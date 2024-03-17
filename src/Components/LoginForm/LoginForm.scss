@@ -71,6 +71,12 @@ body {
           padding: 6px;
           background-color: white;
           border-radius: 20px;
+
+          .x-icon {
+            color: $color-error;
+            width: 12pt;
+            height: 12pt;
+          }
         }
 
         .error-label {

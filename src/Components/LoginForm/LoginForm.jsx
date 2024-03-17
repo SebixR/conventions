@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import "./LoginForm.css"
 import TopNav from "../TopNav/TopNav";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCircleXmark} from "@fortawesome/free-solid-svg-icons";
 
 const LoginForm = (props) => {
     const [email, setEmail] = useState('')
@@ -43,6 +45,7 @@ const LoginForm = (props) => {
                                onChange={(ev) => setEmail(ev.target.value)}/>
                         {emailError &&
                             <div className='error-wrap'>
+                                <FontAwesomeIcon icon={faCircleXmark} className='x-icon'/>
                             <label className='error-label'>{emailError}</label>
                         </div>}
                     </div>
@@ -53,8 +56,10 @@ const LoginForm = (props) => {
                                onChange={(ev) => setPassword(ev.target.value)}/>
                         {passwordError &&
                             <div className='error-wrap'>
-                            <label className='error-label'>{passwordError}</label>
-                        </div>}
+                                <FontAwesomeIcon icon={faCircleXmark} className='x-icon'/>
+                                <label className='error-label'>{passwordError}</label>
+                            </div>
+                        }
                     </div>
 
                     <button onClick={onButtonClick}>Log In</button>

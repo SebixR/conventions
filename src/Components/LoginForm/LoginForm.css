@@ -67,6 +67,11 @@ body {
   background-color: white;
   border-radius: 20px;
 }
+.main-wrap .form-wrap .content-wrap .field .error-wrap .x-icon {
+  color: #ef5f5f;
+  width: 12pt;
+  height: 12pt;
+}
 .main-wrap .form-wrap .content-wrap .field .error-label {
   color: black;
   font-size: 12pt;
