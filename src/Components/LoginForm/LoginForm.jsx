@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import "./LoginForm.css"
-import {Link} from "react-router-dom";
+import TopNav from "../TopNav/TopNav";
 
 const LoginForm = (props) => {
     const [email, setEmail] = useState('')
@@ -32,7 +32,7 @@ const LoginForm = (props) => {
     return (
         <div className='main-wrap'>
 
-            <Link to="/Home">Home</Link>
+            <TopNav/>
 
             <div className='form-wrap'>
                 <h2>Log In</h2>
@@ -41,7 +41,6 @@ const LoginForm = (props) => {
                         <label>Email</label>
                         <input value={email} type='text' placeholder='Email'
                                onChange={(ev) => setEmail(ev.target.value)}/>
-
                         {emailError &&
                             <div className='error-wrap'>
                             <label className='error-label'>{emailError}</label>

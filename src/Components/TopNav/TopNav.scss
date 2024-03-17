@@ -1,0 +1,110 @@
+@import "../../colors";
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.topnav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: $color-yellow;
+  overflow: hidden;
+  align-items: center;
+
+  .left-wrap {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+
+    .home-button {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      font-size: 18px;
+      padding: 12px 12px 12px 16px;
+      color: black;
+    }
+
+    .input-container {
+      position: relative;
+      display: flex;
+      width: 40%;
+      justify-content: end;
+      align-items: center;
+
+      .search-bar {
+        height: 65%;
+        margin: 6px;
+        border: none;
+        border-radius: 10px;
+        width: 100%;
+        padding: 6px 35px 6px 6px;
+      }
+      .search-bar:focus {
+        outline: none;
+      }
+
+      .search-button {
+        background-color: $color-yellow;
+        position: absolute;
+        margin: 12px;
+        padding: 6px;
+        height: 25px;
+        width: 25px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+      }
+
+      .search-icon {
+        color: white;
+      }
+    }
+  }
+
+  .profile-button {
+    margin: 6px 12px 6px 6px;
+    width: 35px;
+    height: 35px;
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+
+    .user-icon {
+      color: $color-yellow;
+      width: 60%;
+      height: 60%;
+    }
+  }
+
+  .drop-wrap {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 48px;
+    right: 12px;
+    border-radius: 10px;
+    background-color: $color-ui;
+
+    .drop-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      margin: 12px 18px 12px 18px;
+
+      .drop-link {
+        color: white;
+        text-decoration: none;
+        padding: 6px 16px 6px 0;
+        font-size: 12pt;
+      }
+    }
+  }
+}
+

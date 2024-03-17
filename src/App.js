@@ -11,13 +11,13 @@ function App() {
           <Routes>
               <Route path="/" element={
                   <>
-                      <LoginForm/>
+                      <Home/>
                   </>
               }>
               </Route>
-              <Route path="/Home" element={
+              <Route path="/LoginForm" element={
                   <>
-                      <Home/>
+                      <LoginForm/>
                   </>
               }>
               </Route>

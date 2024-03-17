@@ -1,0 +1,120 @@
+@import "../../colors";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  background-color: $color-background;
+}
+
+.main-wrap {
+  position: relative;
+  width: 100%;
+
+  .form-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 15% auto;
+    align-items: center;
+
+    h2 {
+      background-color: $color-purple;
+      color: white;
+      padding: 12px;
+      width: 100%;
+      text-align: center;
+      border-radius: 10px;
+      margin: 6px;
+    }
+
+    .content-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      background-color: $color-ui;
+      padding: 12px;
+      border-radius: 10px;
+
+      .field {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        margin: 6px;
+        width: 80%;
+
+        label {
+          color: white;
+          margin: 6px;
+        }
+
+        input {
+          margin: 6px;
+          border: none;
+          border-radius: 10px;
+          padding: 6px;
+          width: 100%;
+        }
+        input:focus {
+          outline: none;
+        }
+
+        .error-wrap {
+          position: absolute;
+          width: 120%;
+          top: 50%;
+          left: 120%;
+          padding: 6px;
+          background-color: white;
+          border-radius: 20px;
+        }
+
+        .error-label {
+          color: black;
+          font-size: 12pt;
+        }
+      }
+
+      button {
+        border: none;
+        border-radius: 10px;
+        padding: 12px;
+        width: 40%;
+        background-color: $color-yellow;
+        margin: 12px;
+        cursor: pointer;
+      }
+
+      .or-signup {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+
+      .line-wrap {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+
+        label {
+          color: white;
+        }
+      }
+
+      .line {
+        background-color: $color-yellow;
+        height: 2px;
+        width: 45%;
+        margin: 4px;
+      }
+    }
+  }
+}

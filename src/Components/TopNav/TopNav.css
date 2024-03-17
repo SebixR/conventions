@@ -1,0 +1,98 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.topnav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #f3e156;
+  overflow: hidden;
+  align-items: center;
+}
+.topnav .left-wrap {
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+}
+.topnav .left-wrap .home-button {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 12px 12px 12px 16px;
+  color: black;
+}
+.topnav .left-wrap .input-container {
+  position: relative;
+  display: flex;
+  width: 40%;
+  justify-content: end;
+  align-items: center;
+}
+.topnav .left-wrap .input-container .search-bar {
+  height: 65%;
+  margin: 6px;
+  border: none;
+  border-radius: 10px;
+  width: 100%;
+  padding: 6px 35px 6px 6px;
+}
+.topnav .left-wrap .input-container .search-bar:focus {
+  outline: none;
+}
+.topnav .left-wrap .input-container .search-button {
+  background-color: #f3e156;
+  position: absolute;
+  margin: 12px;
+  padding: 6px;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.topnav .left-wrap .input-container .search-icon {
+  color: white;
+}
+.topnav .profile-button {
+  margin: 6px 12px 6px 6px;
+  width: 35px;
+  height: 35px;
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.topnav .profile-button .user-icon {
+  color: #f3e156;
+  width: 60%;
+  height: 60%;
+}
+.topnav .drop-wrap {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 48px;
+  right: 12px;
+  border-radius: 10px;
+  background-color: #3f394b;
+}
+.topnav .drop-wrap .drop-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  margin: 12px 18px 12px 18px;
+}
+.topnav .drop-wrap .drop-content .drop-link {
+  color: white;
+  text-decoration: none;
+  padding: 6px 16px 6px 0;
+  font-size: 12pt;
+}
+
+/*# sourceMappingURL=TopNav.css.map */

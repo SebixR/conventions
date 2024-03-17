@@ -1,10 +1,10 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import TopNav from "../TopNav/TopNav";
 
 const Home = () => {
     return (
         <div>
-            <Link to="/">Log In</Link>
+            <TopNav/>
 
             Home
             <div>This is the home page</div>
