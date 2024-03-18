@@ -30,7 +30,7 @@ const TopNav = () => {
                 <div className='drop-wrap'>
                     <div className='drop-content'>
                         <Link to="/LoginForm" className='drop-link'>Log In</Link>
-                        <Link to="/LoginForm" className='drop-link'>Sign Up</Link>
+                        <Link to="/SignupForm" className='drop-link'>Sign Up</Link>
                     </div>
                 </div>
             }

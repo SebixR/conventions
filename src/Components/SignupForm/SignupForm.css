@@ -1,0 +1,128 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  background-color: #25212d;
+}
+
+.main-wrap {
+  position: relative;
+  width: 100%;
+}
+.main-wrap .form-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 15% auto;
+  align-items: center;
+}
+.main-wrap .form-wrap h2 {
+  background-color: #6540b0;
+  color: white;
+  padding: 12px;
+  width: 100%;
+  text-align: center;
+  border-radius: 10px;
+  margin: 6px;
+}
+.main-wrap .form-wrap .content-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background-color: #3f394b;
+  padding: 12px;
+  border-radius: 10px;
+}
+.main-wrap .form-wrap .content-wrap .field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 6px;
+  width: 80%;
+}
+.main-wrap .form-wrap .content-wrap .field label {
+  color: white;
+  margin: 6px;
+}
+.main-wrap .form-wrap .content-wrap .field input {
+  margin: 6px;
+  border: none;
+  border-radius: 10px;
+  padding: 6px;
+  width: 100%;
+}
+.main-wrap .form-wrap .content-wrap .field input:focus {
+  outline: none;
+}
+.main-wrap .form-wrap .content-wrap .field .error-wrap {
+  position: absolute;
+  width: 120%;
+  top: 50%;
+  left: 120%;
+  padding: 6px;
+  background-color: white;
+  border-radius: 20px;
+}
+.main-wrap .form-wrap .content-wrap .field .error-wrap .x-icon {
+  color: #ef5f5f;
+  width: 12pt;
+  height: 12pt;
+}
+.main-wrap .form-wrap .content-wrap .field .error-label {
+  color: black;
+  font-size: 12pt;
+}
+.main-wrap .form-wrap .content-wrap button {
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  width: 40%;
+  background-color: #f3e156;
+  margin: 12px;
+  cursor: pointer;
+  font-size: 11pt;
+}
+.main-wrap .form-wrap .content-wrap .or-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.main-wrap .form-wrap .content-wrap .or-login .line-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+.main-wrap .form-wrap .content-wrap .or-login .line-wrap label {
+  color: white;
+}
+.main-wrap .form-wrap .content-wrap .or-login .line {
+  background-color: #f3e156;
+  height: 2px;
+  width: 45%;
+  margin: 4px;
+}
+.main-wrap .form-wrap .content-wrap .or-login .login-button {
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  width: 40%;
+  background-color: #f3e156;
+  margin: 12px;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  font-size: 11pt;
+}
+
+/*# sourceMappingURL=SignupForm.css.map */

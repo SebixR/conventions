@@ -28,7 +28,7 @@
   position: relative;
   display: flex;
   width: 40%;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
 }
 .topnav .left-wrap .input-container .search-bar {
@@ -85,7 +85,7 @@
 .topnav .drop-wrap .drop-content {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   margin: 12px 18px 12px 18px;
 }
 .topnav .drop-wrap .drop-content .drop-link {

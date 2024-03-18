@@ -2,6 +2,7 @@ import './App.css';
 import LoginForm from "./Components/LoginForm/LoginForm";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Home from "./Components/Home/Home";
+import SignupForm from "./Components/SignupForm/SignupForm";
 
 function App() {
   return (
@@ -18,6 +19,12 @@ function App() {
               <Route path="/LoginForm" element={
                   <>
                       <LoginForm/>
+                  </>
+              }>
+              </Route>
+              <Route path="/SignupForm" element={
+                  <>
+                      <SignupForm/>
                   </>
               }>
               </Route>

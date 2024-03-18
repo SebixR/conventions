@@ -31,7 +31,7 @@
       position: relative;
       display: flex;
       width: 40%;
-      justify-content: end;
+      justify-content: flex-end;
       align-items: center;
 
       .search-bar {
@@ -95,7 +95,7 @@
     .drop-content {
       display: flex;
       flex-direction: column;
-      justify-content: start;
+      justify-content: flex-start;
       margin: 12px 18px 12px 18px;
 
       .drop-link {
