@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Link} from "react-router-dom";
 import './TopNav.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -6,6 +6,21 @@ import { faMagnifyingGlass,  faUser} from '@fortawesome/free-solid-svg-icons';
 
 const TopNav = () => {
     const [drop, setDrop] = useState(false)
+    const dropRef = useRef(null);
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (dropRef.current && !dropRef.current.contains(event.target)) {
+                setDrop(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [dropRef])
+
 
     const dropButton = () => {
         setDrop(!drop)
@@ -27,7 +42,7 @@ const TopNav = () => {
             </button>
 
             {drop &&
-                <div className='drop-wrap'>
+                <div ref={dropRef} className='drop-wrap'>
                     <div className='drop-content'>
                         <Link to="/LoginForm" className='drop-link'>Log In</Link>
                         <Link to="/SignupForm" className='drop-link'>Sign Up</Link>
