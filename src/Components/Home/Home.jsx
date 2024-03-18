@@ -1,13 +1,15 @@
 import React from "react";
+import "./Home.css"
 import TopNav from "../TopNav/TopNav";
+import FilterMenu from "../FilerMenu/FilterMenu";
 
 const Home = () => {
     return (
-        <div>
+        <div className='main-wrap'>
             <TopNav/>
 
-            Home
-            <div>This is the home page</div>
+            <FilterMenu/>
+
         </div>
     )
 }

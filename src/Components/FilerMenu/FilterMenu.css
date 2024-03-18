@@ -1,0 +1,119 @@
+.filter-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.filter-wrap .accept-filter {
+  background-color: #6540b0;
+  border: none;
+  border-radius: 50%;
+  margin: 12px;
+  padding: 6px;
+  width: 5%;
+  cursor: pointer;
+}
+.filter-wrap .accept-filter .accept-icon {
+  height: 24pt;
+  position: relative;
+  top: 2px;
+  color: white;
+}
+.filter-wrap .filter-content {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #6540b0;
+  margin: 12px;
+  padding: 6px;
+  border-radius: 10px;
+}
+.filter-wrap .filter-content .filter-field {
+  flex-grow: 1;
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 6px 16px;
+}
+.filter-wrap .filter-content .filter-field .filter-input {
+  border: none;
+  border-radius: 10px;
+  padding: 6px;
+  font-size: 11pt;
+  width: 100%;
+}
+.filter-wrap .filter-content .filter-field .filter-input:focus {
+  outline: none;
+}
+.filter-wrap .filter-content .filter-field .filter-icon {
+  margin-right: 8px;
+  height: 16pt;
+  color: white;
+}
+.filter-wrap .filter-content .filter-field .filter-dropdown-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  border: none;
+  border-radius: 10px;
+  padding: 6px;
+  font-size: 11pt;
+  background-color: white;
+  text-align: start;
+  cursor: pointer;
+  color: grey;
+  width: 100%;
+}
+.filter-wrap .filter-content .filter-field .filter-dropdown-button .down-icon {
+  display: flex;
+  color: #6540b0;
+}
+.filter-wrap .tag-dropdown {
+  position: absolute;
+  top: 100%;
+  background-color: #6540b0;
+  border-radius: 10px;
+  padding: 6px;
+  width: 15%;
+  margin-left: 16pt;
+}
+.filter-wrap .tag-dropdown .tag-dropdown-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 6px;
+}
+.filter-wrap .tag-dropdown .tag-dropdown-content .tag-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 6px;
+  cursor: pointer;
+}
+.filter-wrap .tag-dropdown .tag-dropdown-content .tag-wrap .tag-label {
+  color: white;
+  cursor: pointer;
+}
+.filter-wrap .tag-dropdown .tag-dropdown-content .tag-wrap .tag-checkmark {
+  background-color: white;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+.filter-wrap .tag-dropdown .tag-dropdown-content .tag-wrap .tag-checkmark .check-icon {
+  color: #6540b0;
+}
+.filter-wrap .tag-dropdown .tag-dropdown-content .tag-wrap .tag-checkmark.checked {
+  background-color: #6540b0;
+  outline-color: white;
+  outline-width: 2px;
+}
+.filter-wrap .tag-dropdown .tag-dropdown-content .tag-wrap .tag-checkmark.checked .check-icon {
+  color: white;
+}
+
+/*# sourceMappingURL=FilterMenu.css.map */
