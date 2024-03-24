@@ -6,6 +6,7 @@
   margin: 24px auto;
   background-color: #3f394b;
   padding: 12px;
+  position: relative;
 }
 .item-main-wrap label {
   background-color: #6540b0;

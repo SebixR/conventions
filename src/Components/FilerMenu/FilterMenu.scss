@@ -87,13 +87,14 @@
 
   .tag-dropdown {
     position: absolute;
-    top: 100%;
+    top: 27%;
     background-color: $color-purple;
     border-radius: 10px;
     padding: 6px;
     width: 15%;
     margin-left: 16pt;
     z-index: 1;
+    border: white solid 1px;
 
     .tag-dropdown-content {
       display: flex;

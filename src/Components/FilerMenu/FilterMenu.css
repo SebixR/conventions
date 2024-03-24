@@ -77,13 +77,14 @@
 }
 .filter-wrap .tag-dropdown {
   position: absolute;
-  top: 100%;
+  top: 27%;
   background-color: #6540b0;
   border-radius: 10px;
   padding: 6px;
   width: 15%;
   margin-left: 16pt;
   z-index: 1;
+  border: white solid 1px;
 }
 .filter-wrap .tag-dropdown .tag-dropdown-content {
   display: flex;
