@@ -1,0 +1,45 @@
+@import "../../colors";
+
+.checkbox-wrap {
+  width: 100%;
+
+  label {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    width: 100%;
+    color: white;
+    font-size: 12pt;
+    cursor: pointer;
+  }
+
+  input {
+    appearance: none;
+    position: absolute;
+    opacity: 0;
+  }
+  input:checked ~ .checkmark {
+    background-color: white;
+
+    .check-icon {
+      color: $color-purple
+    }
+  }
+
+  .checkmark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 16pt;
+    width: 16pt;
+    border-radius: 50%;
+    cursor: pointer;
+    border: white solid 2px;
+
+    .check-icon {
+      color: white;
+    }
+  }
+}

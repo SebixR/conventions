@@ -80,6 +80,7 @@
   padding: 6px;
   width: 15%;
   margin-left: 16pt;
+  z-index: 1;
 }
 .filter-wrap .tag-dropdown .tag-dropdown-content {
   display: flex;
@@ -89,31 +90,20 @@
 }
 .filter-wrap .tag-dropdown .tag-dropdown-content .tag-wrap {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  align-items: center;
   margin: 6px;
-  cursor: pointer;
 }
-.filter-wrap .tag-dropdown .tag-dropdown-content .tag-wrap .tag-label {
-  color: white;
-  cursor: pointer;
+.filter-wrap .tag-dropdown .tag-dropdown-content .icon-upcoming {
+  margin-right: 6px;
+  color: #f3e156;
 }
-.filter-wrap .tag-dropdown .tag-dropdown-content .tag-wrap .tag-checkmark {
-  background-color: white;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
+.filter-wrap .tag-dropdown .tag-dropdown-content .icon-ongoing {
+  margin-right: 6px;
+  color: #69ee70;
 }
-.filter-wrap .tag-dropdown .tag-dropdown-content .tag-wrap .tag-checkmark .check-icon {
-  color: #6540b0;
-}
-.filter-wrap .tag-dropdown .tag-dropdown-content .tag-wrap .tag-checkmark.checked {
-  background-color: #6540b0;
-  outline-color: white;
-  outline-width: 2px;
-}
-.filter-wrap .tag-dropdown .tag-dropdown-content .tag-wrap .tag-checkmark.checked .check-icon {
-  color: white;
+.filter-wrap .tag-dropdown .tag-dropdown-content .icon-over {
+  margin-right: 6px;
+  color: #ef5f5f;
 }
 
 /*# sourceMappingURL=FilterMenu.css.map */

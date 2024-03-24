@@ -91,6 +91,7 @@
     right: 12px;
     border-radius: 10px;
     background-color: $color-ui;
+    z-index: 2;
 
     .drop-content {
       display: flex;

@@ -81,6 +81,7 @@
   right: 12px;
   border-radius: 10px;
   background-color: #3f394b;
+  z-index: 2;
 }
 .topnav .drop-wrap .drop-content {
   display: flex;

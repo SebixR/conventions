@@ -91,6 +91,7 @@
     padding: 6px;
     width: 15%;
     margin-left: 16pt;
+    z-index: 1;
 
     .tag-dropdown-content {
       display: flex;
@@ -100,36 +101,21 @@
 
       .tag-wrap {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        align-items: center;
         margin: 6px;
-        cursor: pointer;
+      }
 
-        .tag-label {
-          color: white;
-          cursor: pointer;
-        }
-
-        .tag-checkmark {
-          background-color: white;
-          border-radius: 50%;
-          border: none;
-          cursor: pointer;
-
-          .check-icon {
-            color: $color-purple;
-          }
-        }
-
-        .tag-checkmark.checked {
-          background-color: $color-purple;
-          outline-color: white;
-          outline-width: 2px;
-
-          .check-icon {
-            color: white;
-          }
-        }
+      .icon-upcoming {
+        margin-right: 6px;
+        color: $color-yellow;
+      }
+      .icon-ongoing {
+        margin-right: 6px;
+        color: $color-green;
+      }
+      .icon-over {
+        margin-right: 6px;
+        color: $color-error;
       }
     }
   }

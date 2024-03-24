@@ -2,13 +2,16 @@ import React, {useEffect, useRef, useState} from "react";
 import "./FilterMenu.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMagnifyingGlass, faMapMarkerAlt, faCalendarAlt, faTag, faQuestionCircle,
-    faCheck, faCaretDown} from "@fortawesome/free-solid-svg-icons";
+    faCheck, faCaretDown, faCircle} from "@fortawesome/free-solid-svg-icons";
+import CustomCheckbox from "../CustomCheckbox/CustomCheckbox";
 
 const FilterMenu = () => {
     const [tagOpen, setTagOpen] = useState(false)
-    const tagRef = useRef(null);
-    const tagButtonRef = useRef(null);
     const [statusOpen, setStatusOpen] = useState(false)
+    const tagRef = useRef(null);
+    const statusRef = useRef(null);
+    const tagButtonRef = useRef(null);
+    const statusButtonRef = useRef(null);
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -25,6 +28,22 @@ const FilterMenu = () => {
         };
     }, [tagRef])
 
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (statusRef.current
+                && !statusRef.current.contains(event.target)
+                && !statusButtonRef.current.contains(event.target)) {
+                setStatusOpen(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [statusRef])
+
     const handleTagMenu = () => {
         setTagOpen(!tagOpen)
     }
@@ -32,7 +51,6 @@ const FilterMenu = () => {
     const handleStatusMenu = () => {
         setStatusOpen(!statusOpen)
     }
-
 
     return (
         <div className='filter-wrap'>
@@ -63,22 +81,13 @@ const FilterMenu = () => {
                         <div ref={tagRef} className='tag-dropdown'>
                             <div className='tag-dropdown-content'>
                                 <div className='tag-wrap'>
-                                    <label className='tag-label'>Tag 1</label>
-                                    <button className='tag-checkmark'>
-                                        <FontAwesomeIcon icon={faCheck} className='check-icon'/>
-                                    </button>
+                                    <CustomCheckbox label={'Tag 1'}/>
                                 </div>
                                 <div className='tag-wrap'>
-                                    <label className='tag-label'>Tag 1</label>
-                                    <button className='tag-checkmark'>
-                                        <FontAwesomeIcon icon={faCheck} className='check-icon'/>
-                                    </button>
+                                    <CustomCheckbox label={'Tag 2'}/>
                                 </div>
                                 <div className='tag-wrap'>
-                                    <label className='tag-label'>Tag 1</label>
-                                    <button className='tag-checkmark'>
-                                        <FontAwesomeIcon icon={faCheck} className='check-icon'/>
-                                    </button>
+                                    <CustomCheckbox label={'Tag 3'}/>
                                 </div>
                             </div>
                         </div>
@@ -88,10 +97,29 @@ const FilterMenu = () => {
 
                 <div className='filter-field'>
                     <FontAwesomeIcon icon={faQuestionCircle} className='filter-icon'/>
-                    <div onClick={handleStatusMenu} className='filter-dropdown-button'>
+                    <div ref={statusButtonRef} onClick={handleStatusMenu} className='filter-dropdown-button'>
                         Status
                         <FontAwesomeIcon icon={faCaretDown} className='down-icon'/>
                     </div>
+
+                    { statusOpen &&
+                        <div ref={statusRef} className='tag-dropdown'>
+                            <div className='tag-dropdown-content'>
+                                <div className='tag-wrap'>
+                                    <FontAwesomeIcon icon={faCircle} className='icon-upcoming'/>
+                                    <CustomCheckbox label={'Upcoming'}/>
+                                </div>
+                                <div className='tag-wrap'>
+                                    <FontAwesomeIcon icon={faCircle} className='icon-ongoing'/>
+                                    <CustomCheckbox label={'Ongoing'}/>
+                                </div>
+                                <div className='tag-wrap'>
+                                    <FontAwesomeIcon icon={faCircle} className='icon-over'/>
+                                    <CustomCheckbox label={'Over'}/>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
         </div>
             <button className='accept-filter'>
