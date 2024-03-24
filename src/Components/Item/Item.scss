@@ -1,0 +1,105 @@
+@import "../../colors";
+
+.item-main-wrap {
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+  max-width: 1000px;
+  margin: 24px auto;
+  background-color: $color-ui;
+  padding: 12px;
+
+  label {
+    background-color: $color-purple;
+    border-radius: 10px;
+    padding: 4px;
+    color: white;
+    text-align: center;
+  }
+
+  .image-wrap {
+    margin: 12px;
+    background-color: $color-yellow;
+    width: 250px;
+    height: 250px;
+    position: relative;
+
+    img {
+      height: 100%;
+    }
+  }
+
+  .item-content-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 6px;
+    margin: 4px;
+    width: 65%;
+
+    .first-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 6px;
+
+      .city-label {
+        width: 50%;
+        margin: 0;
+      }
+
+      label {
+        width: 25%;
+        margin-left: 12px;
+      }
+    }
+
+    .second-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      margin-top: 6px;
+      margin-bottom: 6px;
+
+      label {
+        margin-right: 12px;
+        width: 25%;
+      }
+    }
+
+    .third-row {
+      margin-top: 6px;
+
+      .short-description {
+        background-color: $color-purple;
+        border-radius: 10px;
+        padding: 6px 14px;
+        color: white;
+      }
+    }
+  }
+
+  .item-right-pane {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-left: 12px;
+    width: 10%;
+
+    .more-button {
+      background-color: $color-yellow;
+      border: none;
+      padding: 6px 18px;
+      font-size: 14pt;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .status-icon {
+      color: $color-yellow;
+      width: 24px;
+      height: 24px;
+    }
+  }
+}

@@ -3,4 +3,9 @@
   margin: 0;
 }
 
+body {
+  max-width: 2000px;
+  margin: auto;
+}
+
 /*# sourceMappingURL=Home.css.map */
