@@ -1,8 +1,9 @@
 import React from 'react'
 import "./Item.css"
-import testImage from '../Assets/comic_con_logo.jpg'
+import testImage from '../Assets/SanDiegoCC/comic_con_logo.jpg'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircle} from "@fortawesome/free-solid-svg-icons";
+import {Link} from "react-router-dom";
 
 const Item = () => {
     return (
@@ -12,7 +13,7 @@ const Item = () => {
             </div>
             <div className='item-content-wrap'>
                 <div className='first-row'>
-                    <label className='city-label'>San Diego</label>
+                    <label className='city-label'>San Diego, USA</label>
                     <label>12.05.2024</label>
                     <label>16.05.2024</label>
                 </div>
@@ -33,7 +34,7 @@ const Item = () => {
             </div>
             <div className='item-right-pane'>
                 <FontAwesomeIcon icon={faCircle} className='status-icon'/>
-                <button className='more-button'>More</button>
+                <Link to="/ConventionPage" className='more-button'>More</Link>
             </div>
 
         </div>

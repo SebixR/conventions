@@ -13,6 +13,8 @@ const Home = () => {
 
             <Item/>
 
+            <Item/>
+
         </div>
     )
 }

@@ -1,0 +1,138 @@
+.main-content-wrap {
+  display: flex;
+  flex-direction: column;
+  margin: 12px auto;
+  width: 80%;
+  max-width: 1300px;
+}
+.main-content-wrap .name-header {
+  background-color: #6540b0;
+  color: white;
+  padding: 6px 28px 6px 16px;
+  border-radius: 10px;
+  width: fit-content;
+  float: left;
+  margin-bottom: 12px;
+}
+.main-content-wrap .info-wrap {
+  background-color: #3f394b;
+  padding: 12px;
+}
+.main-content-wrap .info-wrap .status-icon {
+  position: relative;
+  color: #f3e156;
+  float: right;
+  width: 25px;
+  height: 25px;
+}
+.main-content-wrap .info-wrap .info-content {
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+}
+.main-content-wrap .info-wrap .info-content .first-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  height: fit-content;
+}
+.main-content-wrap .info-wrap .info-content .first-row .image-wrap {
+  margin-right: 12px;
+  background-color: #f3e156;
+  width: 250px;
+  height: 250px;
+  position: relative;
+}
+.main-content-wrap .info-wrap .info-content .first-row .image-wrap img {
+  height: 100%;
+}
+.main-content-wrap .info-wrap .info-content .first-row .inner-row-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-left: 12px;
+  height: 250px;
+}
+.main-content-wrap .info-wrap .info-content .first-row .inner-row-wrap .inner-row-content {
+  display: flex;
+  flex-direction: row;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.main-content-wrap .info-wrap .info-content .first-row .inner-row-wrap .inner-row-content .link-label {
+  padding: 6px 12px;
+  background-color: #6540b0;
+  border-radius: 10px;
+  color: white;
+  margin-right: 12px;
+}
+.main-content-wrap .info-wrap .info-content .second-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.main-content-wrap .info-wrap .info-content .second-row label {
+  margin-top: 6px;
+  margin-bottom: 12px;
+}
+.main-content-wrap .info-wrap .info-content .second-row .description {
+  background-color: #6540b0;
+  padding: 8px 16px 8px 12px;
+  border-radius: 10px;
+  color: white;
+  min-height: 150px;
+}
+.main-content-wrap .info-wrap .info-content .third-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+.main-content-wrap .info-wrap .info-content .third-row .schedule-button {
+  border: none;
+  border-radius: 10px;
+  background-color: #f3e156;
+  padding: 8px 18px;
+  font-size: 13pt;
+  cursor: pointer;
+}
+.main-content-wrap .photos-wrap {
+  margin-top: 24px;
+}
+.main-content-wrap .photos-wrap .photos-content {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+  background-color: #3f394b;
+  margin-top: 12px;
+}
+.main-content-wrap .photos-wrap .photos-content .photos-column {
+  flex: 50%;
+  padding: 8px 4px;
+  max-width: 50%;
+}
+.main-content-wrap .photos-wrap .photos-content .photos-column img {
+  margin: 4px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+label {
+  color: white;
+  font-size: 14pt;
+  margin-right: 6px;
+  padding: 4px;
+}
+
+.purple-label {
+  color: white;
+  font-size: 12pt;
+  background-color: #6540b0;
+  padding: 6px 12px;
+  border-radius: 10px;
+  margin-right: 6px;
+}
+
+/*# sourceMappingURL=ConventionPage.css.map */

@@ -82,6 +82,8 @@
   font-size: 14pt;
   border-radius: 10px;
   cursor: pointer;
+  text-decoration: none;
+  color: black;
 }
 .item-main-wrap .item-right-pane .status-icon {
   color: #f3e156;
