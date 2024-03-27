@@ -65,10 +65,13 @@ const ConventionPage = () => {
                         </div>
 
                         <div className='third-row'>
-                            <div className='links-wrap'>
-
-                                <button className='schedule-button'>Schedule</button>
+                            <div className='tags-wrap'>
+                                <label>Tags:</label>
+                                <label className='purple-label'>Fantasy</label>
+                                <label className='purple-label'>Comic Books</label>
+                                <label className='purple-label'>Video Games</label>
                             </div>
+                            <button className='schedule-button'>Schedule</button>
                         </div>
 
                     </div>
