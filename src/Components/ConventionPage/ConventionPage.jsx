@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./ConventionPage.css";
 import testImage from '../Assets/SanDiegoCC/comic_con_logo.jpg'
 import image1 from '../Assets/SanDiegoCC/ca-time.jpg'
@@ -7,8 +7,20 @@ import image3 from '../Assets/SanDiegoCC/San_Diego_Convention_Center.jpg'
 import TopNav from "../TopNav/TopNav";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircle} from "@fortawesome/free-solid-svg-icons";
+import {useParams} from "react-router-dom";
+import axios from "axios";
 
 const ConventionPage = () => {
+    let { id } = useParams(); //the name of the variable has to match the name in the url (for now set in App.js)
+    const [convention, setConvention] = useState();
+
+    useEffect(() => {
+        axios.get(`http://localhost:8082/conventions/getConvention/${id}`).then((res) => {
+            const uploadedConvention = res.data;
+            setConvention(uploadedConvention);
+        })
+    })
+
     return (
         <div className='main-wrap'>
 

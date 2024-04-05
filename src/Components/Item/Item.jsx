@@ -6,6 +6,7 @@ import {faCircle} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 
 const Item = () => {
+
     return (
         <div className='item-main-wrap'>
             <div className='image-wrap'>
@@ -34,7 +35,7 @@ const Item = () => {
             </div>
             <div className='item-right-pane'>
                 <FontAwesomeIcon icon={faCircle} className='status-icon'/>
-                <Link to="/ConventionPage" className='more-button'>More</Link>
+                <Link to="/ConventionPage/:id" className='more-button'>More</Link>
             </div>
 
         </div>
