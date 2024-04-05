@@ -35,7 +35,7 @@ const Item = () => {
             </div>
             <div className='item-right-pane'>
                 <FontAwesomeIcon icon={faCircle} className='status-icon'/>
-                <Link to="/ConventionPage/:id" className='more-button'>More</Link>
+                <Link to="/ConventionPage/0" className='more-button'>More</Link>
             </div>
 
         </div>

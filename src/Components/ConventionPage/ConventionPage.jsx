@@ -12,10 +12,11 @@ import axios from "axios";
 
 const ConventionPage = () => {
     let { id } = useParams(); //the name of the variable has to match the name in the url (for now set in App.js)
+    console.log("Id: " + id);
     const [convention, setConvention] = useState();
 
     useEffect(() => {
-        axios.get(`http://localhost:8082/conventions/getConvention/${id}`).then((res) => {
+        axios.get(`http://localhost:8082/getConvention/${id}`).then((res) => {
             const uploadedConvention = res.data;
             setConvention(uploadedConvention);
         })
