@@ -17,7 +17,7 @@ function App() {
                   </>
               }>
               </Route>
-              <Route path="/ConventionPage/:id" element={
+              <Route path="/ConventionPage/:conventionId" element={
                   <>
                       <ConventionPage/>
                   </>

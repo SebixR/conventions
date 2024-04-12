@@ -11,16 +11,16 @@ import {useParams} from "react-router-dom";
 import axios from "axios";
 
 const ConventionPage = () => {
-    let { id } = useParams(); //the name of the variable has to match the name in the url (for now set in App.js)
-    console.log("Id: " + id);
-    const [convention, setConvention] = useState();
-
-    useEffect(() => {
-        axios.get(`http://localhost:8082/getConvention/${id}`).then((res) => {
-            const uploadedConvention = res.data;
-            setConvention(uploadedConvention);
-        })
-    })
+    // let { conventionId } = useParams(); //the name of the variable has to match the name in the url (for now set in App.js)
+    // console.log("Id: " + id);
+    // const [convention, setConvention] = useState();
+    //
+    // useEffect(() => {
+    //     axios.get(`http://localhost:8082/getConvention/${conventionId}`).then((res) => {
+    //         const uploadedConvention = res.data;
+    //         setConvention(uploadedConvention);
+    //     })
+    // })
 
     return (
         <div className='main-wrap'>

@@ -3,8 +3,9 @@ import "./LoginForm.css"
 import TopNav from "../TopNav/TopNav";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleXmark} from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
-const LoginForm = (props) => {
+const LoginForm = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [emailError, setEmailError] = useState('')
@@ -18,16 +19,22 @@ const LoginForm = (props) => {
             setEmailError('Please enter your email')
         }
 
-        if (!/^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-            setEmailError('Please enter a valid email')
-        }
-
         if ('' === password) {
             setPasswordError('Please enter a password')
         }
+    }
 
-        if (password.length < 8) {
-            setPasswordError('The password must be 8 characters or longer')
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formData = { email, password };
+        try {
+            if (emailError === '' && passwordError === '') {
+                const response = await axios.post('http://localhost:8082/public/loginUser', formData);
+                console.log(response.data);
+                //redirect user
+            }
+        } catch (error) {
+            setEmailError(error)
         }
     }
 
@@ -36,7 +43,7 @@ const LoginForm = (props) => {
 
             <TopNav/>
 
-            <div className='form-wrap'>
+            <form onSubmit={handleSubmit} className='form-wrap'>
                 <h2>Log In</h2>
                 <div className='content-wrap'>
                     <div className='field'>
@@ -62,7 +69,7 @@ const LoginForm = (props) => {
                         }
                     </div>
 
-                    <button onClick={onButtonClick}>Log In</button>
+                    <button type="submit" onClick={onButtonClick}>Log In</button>
                     <div className='or-signup'>
                         <div className='line-wrap'>
                             <div className='line'></div>
@@ -72,7 +79,7 @@ const LoginForm = (props) => {
                         <button>Sign Up</button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     );
 };

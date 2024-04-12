@@ -4,6 +4,7 @@ import "./SignupForm.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleXmark} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 const SignupForm = () => {
     const [firstName, setFirstName] = useState('')
@@ -16,6 +17,8 @@ const SignupForm = () => {
     const [passwordError, setPasswordError] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [confirmPasswordError, setConfirmPasswordError] = useState('')
+
+    const [role, setRole] = useState('USER')
 
 
     const onButtonClick = () => {
@@ -67,12 +70,27 @@ const SignupForm = () => {
         }
     }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formData = { firstName, lastName, email, password, role };
+        try {
+            if (firstNameError === '' && lastNameError === '' && emailError === ''
+                && passwordError === '' && confirmPasswordError === '') {
+                const response = await axios.post('http://localhost:8082/public/signupUser', formData);
+                console.log(response.data);
+                //redirect or notify in some way
+            }
+        } catch (error) {
+            setEmailError(error.response.data);
+        }
+    }
+
     return (
         <div className='main-wrap'>
 
             <TopNav/>
 
-            <div className='form-wrap'>
+            <form onSubmit={handleSubmit} className='form-wrap'>
                 <h2>Sign Up</h2>
                 <div className='content-wrap'>
                     <div className='field'>
@@ -132,7 +150,7 @@ const SignupForm = () => {
                         }
                     </div>
 
-                    <button onClick={onButtonClick}>Sign Up</button>
+                    <button type="submit" onClick={onButtonClick}>Sign Up</button>
                     <div className='or-login'>
                         <div className='line-wrap'>
                             <div className='line'></div>
@@ -142,7 +160,7 @@ const SignupForm = () => {
                         <Link to="/LoginForm" className='login-button'>Log In</Link>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     )
 }
