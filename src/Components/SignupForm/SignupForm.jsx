@@ -3,8 +3,8 @@ import TopNav from "../TopNav/TopNav";
 import "./SignupForm.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleXmark} from "@fortawesome/free-solid-svg-icons";
-import {Link} from "react-router-dom";
-import axios from "axios";
+import {Link, Navigate} from "react-router-dom";
+import axios from "../../config/axios";
 
 const SignupForm = () => {
     const [firstName, setFirstName] = useState('')
@@ -17,9 +17,7 @@ const SignupForm = () => {
     const [passwordError, setPasswordError] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [confirmPasswordError, setConfirmPasswordError] = useState('')
-
-    const [role, setRole] = useState('USER')
-
+    const [signedUp, setSignedUp] = useState(false)
 
     const onButtonClick = () => {
         setFirstNameError('')
@@ -72,18 +70,20 @@ const SignupForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = { firstName, lastName, email, password, role };
+        const formData = { firstName, lastName, email, password };
         try {
             if (firstNameError === '' && lastNameError === '' && emailError === ''
                 && passwordError === '' && confirmPasswordError === '') {
-                const response = await axios.post('http://localhost:8082/public/signupUser', formData);
+                const response = await axios.post('auth/signupUser', formData);
                 console.log(response.data);
-                //redirect or notify in some way
+                setSignedUp(true);
             }
         } catch (error) {
             setEmailError(error.response.data);
         }
     }
+
+    if (signedUp) return <Navigate to="/LoginForm" />
 
     return (
         <div className='main-wrap'>

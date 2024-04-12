@@ -3,10 +3,12 @@ import {Link} from "react-router-dom";
 import './TopNav.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass,  faUser} from '@fortawesome/free-solid-svg-icons';
+import { useAuth } from "../../provider/AuthProvider";
 
 const TopNav = () => {
     const [drop, setDrop] = useState(false)
     const dropRef = useRef(null);
+    const { token } = useAuth();
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -37,6 +39,11 @@ const TopNav = () => {
                     </button>
                 </div>
             </div>
+
+            {token &
+                <label>Logged In</label>
+            }
+
             <button className='profile-button' onClick={dropButton}>
                 <FontAwesomeIcon icon={faUser} className='user-icon'/>
             </button>

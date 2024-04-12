@@ -3,13 +3,18 @@ import "./LoginForm.css"
 import TopNav from "../TopNav/TopNav";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleXmark} from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
+import axios from "../../config/axios";
+import {Navigate} from "react-router-dom";
+import {useAuth} from "../../provider/AuthProvider";
 
 const LoginForm = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [emailError, setEmailError] = useState('')
     const [passwordError, setPasswordError] = useState('')
+    const [loggedIn, setLoggedIn] = useState(false)
+
+    const { addToken, isAuth } = useAuth();
 
     const onButtonClick = () => {
         setEmailError('')
@@ -29,14 +34,18 @@ const LoginForm = () => {
         const formData = { email, password };
         try {
             if (emailError === '' && passwordError === '') {
-                const response = await axios.post('http://localhost:8082/public/loginUser', formData);
+                const response = await axios.post('auth/loginUser', formData);
+                const token = response.data.token;
+                addToken(token);
                 console.log(response.data);
-                //redirect user
+                setLoggedIn(true)
             }
         } catch (error) {
-            setEmailError(error)
+            setEmailError(error.response.data)
         }
     }
+
+    if (loggedIn && isAuth) return <Navigate to="/" />
 
     return (
         <div className='main-wrap'>
