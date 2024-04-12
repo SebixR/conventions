@@ -101,6 +101,20 @@ body {
         justify-content: center;
         align-items: center;
         width: 100%;
+
+        .signup-button {
+          border: none;
+          border-radius: 10px;
+          padding: 12px;
+          width: 40%;
+          background-color: $color-yellow;
+          margin: 12px;
+          cursor: pointer;
+          text-decoration: none;
+          color: black;
+          text-align: center;
+          font-size: 11pt;
+        }
       }
 
       .line-wrap {

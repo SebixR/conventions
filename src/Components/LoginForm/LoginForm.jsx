@@ -4,7 +4,7 @@ import TopNav from "../TopNav/TopNav";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleXmark} from "@fortawesome/free-solid-svg-icons";
 import axios from "../../config/axios";
-import {Navigate} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import {useAuth} from "../../provider/AuthProvider";
 
 const LoginForm = () => {
@@ -14,7 +14,7 @@ const LoginForm = () => {
     const [passwordError, setPasswordError] = useState('')
     const [loggedIn, setLoggedIn] = useState(false)
 
-    const { addToken, isAuth } = useAuth();
+    const { addToken, isAuth} = useAuth();
 
     const onButtonClick = () => {
         setEmailError('')
@@ -37,15 +37,15 @@ const LoginForm = () => {
                 const response = await axios.post('auth/loginUser', formData);
                 const token = response.data.token;
                 addToken(token);
-                console.log(response.data);
                 setLoggedIn(true)
+                console.log(response.data);
             }
         } catch (error) {
             setEmailError(error.response.data)
         }
     }
 
-    if (loggedIn && isAuth) return <Navigate to="/" />
+    if (isAuth && loggedIn) return <Navigate to="/" />
 
     return (
         <div className='main-wrap'>
@@ -85,7 +85,7 @@ const LoginForm = () => {
                             <label>Or</label>
                             <div className='line'></div>
                         </div>
-                        <button>Sign Up</button>
+                        <Link to="/SignupForm" className='signup-button'>Sign Up</Link>
                     </div>
                 </div>
             </form>

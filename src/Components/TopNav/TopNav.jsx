@@ -8,7 +8,7 @@ import { useAuth } from "../../provider/AuthProvider";
 const TopNav = () => {
     const [drop, setDrop] = useState(false)
     const dropRef = useRef(null);
-    const { token } = useAuth();
+    const { isAuth } = useAuth();
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -40,8 +40,11 @@ const TopNav = () => {
                 </div>
             </div>
 
-            {token &
-                <label>Logged In</label>
+            {isAuth() ? (
+                    <label>Logged in</label>
+                ) : (
+                <label>Not logged in</label>
+            )
             }
 
             <button className='profile-button' onClick={dropButton}>
