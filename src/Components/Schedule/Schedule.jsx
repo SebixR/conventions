@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React from "react";
 import TopNav from "../TopNav/TopNav";
 import "./Schedule.css";
 import {Link} from "react-router-dom";
@@ -15,7 +15,6 @@ const Schedule = () => {
         )
     }
 
-    const scheduleContainerRef = useRef(null);
     function Day({ events }) {
         return (
             <div className="day-wrap">
@@ -24,7 +23,7 @@ const Schedule = () => {
                     <label className="date-label">12.05.2024</label>
                 </div>
 
-                <div className="day-content-wrap" ref={scheduleContainerRef}>
+                <div className="day-content-wrap">
                     {events.map((event, index) => (
                         <Event key={index} duration={event.duration} title={event.title} />
                     ))}
@@ -34,14 +33,6 @@ const Schedule = () => {
     }
 
     function Event({ duration, title }) {
-        const [containerWidth, setContainerWidth] = useState(0);
-
-        useEffect(() => {
-            if (scheduleContainerRef.current) {
-                setContainerWidth(scheduleContainerRef.current.offsetWidth);
-            }
-        }, []);
-
         const hourWidth = 200
         const style = {
             width: `${duration * hourWidth}px`
