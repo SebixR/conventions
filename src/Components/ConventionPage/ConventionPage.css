@@ -93,6 +93,8 @@
 }
 .main-content-wrap .info-wrap .info-content .third-row .schedule-button {
   border: none;
+  text-decoration: none;
+  color: black;
   border-radius: 10px;
   background-color: #f3e156;
   padding: 8px 18px;

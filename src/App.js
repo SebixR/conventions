@@ -5,6 +5,8 @@ import Home from "./Components/Home/Home";
 import SignupForm from "./Components/SignupForm/SignupForm";
 import ConventionPage from "./Components/ConventionPage/ConventionPage";
 import AuthProvider from "./provider/AuthProvider";
+import Account from "./Components/Account/Account";
+import Schedule from "./Components/Schedule/Schedule";
 
 function App() {
   return (
@@ -24,6 +26,12 @@ function App() {
                       </>
                   }>
                   </Route>
+                  <Route path="/Schedule/:scheduleId" element={
+                      <>
+                          <Schedule/>
+                      </>
+                  }>
+                  </Route>
                   <Route path="/LoginForm" element={
                       <>
                           <LoginForm/>
@@ -33,6 +41,12 @@ function App() {
                   <Route path="/SignupForm" element={
                       <>
                           <SignupForm/>
+                      </>
+                  }>
+                  </Route>
+                  <Route path="/Account" element={
+                      <>
+                          <Account/>
                       </>
                   }>
                   </Route>

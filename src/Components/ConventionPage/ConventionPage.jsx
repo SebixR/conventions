@@ -7,7 +7,7 @@ import image3 from '../Assets/SanDiegoCC/San_Diego_Convention_Center.jpg'
 import TopNav from "../TopNav/TopNav";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircle} from "@fortawesome/free-solid-svg-icons";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import axios from "axios";
 
 const ConventionPage = () => {
@@ -84,7 +84,7 @@ const ConventionPage = () => {
                                 <label className='purple-label'>Comic Books</label>
                                 <label className='purple-label'>Video Games</label>
                             </div>
-                            <button className='schedule-button'>Schedule</button>
+                            <Link to="/Schedule/0" className='schedule-button'>Schedule</Link>
                         </div>
 
                     </div>

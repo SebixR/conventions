@@ -1,0 +1,112 @@
+@import "../../colors";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  max-width: 2000px;
+  margin: auto;
+}
+
+.schedule-content-wrap {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-left: 12px;
+  margin-top: 24px;
+
+  .con-name {
+    background-color: $color-purple;
+    color: white;
+    padding: 6px 28px 6px 16px;
+    border-radius: 10px;
+    width: fit-content;
+    float: left;
+    margin-bottom: 12px;
+  }
+
+  .days {
+    display: flex;
+    flex-direction: column;
+
+    .day-wrap {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 12px;
+
+      .date-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: $color-purple;
+        border-radius: 10px;
+        padding: 12px;
+
+        .day-label {
+          color: white;
+          font-size: 15pt;
+          font-weight: bold;
+          margin: 0;
+        }
+
+        .date-label {
+          color: white;
+          font-size: 12pt;
+          margin: 0;
+        }
+      }
+
+      .day-content-wrap {
+        display: flex;
+        flex-direction: row;
+        background-color: $color-ui;
+        border-radius: 10px;
+        padding: 12px 6px;
+        margin-left: 12px;
+        margin-right: 12px;
+        width: 100%;
+        overflow-x: auto;
+        scrollbar-width: thin;
+        white-space: nowrap;
+
+        .event {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          background-color: $color-yellow;
+          border-radius: 10px;
+          margin-left: 6px;
+          margin-right: 6px;
+          padding: 6px;
+          min-width: 180px;
+
+          .event-name-label {
+            font-size: 16pt;
+          }
+
+          .event-time-label {
+            font-size: 10pt;
+          }
+
+          label {
+            color: black;
+          }
+        }
+      }
+    }
+  }
+}
+
+.back-button {
+  text-decoration: none;
+  color: black;
+  background-color: $color-yellow;
+  padding: 6px 12px;
+  font-size: 15pt;
+  border-radius: 10px;
+  float: right;
+  margin-right: 12px;
+}

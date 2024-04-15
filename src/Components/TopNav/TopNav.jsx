@@ -8,7 +8,7 @@ import { useAuth } from "../../provider/AuthProvider";
 const TopNav = () => {
     const [drop, setDrop] = useState(false)
     const dropRef = useRef(null);
-    const { isAuth } = useAuth();
+    const { isAuth, setTokenNull } = useAuth();
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -28,6 +28,10 @@ const TopNav = () => {
         setDrop(!drop)
     }
 
+    const handleLogout = () => {
+        setTokenNull();
+    }
+
     return (
         <div className='topnav'>
             <div className='left-wrap'>
@@ -40,24 +44,27 @@ const TopNav = () => {
                 </div>
             </div>
 
-            {isAuth() ? (
-                    <label>Logged in</label>
-                ) : (
-                <label>Not logged in</label>
-            )
-            }
-
             <button className='profile-button' onClick={dropButton}>
                 <FontAwesomeIcon icon={faUser} className='user-icon'/>
             </button>
 
-            {drop &&
-                <div ref={dropRef} className='drop-wrap'>
-                    <div className='drop-content'>
-                        <Link to="/LoginForm" className='drop-link'>Log In</Link>
-                        <Link to="/SignupForm" className='drop-link'>Sign Up</Link>
-                    </div>
-                </div>
+            {drop && (
+                    isAuth() ? (
+                        <div ref={dropRef} className='drop-wrap'>
+                            <div className='drop-content'>
+                                <Link to="/Account" className='drop-link'>My Account</Link>
+                                <Link to="/" onClick={handleLogout} className='drop-link'>Log Out</Link>
+                            </div>
+                        </div>
+                    ) : (
+                        <div ref={dropRef} className='drop-wrap'>
+                            <div className='drop-content'>
+                                <Link to="/LoginForm" className='drop-link'>Log In</Link>
+                                <Link to="/SignupForm" className='drop-link'>Sign In</Link>
+                            </div>
+                        </div>
+                    )
+                )
             }
 
         </div>
