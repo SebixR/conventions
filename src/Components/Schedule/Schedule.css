@@ -62,7 +62,7 @@ body {
   margin-left: 12px;
   margin-right: 12px;
   width: 100%;
-  overflow-x: auto;
+  overflow-x: scroll;
   scrollbar-width: thin;
   white-space: nowrap;
 }

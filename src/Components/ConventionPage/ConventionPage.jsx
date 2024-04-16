@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import "./ConventionPage.css";
 import testImage from '../Assets/SanDiegoCC/comic_con_logo.jpg'
 import image1 from '../Assets/SanDiegoCC/ca-time.jpg'

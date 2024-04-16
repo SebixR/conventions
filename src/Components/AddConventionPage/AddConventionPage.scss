@@ -12,9 +12,14 @@
     color: white;
     padding: 6px 28px 6px 16px;
     border-radius: 10px;
-    width: fit-content;
+    width: 50%;
     float: left;
     margin-bottom: 12px;
+    border: none;
+    font-size: 15pt;
+  }
+  .name-header:focus {
+    outline: $color-yellow solid 1.5px;
   }
 
   .info-wrap {
@@ -38,7 +43,7 @@
         display: flex;
         flex-direction: row;
         align-items: flex-start;
-        height: fit-content;
+        height: 250px;
 
         .image-wrap {
           margin-right: 12px;
@@ -49,6 +54,7 @@
 
           img {
             height: 100%;
+            width: 100%;
           }
         }
 
@@ -58,22 +64,7 @@
           flex-direction: column;
           justify-content: space-evenly;
           margin-left: 12px;
-          height: 250px;
-
-          .inner-row-content {
-            display: flex;
-            flex-direction: row;
-            margin-top: 12px;
-            margin-bottom: 12px;
-
-            .link-label {
-              padding: 6px 12px;
-              background-color: $color-purple;
-              border-radius: 10px;
-              color: white;
-              margin-right: 12px;
-            }
-          }
+          height: auto;
         }
       }
 
@@ -82,18 +73,30 @@
         flex-direction: column;
         align-items: flex-start;
 
+        p {
+          align-self: flex-end;
+          color: white;
+          font-size: 10pt;
+        }
+
         label {
           margin-top: 6px;
           margin-bottom: 12px;
         }
 
         .description {
+          width: 100%;
+          resize: none;
+          border: none;
+          font-size: 12pt;
           background-color: $color-purple;
           padding: 8px 16px 8px 12px;
           border-radius: 10px;
           color: white;
           min-height: 150px;
-          font-size: 12pt;
+        }
+        .description:focus {
+          outline: $color-yellow solid 1.5px;
         }
       }
 
@@ -105,6 +108,24 @@
         margin-top: 16px;
         width: 100%;
 
+        .tag-dropdown-button {
+          margin-top: 12px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background-color: $color-yellow;
+          padding: 6px 12px;
+          border-radius: 10px;
+          cursor: pointer;
+
+          .down-icon {
+            color: $color-purple;
+            width: 20px;
+            height: 20px;
+            margin-left: 6px;
+          }
+        }
+
         .schedule-button {
           border: none;
           text-decoration: none;
@@ -114,6 +135,7 @@
           padding: 8px 18px;
           font-size: 13pt;
           cursor: pointer;
+          align-self: end;
         }
       }
     }
@@ -121,6 +143,12 @@
 
   .photos-wrap {
     margin-top: 24px;
+
+    .photos-button {
+      background-color: $color-yellow;
+      padding: 6px;
+      border-radius: 10px;
+    }
 
     .photos-content {
       position: relative;
@@ -145,6 +173,22 @@
   }
 }
 
+.inner-row-content {
+  display: flex;
+  flex-direction: row;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  width: 100%;
+
+  .link-label {
+    padding: 6px 12px;
+    background-color: $color-purple;
+    border-radius: 10px;
+    color: white;
+    margin-right: 12px;
+  }
+}
+
 label {
   color: white;
   font-size: 14pt;
@@ -159,4 +203,47 @@ label {
   padding: 6px 12px;
   border-radius: 10px;
   margin-right: 6px;
+}
+
+.text-input {
+  border: none;
+  color: white;
+  font-size: 12pt;
+  background-color: $color-purple;
+  padding: 6px 12px;
+  border-radius: 10px;
+  margin-right: 6px;
+  width: 30%;
+}
+.text-input:focus {
+  outline: $color-yellow solid 1.5px;
+}
+
+.add-button {
+  background-color: $color-yellow;
+  border: none;
+  border-radius: 10px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.deletable-item-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-button {
+  margin-left: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  .trash-icon {
+    color: white;
+    height: 12pt;
+    width: 12pt;
+  }
+
 }

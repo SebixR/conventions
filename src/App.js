@@ -7,6 +7,7 @@ import ConventionPage from "./Components/ConventionPage/ConventionPage";
 import AuthProvider from "./provider/AuthProvider";
 import Account from "./Components/Account/Account";
 import Schedule from "./Components/Schedule/Schedule";
+import AddConventionPage from "./Components/AddConventionPage/AddConventionPage";
 
 function App() {
   return (
@@ -29,6 +30,12 @@ function App() {
                   <Route path="/Schedule/:scheduleId" element={
                       <>
                           <Schedule/>
+                      </>
+                  }>
+                  </Route>
+                  <Route path="/AddConventionPage" element={
+                      <>
+                          <AddConventionPage/>
                       </>
                   }>
                   </Route>
