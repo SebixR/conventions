@@ -10,7 +10,7 @@ const AddConventionPage = () => {
     const [ticketPrice, setTicketPrice] = useState('');
     const [ticketDescription, setTicketDescription] = useState('');
     const handleAddTicket = () => {
-        if (ticketPrice.trim() !== '') {
+        if (ticketPrice.trim() !== '' && !isNaN(ticketPrice)) {
             const newTicket = {
                 id: Date.now(),
                 price: ticketPrice,
