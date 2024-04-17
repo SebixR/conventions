@@ -66,7 +66,7 @@ const AddConventionPage = () => {
             <TopNav/>
 
             <div className='main-content-wrap'>
-                <input type="text" placeholder="Event Name" className='name-header'/>
+                <input maxLength="60" type="text" placeholder="Event Name" className='name-header'/>
 
                 <div className='info-wrap'>
                     <FontAwesomeIcon icon={faCircle} className='status-icon'/> {/*TODO status should update dynamically*/}
