@@ -122,7 +122,7 @@ const AddConventionPage = () => {
                             {links.map((link, index) => (
                                 <div className="deletable-item-wrap">
                                     <label className="purple-label">
-                                        <a key={index} href={link.address} className="link-label">{link.name}</a>
+                                        <a key={index} href={link.address} target="_blank" className="link-label">{link.name}</a>
                                         <button onClick={() => handleDeleteLink(link.id)} className="delete-button">
                                             <FontAwesomeIcon icon={faTrash} className="trash-icon"/>
                                         </button>
