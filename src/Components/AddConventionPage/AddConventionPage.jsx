@@ -93,8 +93,8 @@ const AddConventionPage = () => {
                                 </div>
                                 <div className='inner-row-content'>
                                     <label>Ticket Price(s):</label>
-                                    <input type="text" value={ticketPrice} onChange={(e) => setTicketPrice(e.target.value)} placeholder="Price (EUR)" className='text-input'/>
-                                    <input type="text" value={ticketDescription} onChange={(e) => setTicketDescription(e.target.value)} placeholder="Description (optional)" className='text-input'/>
+                                    <input maxLength="10" type="text" value={ticketPrice} onChange={(e) => setTicketPrice(e.target.value)} placeholder="Price (EUR)" className='text-input'/>
+                                    <input maxLength="40" type="text" value={ticketDescription} onChange={(e) => setTicketDescription(e.target.value)} placeholder="Description (optional)" className='text-input'/>
                                     <button onClick={handleAddTicket} className="add-button">Add</button>
                                 </div>
                                 <div className="inner-row-content">
@@ -114,8 +114,8 @@ const AddConventionPage = () => {
 
                         <div className='inner-row-content'>
                             <label>Links:</label>
-                            <input value={linkAddress} onChange={(e) => setLinkAddress(e.target.value)} type="text" placeholder="Link" className="text-input"/>
-                            <input value={linkName} onChange={(e) => setLinkName(e.target.value)} type="text" placeholder="Link Name" className="text-input"/>
+                            <input maxLength="200" value={linkAddress} onChange={(e) => setLinkAddress(e.target.value)} type="text" placeholder="Link" className="text-input"/>
+                            <input maxLength="40" value={linkName} onChange={(e) => setLinkName(e.target.value)} type="text" placeholder="Link Name" className="text-input"/>
                             <button onClick={handleAddLink} className="add-button">Add</button>
                         </div>
                         <div className="inner-row-content">
