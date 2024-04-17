@@ -23,7 +23,26 @@ const AddConventionPage = () => {
     const handleDeleteTicket = (id) => {
         const updatedTickets = tickets.filter(ticket => ticket.id !== id);
         setTickets(updatedTickets);
-    }
+    };
+
+    const [links, setLinks] = useState([]);
+    const [linkAddress, setLinkAddress] = useState('');
+    const [linkName, setLinkName] = useState('');
+    const handleAddLink = () => {
+        if (linkAddress.trim() !== '' && linkName.trim() !== '') {
+            const newLink = {
+                id: Date.now(),
+                address: linkAddress,
+                name: linkName };
+            setLinks([...links, newLink]);
+            setLinkAddress('');
+            setLinkName('');
+            }
+    };
+    const handleDeleteLink = (id) => {
+        const updatedLinks = links.filter(link => link.id !== id);
+        setLinks(updatedLinks);
+    };
 
     const [description, setDescription] = useState('');
     const maxDescriptionLength = 800;
@@ -95,13 +114,21 @@ const AddConventionPage = () => {
 
                         <div className='inner-row-content'>
                             <label>Links:</label>
-                            <input type="text" placeholder="Link" className="text-input"/>
-                            <input type="text" placeholder="Link Name" className="text-input"/>
-                            <button className="add-button">Add</button>
+                            <input value={linkAddress} onChange={(e) => setLinkAddress(e.target.value)} type="text" placeholder="Link" className="text-input"/>
+                            <input value={linkName} onChange={(e) => setLinkName(e.target.value)} type="text" placeholder="Link Name" className="text-input"/>
+                            <button onClick={handleAddLink} className="add-button">Add</button>
                         </div>
                         <div className="inner-row-content">
-                            <a href='https://www.comic-con.org/cc/' className="link-label">Website</a>
-                            <a href='https://www.instagram.com/comic_con/' className='link-label'>Instagram</a>
+                            {links.map((link, index) => (
+                                <div className="deletable-item-wrap">
+                                    <label className="purple-label">
+                                        <a key={index} href={link.address} className="link-label">{link.name}</a>
+                                        <button onClick={() => handleDeleteLink(link.id)} className="delete-button">
+                                            <FontAwesomeIcon icon={faTrash} className="trash-icon"/>
+                                        </button>
+                                    </label>
+                                </div>
+                            ))}
                         </div>
 
                         <div className='second-row'>

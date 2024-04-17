@@ -8,7 +8,7 @@ import TopNav from "../TopNav/TopNav";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircle} from "@fortawesome/free-solid-svg-icons";
 import {Link, useParams} from "react-router-dom";
-import axios from "axios";
+//import axios from "axios";
 
 const ConventionPage = () => {
     // let { conventionId } = useParams(); //the name of the variable has to match the name in the url (for now set in App.js)
