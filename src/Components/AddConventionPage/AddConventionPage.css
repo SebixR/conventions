@@ -25,7 +25,6 @@
 }
 .main-content-wrap .info-wrap .status-icon {
   position: relative;
-  color: #f3e156;
   float: right;
   width: 25px;
   height: 25px;
@@ -130,6 +129,7 @@
   background-color: #f3e156;
   padding: 6px;
   border-radius: 10px;
+  cursor: pointer;
 }
 .main-content-wrap .photos-wrap .photos-content {
   position: relative;

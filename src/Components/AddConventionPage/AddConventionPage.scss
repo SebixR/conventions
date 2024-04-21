@@ -28,7 +28,6 @@
 
     .status-icon {
       position: relative;
-      color: $color-yellow;
       float: right;
       width: 25px;
       height: 25px;
@@ -148,6 +147,7 @@
       background-color: $color-yellow;
       padding: 6px;
       border-radius: 10px;
+      cursor: pointer;
     }
 
     .photos-content {

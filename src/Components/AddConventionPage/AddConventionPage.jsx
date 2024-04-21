@@ -5,8 +5,28 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCaretDown, faCircle, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import ImageUploader from "./ImageUploader";
+import "../../colors.scss";
 
 const AddConventionPage = () => {
+
+    const [selectedStartDate, setSelectedStartDate] = useState('');
+    const handleStartDateChange = (e) => {
+        setSelectedStartDate(e.target.value);
+    };
+    const [selectedEndDate, setSelectedEndDate] = useState('');
+    const handleEndDateChange = (e) => {
+        setSelectedEndDate(e.target.value);
+    };
+    const getIconColor = () => {
+        const today = new Date();
+        const selectedStartDateTime = new Date(selectedStartDate);
+        const selectedEndDateTime = new Date(selectedEndDate);
+        if (selectedStartDateTime > selectedEndDateTime) return '#ef5f5f';
+
+        if (selectedStartDateTime <= today && selectedEndDateTime >= today) return '#69ee70'
+        else if (selectedStartDateTime > today && selectedEndDateTime > today) return '#f3e156';
+        else return '#ef5f5f'
+    };
 
     const [tickets, setTickets] = useState([]);
     const [ticketPrice, setTicketPrice] = useState('');
@@ -62,7 +82,7 @@ const AddConventionPage = () => {
         }
     }, [description])
 
-    const [uploadedImages, setUploadedImages] = useState([]);
+    const [, setUploadedImages] = useState([]);
     const handleImageUpload = (newImages) => {
         setUploadedImages((prevImages) => [...prevImages, ...newImages]);
     };
@@ -77,7 +97,7 @@ const AddConventionPage = () => {
                 <input maxLength="60" type="text" placeholder="Event Name" className='name-header'/>
 
                 <div className='info-wrap'>
-                    <FontAwesomeIcon icon={faCircle} className='status-icon'/> {/*TODO status should update dynamically*/}
+                    <FontAwesomeIcon icon={faCircle} style={{ color: getIconColor() }} className='status-icon'/>
                     <div className='info-content'>
 
                         <div className='first-row'>
@@ -89,9 +109,9 @@ const AddConventionPage = () => {
                             <div className='inner-row-wrap'>
                                 <div className='inner-row-content'>
                                     <label>From:</label>
-                                    <input type="date" className='text-input'/>
+                                    <input type="date" value={selectedStartDate} onChange={handleStartDateChange} className='text-input'/>
                                     <label>To:</label>
-                                    <input type="date" className='text-input'/>
+                                    <input type="date" value={selectedEndDate} onChange={handleEndDateChange} className='text-input'/>
                                 </div>
                                 <div className='inner-row-content'>
                                     <label>Address:</label>
