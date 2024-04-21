@@ -247,3 +247,28 @@ label {
   }
 
 }
+
+.delete-image-button-wrap {
+  display: flex;
+  flex-direction: row;
+}
+
+.delete-button-img {
+  margin-top: 12px;
+  margin-left: -54px;
+  height: 100%;
+  background: $color-purple;
+  padding: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+
+  .trash-icon {
+    color: white;
+    height: 12pt;
+    width: 12pt;
+  }
+
+}

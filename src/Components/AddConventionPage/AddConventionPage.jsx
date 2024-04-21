@@ -4,6 +4,8 @@ import TopNav from "../TopNav/TopNav";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCaretDown, faCircle, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
+import ImageUploader from "./ImageUploader";
+
 const AddConventionPage = () => {
 
     const [tickets, setTickets] = useState([]);
@@ -60,6 +62,12 @@ const AddConventionPage = () => {
         }
     }, [description])
 
+    const [uploadedImages, setUploadedImages] = useState([]);
+    const handleImageUpload = (newImages) => {
+        setUploadedImages((prevImages) => [...prevImages, ...newImages]);
+    };
+
+
     return (
         <div className='main-wrap'>
 
@@ -100,7 +108,7 @@ const AddConventionPage = () => {
                                 <div className="inner-row-content">
                                     {tickets.map((ticket, index) => (
                                         <div className="deletable-item-wrap">
-                                            <label key={index} className="purple-label">{ticket.price} {ticket.description}
+                                            <label key={index} className="purple-label">{ticket.price}€ {ticket.description}
                                                 <button onClick={() => handleDeleteTicket(ticket.id)} className="delete-button">
                                                     <FontAwesomeIcon icon={faTrash} className="trash-icon"/>
                                                 </button>
@@ -122,7 +130,7 @@ const AddConventionPage = () => {
                             {links.map((link, index) => (
                                 <div className="deletable-item-wrap">
                                     <label className="purple-label">
-                                        <a key={index} href={link.address} target="_blank" className="link-label">{link.name}</a>
+                                        <a key={index} href={link.address} target="_blank" className="link-label" rel="noreferrer">{link.name}</a>
                                         <button onClick={() => handleDeleteLink(link.id)} className="delete-button">
                                             <FontAwesomeIcon icon={faTrash} className="trash-icon"/>
                                         </button>
@@ -153,13 +161,7 @@ const AddConventionPage = () => {
 
                 <div className='photos-wrap'>
                     <label>Photos:</label>
-                    <input type="file" className="photos-button"/>
-                    <div className='photos-content'>
-                        <div className='photos-column'>
-                        </div>
-                        <div className='photos-column'>
-                        </div>
-                    </div>
+                    <ImageUploader onImageUpload={handleImageUpload} className="photos-button" />
                 </div>
             </div>
 
