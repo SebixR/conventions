@@ -5,7 +5,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCaretDown, faCircle, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import ImageUploader from "./ImageUploader";
-import "../../colors.scss";
 
 const AddConventionPage = () => {
 
