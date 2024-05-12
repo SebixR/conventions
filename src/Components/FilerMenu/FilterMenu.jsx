@@ -1,9 +1,8 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useState} from "react";
 import "./FilterMenu.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faMagnifyingGlass, faMapMarkerAlt, faCalendarAlt, faQuestionCircle,
-    faCheck, faCaretDown, faCircle} from "@fortawesome/free-solid-svg-icons";
-import CustomCheckbox from "../CustomCheckbox/CustomCheckbox";
+import {faMagnifyingGlass, faMapMarkerAlt, faCalendarAlt,
+    faCheck} from "@fortawesome/free-solid-svg-icons";
 import TagDropdown from "./TagDropdown";
 import StatusDropdown from "./StatusDropdown";
 
