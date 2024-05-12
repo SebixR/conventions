@@ -119,11 +119,12 @@
   margin-top: 34px;
   margin-left: -12px;
   min-width: 200px;
+  z-index: 1;
 }
 .main-content-wrap .info-wrap .info-content .third-row .tag-dropdown-button .filter-icon {
   margin-right: 8px;
   height: 16pt;
-  color: white;
+  color: #6540b0;
 }
 .main-content-wrap .info-wrap .info-content .third-row .tag-dropdown-button .down-icon {
   color: #6540b0;

@@ -6,6 +6,8 @@ import {faCircle, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import ImageUploader from "./ImageUploader";
 import TagDropdown from "../FilerMenu/TagDropdown";
+import axios from "axios";
+import TagService from "../../Services/TagService";
 
 const AddConventionPage = () => {
 
@@ -95,13 +97,18 @@ const AddConventionPage = () => {
         setUploadedImages((prevImages) => [...prevImages, ...newImages]);
     };
 
+    useEffect(() => {
+        const fetchTags = async () => {
+            try {
+                const fetchedTags = await TagService.getAllTags();
+                setTags(fetchedTags);
+            } catch (error) {}
+        }
 
+        fetchTags();
+    }, []);
     const [selectedTags, setSelectedTags] = useState([]);
-    const tags = [ //TODO get from the database
-        { label: 'Tag 1'},
-        { label: 'Tag 2'},
-        { label: 'Tag 3'},
-    ]
+    const [tags, setTags] = useState([])
     const handleSelectTag = (tags) => {
         setSelectedTags(tags);
     }

@@ -132,12 +132,13 @@
             margin-top: 34px;
             margin-left: -12px;
             min-width: 200px;
+            z-index: 1;
           }
 
           .filter-icon {
             margin-right: 8px;
             height: 16pt;
-            color: white;
+            color: $color-purple;
           }
 
           .down-icon {
