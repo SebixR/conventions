@@ -99,11 +99,31 @@
   margin-top: 12px;
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
   align-items: center;
   background-color: #f3e156;
   padding: 6px 12px;
   border-radius: 10px;
   cursor: pointer;
+}
+.main-content-wrap .info-wrap .info-content .third-row .tag-dropdown-button .filter-field {
+  display: flex;
+  flex-direction: row;
+}
+.main-content-wrap .info-wrap .info-content .third-row .tag-dropdown-button .tag-dropdown {
+  position: absolute;
+  background-color: #6540b0;
+  padding: 6px;
+  border-radius: 10px;
+  outline: white solid 1px;
+  margin-top: 34px;
+  margin-left: -12px;
+  min-width: 200px;
+}
+.main-content-wrap .info-wrap .info-content .third-row .tag-dropdown-button .filter-icon {
+  margin-right: 8px;
+  height: 16pt;
+  color: white;
 }
 .main-content-wrap .info-wrap .info-content .third-row .tag-dropdown-button .down-icon {
   color: #6540b0;

@@ -111,11 +111,34 @@
           margin-top: 12px;
           display: flex;
           justify-content: space-between;
+          flex-direction: row;
           align-items: center;
           background-color: $color-yellow;
           padding: 6px 12px;
           border-radius: 10px;
           cursor: pointer;
+
+          .filter-field {
+            display: flex;
+            flex-direction: row;
+          }
+
+          .tag-dropdown {
+            position: absolute;
+            background-color: $color-purple;
+            padding: 6px;
+            border-radius: 10px;
+            outline: white solid 1px;
+            margin-top: 34px;
+            margin-left: -12px;
+            min-width: 200px;
+          }
+
+          .filter-icon {
+            margin-right: 8px;
+            height: 16pt;
+            color: white;
+          }
 
           .down-icon {
             color: $color-purple;

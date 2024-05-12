@@ -2,9 +2,10 @@ import React, {useEffect, useRef, useState} from "react";
 import "./AddConventionPage.css";
 import TopNav from "../TopNav/TopNav";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCaretDown, faCircle, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faCircle, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import ImageUploader from "./ImageUploader";
+import TagDropdown from "../FilerMenu/TagDropdown";
 
 const AddConventionPage = () => {
 
@@ -27,10 +28,13 @@ const AddConventionPage = () => {
         else return '#ef5f5f'
     };
 
+
     const [tickets, setTickets] = useState([]);
     const [ticketPrice, setTicketPrice] = useState('');
     const [ticketDescription, setTicketDescription] = useState('');
     const handleAddTicket = () => {
+        if (tickets.length >= 6) return;
+
         if (ticketPrice.trim() !== '' && !isNaN(ticketPrice)) {
             const newTicket = {
                 id: Date.now(),
@@ -46,10 +50,13 @@ const AddConventionPage = () => {
         setTickets(updatedTickets);
     };
 
+
     const [links, setLinks] = useState([]);
     const [linkAddress, setLinkAddress] = useState('');
     const [linkName, setLinkName] = useState('');
     const handleAddLink = () => {
+        if (links.length >= 4) return;
+
         if (linkAddress.trim() !== '' && linkName.trim() !== '') {
             const newLink = {
                 id: Date.now(),
@@ -64,6 +71,7 @@ const AddConventionPage = () => {
         const updatedLinks = links.filter(link => link.id !== id);
         setLinks(updatedLinks);
     };
+
 
     const [description, setDescription] = useState('');
     const maxDescriptionLength = 800;
@@ -81,13 +89,22 @@ const AddConventionPage = () => {
         }
     }, [description])
 
+
     const [, setUploadedImages] = useState([]);
     const handleImageUpload = (newImages) => {
         setUploadedImages((prevImages) => [...prevImages, ...newImages]);
     };
 
 
-
+    const [selectedTags, setSelectedTags] = useState([]);
+    const tags = [ //TODO get from the database
+        { label: 'Tag 1'},
+        { label: 'Tag 2'},
+        { label: 'Tag 3'},
+    ]
+    const handleSelectTag = (tags) => {
+        setSelectedTags(tags);
+    }
 
     return (
         <div className='main-wrap'>
@@ -121,7 +138,7 @@ const AddConventionPage = () => {
                                     <input type="text" placeholder="Address 2 (optional)" className='text-input'/>
                                 </div>
                                 <div className='inner-row-content'>
-                                    <label>Ticket Price(s):</label>
+                                    <label>Ticket Price(s) (1-6):</label>
                                     <input maxLength="10" type="text" value={ticketPrice} onChange={(e) => setTicketPrice(e.target.value)} placeholder="Price (EUR)" className='text-input'/>
                                     <input maxLength="40" type="text" value={ticketDescription} onChange={(e) => setTicketDescription(e.target.value)} placeholder="Description (optional)" className='text-input'/>
                                     <button onClick={handleAddTicket} className="add-button">Add</button>
@@ -142,7 +159,7 @@ const AddConventionPage = () => {
                         </div>
 
                         <div className='inner-row-content'>
-                            <label>Links:</label>
+                            <label>Links (0 - 4):</label>
                             <input maxLength="200" value={linkAddress} onChange={(e) => setLinkAddress(e.target.value)} type="text" placeholder="Link" className="text-input"/>
                             <input maxLength="40" value={linkName} onChange={(e) => setLinkName(e.target.value)} type="text" placeholder="Link Name" className="text-input"/>
                             <button onClick={handleAddLink} className="add-button">Add</button>
@@ -168,10 +185,9 @@ const AddConventionPage = () => {
 
                         <div className='third-row'>
                             <div className='tags-wrap'>
-                                <label>Tags:</label>
+                                <label>Tags (1-4):</label>
                                 <div className='tag-dropdown-button'>
-                                    Choose Tags (1-4)
-                                    <FontAwesomeIcon icon={faCaretDown} className='down-icon'/>
+                                    <TagDropdown options={tags} selectedTags={selectedTags} onSelectTag={handleSelectTag}/>
                                 </div>
                             </div>
                             <Link to="/AddSchedule/0" className='schedule-button'>Create Schedule</Link>
