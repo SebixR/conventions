@@ -7,6 +7,24 @@
   width: 80%;
   max-width: 1300px;
 
+  .top-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+
+    .submit-convention-button {
+      background-color: $color-yellow;
+      border: none;
+      border-radius: 10px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 14pt;
+      color: $color-background;
+      margin-bottom: 6px;
+    }
+  }
+
   .name-header {
     background-color: $color-purple;
     color: white;

@@ -2,12 +2,14 @@ import React, {useEffect, useRef, useState} from "react";
 import "./AddConventionPage.css";
 import TopNav from "../TopNav/TopNav";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircle, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faCircle, faCircleXmark, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import ImageUploader from "./ImageUploader";
 import TagDropdown from "../FilerMenu/TagDropdown";
-import axios from "axios";
+import { useForm } from 'react-hook-form';
+import axios from '../../config/axios'
 import TagService from "../../Services/TagService";
+import ErrorNotification from "../ErrorNotification/ErrorNotification";
 
 const AddConventionPage = () => {
 
@@ -113,13 +115,31 @@ const AddConventionPage = () => {
         setSelectedTags(tags);
     }
 
+    const { register, handleSubmit, formState: { errors }} = useForm();
+    const onSubmit = async (data) => {
+        try {
+            const response = await axios.post('auth/addConvention', data)
+            console.log(response.data)
+        } catch (error) {
+
+        }
+    }
+
     return (
         <div className='main-wrap'>
 
             <TopNav/>
 
-            <div className='main-content-wrap'>
-                <input maxLength="60" type="text" placeholder="Event Name" className='name-header'/>
+            {errors.event_name && <ErrorNotification text={'Name is required!'}/> }
+
+            <form onSubmit={handleSubmit(onSubmit)} className='main-content-wrap'>
+                <div className='top-row'>
+                    <input maxLength="60" type="text" id="event_name"
+                           {...register('event_name', {required: true})}
+                           placeholder="Event Name" className='name-header' />
+
+                    <button type="submit" className='submit-convention-button'>Create</button>
+                </div>
 
                 <div className='info-wrap'>
                     <FontAwesomeIcon icon={faCircle} style={{ color: getIconColor() }} className='status-icon'/>
@@ -207,7 +227,7 @@ const AddConventionPage = () => {
                     <label>Photos:</label>
                     <ImageUploader onImageUpload={handleImageUpload} className="photos-button" />
                 </div>
-            </div>
+            </form>
 
         </div>
     )
