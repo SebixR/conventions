@@ -66,6 +66,21 @@
     }
   }
 
+  .add-convention-button {
+    position: absolute;
+    right: 65px;
+    border: none;
+    border-radius: 50%;
+    background-color: white;
+    color: $color-yellow;
+    font-size: 14pt;
+    text-align: center;
+    padding-top: 5px;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+  }
+
   .profile-button {
     margin: 6px 12px 6px 6px;
     width: 35px;

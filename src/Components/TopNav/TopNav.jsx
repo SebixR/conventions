@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {Link} from "react-router-dom";
 import './TopNav.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass,  faUser} from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass,  faUser, faPlus} from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from "../../provider/AuthProvider";
 
 const TopNav = () => {
@@ -43,6 +43,12 @@ const TopNav = () => {
                     </button>
                 </div>
             </div>
+
+            {isAuth() && (
+                <Link to="/AddConventionPage" className='add-convention-button'>
+                    <FontAwesomeIcon icon={faPlus}/>
+                </Link>
+            )}
 
             <button className='profile-button' onClick={dropButton}>
                 <FontAwesomeIcon icon={faUser} className='user-icon'/>
