@@ -2,14 +2,13 @@ import React, {useEffect, useRef, useState} from "react";
 import "./AddConventionPage.css";
 import TopNav from "../TopNav/TopNav";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircle, faCircleXmark, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faCircle, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import ImageUploader from "./ImageUploader";
 import TagDropdown from "../FilerMenu/TagDropdown";
-import { useForm } from 'react-hook-form';
 import axios from '../../config/axios'
 import TagService from "../../Services/TagService";
-import ErrorNotification from "../ErrorNotification/ErrorNotification";
+import {useAuth} from "../../provider/AuthProvider";
 
 const AddConventionPage = () => {
 
@@ -94,7 +93,7 @@ const AddConventionPage = () => {
     }, [description])
 
 
-    const [, setUploadedImages] = useState([]);
+    const [uploadedImages, setUploadedImages] = useState([]);
     const handleImageUpload = (newImages) => {
         setUploadedImages((prevImages) => [...prevImages, ...newImages]);
     };
@@ -115,28 +114,59 @@ const AddConventionPage = () => {
         setSelectedTags(tags);
     }
 
-    const { register, handleSubmit, formState: { errors }} = useForm();
-    const onSubmit = async (data) => {
+    const [eventName, setEventName] = useState('');
+    const [logo, setLogo] = useState('');
+    const [city, setCity] = useState('');
+    const [country, setCountry] = useState('');
+    const [address1, setAddress1] = useState('');
+    const [address2, setAddress2] = useState('');
+
+    const [userId, setUserId] = useState(null)
+    const { token } = useAuth();
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response = await axios.get("/getAppUser", {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const userDataResponse = response.data;
+                setUserId(userDataResponse.id);
+            } catch (error) {
+
+            }
+        };
+
+        if (token) {
+            fetchUserData();
+        }
+    }, [token, userId])
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const photos = uploadedImages;
+        const formData = { userId , eventName, logo, selectedStartDate, selectedEndDate, city, country, address1, address2,
+        tickets, links, description, selectedTags, photos};
         try {
-            const response = await axios.post('auth/addConvention', data)
-            console.log(response.data)
+            const response = await axios.post('auth/addConvention', formData);
+            console.log(response.data);
+
         } catch (error) {
 
         }
     }
+
 
     return (
         <div className='main-wrap'>
 
             <TopNav/>
 
-            {errors.event_name && <ErrorNotification text={'Name is required!'}/> }
-
-            <form onSubmit={handleSubmit(onSubmit)} className='main-content-wrap'>
+            <form onSubmit={handleSubmit} className='main-content-wrap'>
                 <div className='top-row'>
-                    <input maxLength="60" type="text" id="event_name"
-                           {...register('event_name', {required: true})}
-                           placeholder="Event Name" className='name-header' />
+                    <input maxLength="60" type="text" id="event_name" placeholder="Event Name"
+                           className='name-header' onChange={(ev) => setEventName(ev.target.value)}/>
 
                     <button type="submit" className='submit-convention-button'>Create</button>
                 </div>
@@ -148,7 +178,7 @@ const AddConventionPage = () => {
                         <div className='first-row'>
 
                             <div className='image-wrap'>
-                                <input type="file"/>
+                                <input type="file" onChange={(ev) => setLogo(ev.target.value)}/>
                             </div>
 
                             <div className='inner-row-wrap'>
@@ -160,21 +190,22 @@ const AddConventionPage = () => {
                                 </div>
                                 <div className='inner-row-content'>
                                     <label>Address:</label>
-                                    <input type="text" placeholder="City, Country" className='text-input'/>
-                                    <input type="text" placeholder="Address 1" className='text-input'/>
-                                    <input type="text" placeholder="Address 2 (optional)" className='text-input'/>
+                                    <input type="text" placeholder="City" onChange={(ev) => setCity(ev.target.value)} className='text-input'/>
+                                    <input type="text" placeholder="Country" onChange={(ev) => setCountry(ev.target.value)} className='text-input'/>
+                                    <input type="text" placeholder="Address 1" onChange={(ev) => setAddress1(ev.target.value)} className='text-input'/>
+                                    <input type="text" placeholder="Address 2 (optional)" onChange={(ev) => setAddress2(ev.target.value)} className='text-input'/>
                                 </div>
                                 <div className='inner-row-content'>
                                     <label>Ticket Price(s) (1-6):</label>
                                     <input maxLength="10" type="text" value={ticketPrice} onChange={(e) => setTicketPrice(e.target.value)} placeholder="Price (EUR)" className='text-input'/>
                                     <input maxLength="40" type="text" value={ticketDescription} onChange={(e) => setTicketDescription(e.target.value)} placeholder="Description (optional)" className='text-input'/>
-                                    <button onClick={handleAddTicket} className="add-button">Add</button>
+                                    <button type="button" onClick={handleAddTicket} className="add-button">Add</button>
                                 </div>
                                 <div className="inner-row-content">
-                                    {tickets.map((ticket, index) => (
-                                        <div className="deletable-item-wrap">
-                                            <label key={index} className="purple-label">{ticket.price}€ {ticket.description}
-                                                <button onClick={() => handleDeleteTicket(ticket.id)} className="delete-button">
+                                    {tickets.map((ticket) => (
+                                        <div key={ticket.id} className="deletable-item-wrap">
+                                            <label className="purple-label">{ticket.price}€ {ticket.description}
+                                                <button type="button" onClick={() => handleDeleteTicket(ticket.id)} className="delete-button">
                                                     <FontAwesomeIcon icon={faTrash} className="trash-icon"/>
                                                 </button>
                                             </label>
@@ -189,14 +220,14 @@ const AddConventionPage = () => {
                             <label>Links (0 - 4):</label>
                             <input maxLength="200" value={linkAddress} onChange={(e) => setLinkAddress(e.target.value)} type="text" placeholder="Link" className="text-input"/>
                             <input maxLength="40" value={linkName} onChange={(e) => setLinkName(e.target.value)} type="text" placeholder="Link Name" className="text-input"/>
-                            <button onClick={handleAddLink} className="add-button">Add</button>
+                            <button type="button" onClick={handleAddLink} className="add-button">Add</button>
                         </div>
                         <div className="inner-row-content">
-                            {links.map((link, index) => (
-                                <div className="deletable-item-wrap">
+                            {links.map((link) => (
+                                <div key={link.id} className="deletable-item-wrap">
                                     <label className="purple-label">
-                                        <a key={index} href={link.address} target="_blank" className="link-label" rel="noreferrer">{link.name}</a>
-                                        <button onClick={() => handleDeleteLink(link.id)} className="delete-button">
+                                        <a  href={link.address} target="_blank" className="link-label" rel="noreferrer">{link.name}</a>
+                                        <button type="button" onClick={() => handleDeleteLink(link.id)} className="delete-button">
                                             <FontAwesomeIcon icon={faTrash} className="trash-icon"/>
                                         </button>
                                     </label>

@@ -10,6 +10,7 @@ const ImageUploader = ({ onImageUpload, className }) => {
         const newImages = Array.from(fileList).map((file) => ({
             id: Date.now(),
             file: file,
+            fileName: file.name,
             preview: URL.createObjectURL(file),
         }));
         setImages((prevImages) => [...prevImages, ...newImages]);
