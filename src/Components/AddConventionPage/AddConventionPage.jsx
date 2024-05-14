@@ -148,6 +148,8 @@ const AddConventionPage = () => {
         const photos = uploadedImages;
         const formData = { userId , eventName, logo, selectedStartDate, selectedEndDate, city, country, address1, address2,
         tickets, links, description, selectedTags, photos};
+        console.log("Tags: " + tags.at(0).tag)
+        console.log("Selected Tags: " + selectedTags);
         try {
             const response = await axios.post('auth/addConvention', formData);
             console.log(response.data);

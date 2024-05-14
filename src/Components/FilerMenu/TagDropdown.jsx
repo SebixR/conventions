@@ -46,7 +46,7 @@ const TagDropdown = ({ options, selectedTags, onSelectTag }) => {
                 <div ref={tagRef} className='tag-dropdown'>
                     <div className='tag-dropdown-content'>
                         {options.map((option) => (
-                            <div key={option.id} onClick={() => handleSelect(option)} className='tag-wrap'>
+                            <div key={option.id} className='tag-wrap'>
                                 <CustomCheckbox checked={selectedTags.includes(option.tag)} onChange={() => handleSelect(option.tag)} label={option.tag}/>
                             </div>
                             ))}
