@@ -112,7 +112,6 @@ const AddConventionPage = () => {
     const [selectedTags, setSelectedTags] = useState([]);
     const [tags, setTags] = useState([])
     const handleSelectTag = (tags) => {
-        if (selectedTags.length >= 4) return;
         setSelectedTags(tags);
     }
 
@@ -279,7 +278,7 @@ const AddConventionPage = () => {
                             <div className='tags-wrap'>
                                 <label>Tags (1-4):</label>
                                 <div className='tag-dropdown-button'>
-                                    <TagDropdown options={tags} selectedTags={selectedTags} onSelectTag={handleSelectTag}/>
+                                    <TagDropdown maxTags={4} options={tags} selectedTags={selectedTags} onSelectTag={handleSelectTag}/>
                                 </div>
                             </div>
                             <Link to="/AddSchedule/0" className='schedule-button'>Create Schedule</Link>

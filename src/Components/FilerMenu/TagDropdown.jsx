@@ -3,7 +3,7 @@ import CustomCheckbox from "../CustomCheckbox/CustomCheckbox";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCaretDown, faTag} from "@fortawesome/free-solid-svg-icons";
 
-const TagDropdown = ({ options, selectedTags, onSelectTag }) => {
+const TagDropdown = ({ options, selectedTags, onSelectTag, maxTags }) => {
     const [tagOpen, setTagOpen] = useState(false)
     const tagRef = useRef(null);
     const tagButtonRef = useRef(null);
@@ -24,7 +24,11 @@ const TagDropdown = ({ options, selectedTags, onSelectTag }) => {
     }, [tagRef])
 
     const handleSelect = (tag) => {
-        const newSelectedTags = selectedTags.includes(tag)
+        const isTagSelected = selectedTags.includes(tag);
+
+        if (!isTagSelected && selectedTags.length >= maxTags) return;
+
+        const newSelectedTags = isTagSelected
             ? selectedTags.filter((selectedTag) => selectedTag !== tag)
             : [...selectedTags, tag];
         onSelectTag(newSelectedTags);

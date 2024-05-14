@@ -53,7 +53,7 @@ const FilterMenu = () => {
                     <input className='filter-input' type='date' placeholder='Date'/>
                 </div>
 
-                <TagDropdown options={tags} selectedTags={selectedTags} onSelectTag={handleSelectTag}/>
+                <TagDropdown maxTags={tags.length} options={tags} selectedTags={selectedTags} onSelectTag={handleSelectTag}/>
 
                 <StatusDropdown options={statuses} selectedStatuses={selectedStatuses} onSelectStatus={handleSelectStatus}/>
         </div>
