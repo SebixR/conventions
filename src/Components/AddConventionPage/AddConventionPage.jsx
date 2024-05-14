@@ -9,6 +9,7 @@ import TagDropdown from "../FilerMenu/TagDropdown";
 import axios from '../../config/axios'
 import TagService from "../../Services/TagService";
 import {useAuth} from "../../provider/AuthProvider";
+import ErrorNotification from "../ErrorNotification/ErrorNotification";
 
 const AddConventionPage = () => {
 
@@ -111,6 +112,7 @@ const AddConventionPage = () => {
     const [selectedTags, setSelectedTags] = useState([]);
     const [tags, setTags] = useState([])
     const handleSelectTag = (tags) => {
+        if (selectedTags.length >= 4) return;
         setSelectedTags(tags);
     }
 
@@ -143,17 +145,43 @@ const AddConventionPage = () => {
         }
     }, [token, userId])
 
+    const [errors, setErrors] = useState([]);
+    const validateForm = () => {
+        let errors = {};
+        let isValid = true;
+
+        if (!eventName.trim()) errors.eventName = 'The event\'s name is required!';
+        if (!logo.trim()) errors.logo = 'The Logo is required!';
+
+        if (selectedStartDate === '') errors.startDate = 'A Start date is required!';
+        if (selectedEndDate === '') errors.endDate = 'An End date is required!';
+        if (selectedStartDate > selectedEndDate) errors.date = 'Date is incorrect!';
+
+        if (!city.trim()) errors.city = 'The city is required!';
+        if (!country.trim()) errors.country = 'The country is required!';
+        if (!address1.trim()) errors.address = 'At least one address field is required!';
+        if (tickets.length === 0) errors.tickets = 'At least one ticket price is required!';
+        if (!description.trim()) errors.description = 'A description is required!';
+        if (selectedTags.length === 0) errors.tags = 'At least one tag is required!';
+
+        if (Object.keys(errors).length !== 0) isValid = false;
+
+        setErrors(errors);
+        return isValid;
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        let isValid = validateForm();
+        if (!isValid) return;
+
         const photos = uploadedImages;
         const formData = { userId , eventName, logo, selectedStartDate, selectedEndDate, city, country, address1, address2,
         tickets, links, description, selectedTags, photos};
-        console.log("Tags: " + tags.at(0).tag)
-        console.log("Selected Tags: " + selectedTags);
         try {
             const response = await axios.post('auth/addConvention', formData);
             console.log(response.data);
-
         } catch (error) {
 
         }
@@ -164,6 +192,10 @@ const AddConventionPage = () => {
         <div className='main-wrap'>
 
             <TopNav/>
+
+            {Object.keys(errors).map((errorKey) => (
+                <ErrorNotification key={errorKey} text={errors[errorKey]} />
+            ))}
 
             <form onSubmit={handleSubmit} className='main-content-wrap'>
                 <div className='top-row'>
