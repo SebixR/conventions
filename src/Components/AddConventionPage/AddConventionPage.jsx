@@ -212,7 +212,7 @@ const AddConventionPage = () => {
                         <div className='first-row'>
 
                             <div className='image-wrap'>
-                                <input type="file" onChange={(ev) => setLogo(ev.target.value)}/>
+                                <input type="file" onChange={(ev) => setLogo(ev.target.files[0].name)}/>
                             </div>
 
                             <div className='inner-row-wrap'>
