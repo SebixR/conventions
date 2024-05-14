@@ -15,8 +15,8 @@
   margin-top: 12px;
   width: 360px;
 }
-.error-notification-wrap .error-notification .error-icon {
-  color: #ef5f5f;
+.error-notification-wrap .error-notification .check-icon {
+  color: #69ee70;
   width: 12pt;
   height: 12pt;
 }

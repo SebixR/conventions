@@ -10,6 +10,7 @@ import axios from '../../config/axios'
 import TagService from "../../Services/TagService";
 import {useAuth} from "../../provider/AuthProvider";
 import ErrorNotification from "../ErrorNotification/ErrorNotification";
+import SuccessNotification from "../SuccessNotification/SuccessNotification";
 
 const AddConventionPage = () => {
 
@@ -169,6 +170,7 @@ const AddConventionPage = () => {
         return isValid;
     }
 
+    const [success, setSuccess] = useState(false);
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -181,6 +183,7 @@ const AddConventionPage = () => {
         try {
             const response = await axios.post('auth/addConvention', formData);
             console.log(response.data);
+            setSuccess(true)
         } catch (error) {
 
         }
@@ -191,6 +194,8 @@ const AddConventionPage = () => {
         <div className='main-wrap'>
 
             <TopNav/>
+
+            {success && <SuccessNotification text="Successfully added the convention!"/>}
 
             {Object.keys(errors).map((errorKey) => (
                 <ErrorNotification key={errorKey} text={errors[errorKey]} />
