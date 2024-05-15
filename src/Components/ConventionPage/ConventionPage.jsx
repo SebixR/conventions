@@ -1,26 +1,37 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./ConventionPage.css";
-import testImage from '../Assets/comic_con_logo.jpg'
-import image1 from '../Assets/ca-time.jpg'
-import image2 from '../Assets/san-diego-comic-con.jpg'
-import image3 from '../Assets/San_Diego_Convention_Center.jpg'
 import TopNav from "../TopNav/TopNav";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircle} from "@fortawesome/free-solid-svg-icons";
 import {Link, useParams} from "react-router-dom";
-//import axios from "../../config/axios";
+import axios from "../../config/axios";
 
 const ConventionPage = () => {
-    // let { conventionId } = useParams(); //the name of the variable has to match the name in the url (for now set in App.js)
-    // console.log("Id: " + id);
-    // const [convention, setConvention] = useState();
-    //
-    // useEffect(() => {
-    //     axios.get(`public/getConvention/${conventionId}`).then((res) => {
-    //         const uploadedConvention = res.data;
-    //         setConvention(uploadedConvention);
-    //     })
-    // })
+    let { conventionId } = useParams(); //the name of the variable has to match the name in the url (for now set in App.js)
+    const [convention, setConvention] = useState({
+        eventName: '',
+        conventionStatus: '',
+        logo: '',
+        selectedStartDate: '',
+        selectedEndDate: '',
+        tickets: [],
+        links: [],
+        selectedTags: [],
+        photos: [],
+    });
+
+    useEffect(() => {
+        try {
+            axios.get(`public/getConvention/${conventionId}`).then((res) => {
+                const receivedConvention = res.data;
+                setConvention(receivedConvention);
+                console.log(receivedConvention);
+            })
+        } catch (error) {}
+    }, [conventionId])
+
+
+    const logoImage = '/Assets/' + convention.logo;
 
     return (
         <div className='main-wrap'>
@@ -28,40 +39,60 @@ const ConventionPage = () => {
             <TopNav/>
 
             <div className='main-content-wrap'>
-                <h2 className='name-header'>San Diego Comic-Con</h2>
+                <h2 className='name-header'>{convention.eventName}</h2>
 
                 <div className='info-wrap'>
-                    <FontAwesomeIcon icon={faCircle} className='status-icon'/>
+                    {convention.conventionStatus === 'UPCOMING' &&
+                        <FontAwesomeIcon icon={faCircle} className='status-icon-upcoming'/>
+                    }
+                    {convention.conventionStatus === 'OVER' &&
+                        <FontAwesomeIcon icon={faCircle} className='status-icon-over'/>
+                    }
+                    {convention.conventionStatus === 'ONGOING' &&
+                        <FontAwesomeIcon icon={faCircle} className='status-icon-ongoing'/>
+                    }
+
                     <div className='info-content'>
 
                         <div className='first-row'>
 
                             <div className='image-wrap'>
-                                <img src={testImage} alt='logo'/>
+                                <img src={logoImage} alt='logo'/>
                             </div>
 
                             <div className='inner-row-wrap'>
                                 <div className='inner-row-content'>
                                     <label>From:</label>
-                                    <label className='purple-label'>12.05.2024</label>
+                                    <label className='purple-label'>{convention.selectedStartDate.replace(/-/g, ".")}</label>
                                     <label>To:</label>
-                                    <label className='purple-label'>16.05.2024</label>
+                                    <label className='purple-label'>{convention.selectedEndDate.replace(/-/g, ".")}</label>
                                 </div>
                                 <div className='inner-row-content'>
                                     <label>Address:</label>
-                                    <label className='purple-label'>San Diego, USA</label>
-                                    <label className='purple-label'>San Diego Convention Center</label>
-                                    <label className='purple-label'>111 Harbor Dr</label>
+                                    <label className='purple-label'>{convention.city + ', ' + convention.country}</label>
+                                    <label className='purple-label'>{convention.address1}</label>
+                                    {convention.address2 &&
+                                        <label className='purple-label'>{convention.address2}</label>
+                                    }
                                 </div>
                                 <div className='inner-row-content'>
                                     <label>Ticket Price(s):</label>
-                                    <label className='purple-label'>24.99 (normal)</label>
-                                    <label className='purple-label'>12.99 (0-3 y.o.)</label>
+                                    {convention.tickets.map((ticket) => {
+
+                                        if (!ticket.price.toString().includes(".")) {
+                                            ticket.price = ticket.price.toString() + ".00";
+                                        }
+
+                                        return (
+                                                <label key={ticket.id} className='purple-label'>{ticket.price + '€ ' + ticket.description}</label>
+                                            )
+                                    })}
                                 </div>
                                 <div className='inner-row-content'>
                                     <label>Links:</label>
-                                    <a href='https://www.comic-con.org/cc/' className='link-label'>Official Website</a>
-                                    <a href='https://www.instagram.com/comic_con/' className='link-label'>Instagram</a>
+                                    {convention.links.map((link) => (
+                                        <a key={link.id} href={link.address} className='link-label' target="_blank" rel={"noreferrer"}>{link.name}</a>
+                                    ))}
                                 </div>
                             </div>
                         </div>
@@ -69,20 +100,16 @@ const ConventionPage = () => {
                         <div className='second-row'>
                             <label>Description:</label>
                             <p className='description'>
-                                San Diego Comic-Con International is a comic book convention and nonprofit
-                                multi-genre entertainment event held annually in San Diego, California,
-                                since 1970. The event's official name, as given on its website, is Comic-Con
-                                International: San Diego, but is more commonly known as Comic-Con, the San Diego
-                                Comic-Con, or the abbreviation SDCC.
+                                {convention.description}
                             </p>
                         </div>
 
                         <div className='third-row'>
                             <div className='tags-wrap'>
                                 <label>Tags:</label>
-                                <label className='purple-label'>Fantasy</label>
-                                <label className='purple-label'>Comic Books</label>
-                                <label className='purple-label'>Video Games</label>
+                                {convention.selectedTags.map((tag) => (
+                                    <label key={tag} className='purple-label'>{tag}</label>
+                                ))}
                             </div>
                             <Link to="/Schedule/0" className='schedule-button'>Schedule</Link>
                         </div>
@@ -94,14 +121,20 @@ const ConventionPage = () => {
                     <label>Photos:</label>
                     <div className='photos-content'>
                         <div className='photos-column'>
-                            <img src={image1} alt='image1'/>
-                            <img src={testImage} alt='image2'/>
-                            <img src={image3} alt='image2'/>
+                            {convention.photos.map((photo, index) => {
+                                if (index % 2 === 0) {
+                                    return <img key={photo.id} src={'/Assets/' + photo.fileName} alt='image1' />;
+                                }
+                                return null;
+                            })}
                         </div>
                         <div className='photos-column'>
-                            <img src={image2} alt='image1'/>
-                            <img src={image3} alt='image2'/>
-                            <img src={image1} alt='image1'/>
+                            {convention.photos.map((photo, index) => {
+                                if (index % 2 !== 0) {
+                                    return <img key={photo.id} src={'/Assets/' + photo.fileName} alt='image1' />;
+                                }
+                                return null;
+                            })}
                         </div>
                     </div>
                 </div>

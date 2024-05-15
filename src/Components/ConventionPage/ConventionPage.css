@@ -18,9 +18,23 @@
   background-color: #3f394b;
   padding: 12px;
 }
-.main-content-wrap .info-wrap .status-icon {
+.main-content-wrap .info-wrap .status-icon-upcoming {
   position: relative;
   color: #f3e156;
+  float: right;
+  width: 25px;
+  height: 25px;
+}
+.main-content-wrap .info-wrap .status-icon-over {
+  position: relative;
+  color: #ef5f5f;
+  float: right;
+  width: 25px;
+  height: 25px;
+}
+.main-content-wrap .info-wrap .status-icon-ongoing {
+  position: relative;
+  color: #69ee70;
   float: right;
   width: 25px;
   height: 25px;
