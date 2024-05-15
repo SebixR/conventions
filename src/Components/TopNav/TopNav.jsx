@@ -66,7 +66,7 @@ const TopNav = () => {
                         <div ref={dropRef} className='drop-wrap'>
                             <div className='drop-content'>
                                 <Link to="/LoginForm" className='drop-link'>Log In</Link>
-                                <Link to="/SignupForm" className='drop-link'>Sign In</Link>
+                                <Link to="/SignupForm" className='drop-link'>Sign Up</Link>
                             </div>
                         </div>
                     )
