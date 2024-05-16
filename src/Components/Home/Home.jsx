@@ -22,24 +22,49 @@ const Home = () => {
 
     }, []);
 
+    const [filteredData, setFilteredData] = useState(null);
+
+    const handleFilter = (filteredData) => {
+        setFilteredData(filteredData);
+        console.log(filteredData);
+    };
+
     return (
         <div className='main-wrap'>
             <TopNav/>
 
-            <FilterMenu/>
-
-            {items.length > 0 ? items.map((item) => (
-                <Item key={item.id}
-                      id={item.id}
-                      status={item.conventionStatus}
-                      logo={item.logo}
-                      city={item.city}
-                      country={item.country}
-                      startDate={item.selectedStartDate}
-                      endDate={item.selectedEndDate}
-                      tags={item.selectedTags}
-                      description={item.description}/>
-            )) : (
+            <FilterMenu onFilter={handleFilter}/>
+            {filteredData !== null ? (
+                filteredData.length > 0 ? (
+                        filteredData.map((item) => (
+                            <Item key={item.id}
+                                  id={item.id}
+                                  status={item.conventionStatus}
+                                  logo={item.logo}
+                                  city={item.city}
+                                  country={item.country}
+                                  startDate={item.selectedStartDate}
+                                  endDate={item.selectedEndDate}
+                                  tags={item.selectedTags}
+                                  description={item.description}/>
+                        ))
+                    ) : (
+                    <ErrorNotification text="No conventions found"/>
+                )
+            ) : items.length > 0 ? (
+                items.map((item) => (
+                    <Item key={item.id}
+                          id={item.id}
+                          status={item.conventionStatus}
+                          logo={item.logo}
+                          city={item.city}
+                          country={item.country}
+                          startDate={item.selectedStartDate}
+                          endDate={item.selectedEndDate}
+                          tags={item.selectedTags}
+                          description={item.description}/>
+                ))
+            ) : (
                 <ErrorNotification text="No conventions found"/>
             )}
 

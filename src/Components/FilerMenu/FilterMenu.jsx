@@ -8,7 +8,7 @@ import StatusDropdown from "./StatusDropdown";
 import TagService from "../../Services/TagService";
 import axios from "../../config/axios";
 
-const FilterMenu = () => {
+const FilterMenu = ( { onFilter } ) => {
     useEffect(() => {
         const fetchTags = async () => {
             try {
@@ -46,6 +46,7 @@ const FilterMenu = () => {
         const formData = { name, city, date, selectedTags, selectedStatuses };
         try {
             const response = await axios.post('public/filterConventions', formData);
+            onFilter(response.data);
             console.log(response.data);
         } catch (error)  {
             console.log(error);
