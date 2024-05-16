@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import "./FilterMenu.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMagnifyingGlass, faMapMarkerAlt, faCalendarAlt,
-    faCheck} from "@fortawesome/free-solid-svg-icons";
+    faCheck, faTrash} from "@fortawesome/free-solid-svg-icons";
 import TagDropdown from "./TagDropdown";
 import StatusDropdown from "./StatusDropdown";
 import TagService from "../../Services/TagService";
@@ -24,7 +24,6 @@ const FilterMenu = ( { onFilter } ) => {
     const handleSelectTag = (tags) => {
         setSelectedTags(tags);
     }
-
 
     const [selectedStatuses, setSelectedStatuses] = useState([]);
     const [statuses] = useState([
@@ -53,24 +52,33 @@ const FilterMenu = ( { onFilter } ) => {
         }
     }
 
+
+    const clearFilters = () => {
+        setName('');
+        setCity('');
+        setDate('');
+        setSelectedTags([]);
+        setSelectedStatuses([]);
+    }
+
     return (
         <form onSubmit={handleSubmit} className='filter-wrap'>
             <div className='filter-content'>
                 <div className='filter-field'>
                     <FontAwesomeIcon icon={faMagnifyingGlass} className='filter-icon'/>
-                    <input className='filter-input' type='text' placeholder='Name'
+                    <input className='filter-input' type='text' placeholder='Name' value={name}
                            onChange={(ev) => setName(ev.target.value)}/>
                 </div>
 
                 <div className='filter-field'>
                     <FontAwesomeIcon icon={faMapMarkerAlt} className='filter-icon'/>
-                    <input className='filter-input' type='text' placeholder='City'
+                    <input className='filter-input' type='text' placeholder='City' value={city}
                            onChange={(ev) => setCity(ev.target.value)}/>
                 </div>
 
                 <div className='filter-field'>
                     <FontAwesomeIcon icon={faCalendarAlt} className='filter-icon'/>
-                    <input className='filter-input' type='date' placeholder='Date'
+                    <input className='filter-input' type='date' placeholder='Date' value={date}
                            onChange={(ev) => setDate(ev.target.value)}/>
                 </div>
 
@@ -80,6 +88,9 @@ const FilterMenu = ( { onFilter } ) => {
         </div>
             <button type="submit" className='accept-filter'>
                 <FontAwesomeIcon icon={faCheck} className='accept-icon'/>
+            </button>
+            <button type="button" className='accept-filter' onClick={() => clearFilters()}>
+                <FontAwesomeIcon icon={faTrash} className='accept-icon'/>
             </button>
         </form>
     )
