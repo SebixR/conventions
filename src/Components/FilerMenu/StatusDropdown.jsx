@@ -46,9 +46,9 @@ const StatusDropdown = ({ options, selectedStatuses, onSelectStatus }) => {
                 <div ref={statusRef} className='tag-dropdown'>
                     <div className='tag-dropdown-content'>
                         {options.map((option) => (
-                            <div key={option.label} onClick={() => handleSelect(option)} className='tag-wrap'>
+                            <div key={option.value} className='tag-wrap'>
                                 <FontAwesomeIcon icon={faCircle} className={option.icon}/>
-                                <CustomCheckbox checked={selectedStatuses.includes(option.label)} onChange={() => handleSelect(option.label)} label={option.label}/>
+                                <CustomCheckbox checked={selectedStatuses.includes(option.value)} onChange={() => handleSelect(option.value)} label={option.label}/>
                             </div>
                         ))}
                     </div>

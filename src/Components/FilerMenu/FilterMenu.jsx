@@ -6,6 +6,7 @@ import {faMagnifyingGlass, faMapMarkerAlt, faCalendarAlt,
 import TagDropdown from "./TagDropdown";
 import StatusDropdown from "./StatusDropdown";
 import TagService from "../../Services/TagService";
+import axios from "../../config/axios";
 
 const FilterMenu = () => {
     useEffect(() => {
@@ -26,31 +27,50 @@ const FilterMenu = () => {
 
 
     const [selectedStatuses, setSelectedStatuses] = useState([]);
-    const statuses = [
+    const [statuses] = useState([
         { label: 'Upcoming', icon: 'icon-upcoming', value: 'UPCOMING' },
         { label: 'Ongoing', icon: 'icon-ongoing', value: 'ONGOING' },
         { label: 'Over', icon: 'icon-over', value: 'OVER' },
-    ]
+    ])
     const handleSelectStatus = (statuses) => {
         setSelectedStatuses(statuses);
     }
 
+    const [name, setName] = useState('');
+    const [city, setCity] = useState('');
+    const [date, setDate] = useState('');
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const formData = { name, city, date, selectedTags, selectedStatuses };
+        try {
+            const response = await axios.post('public/filterConventions', formData);
+            console.log(response.data);
+        } catch (error)  {
+            console.log(error);
+        }
+    }
+
     return (
-        <form className='filter-wrap'>
+        <form onSubmit={handleSubmit} className='filter-wrap'>
             <div className='filter-content'>
                 <div className='filter-field'>
                     <FontAwesomeIcon icon={faMagnifyingGlass} className='filter-icon'/>
-                    <input className='filter-input' type='text' placeholder='Name'/>
+                    <input className='filter-input' type='text' placeholder='Name'
+                           onChange={(ev) => setName(ev.target.value)}/>
                 </div>
 
                 <div className='filter-field'>
                     <FontAwesomeIcon icon={faMapMarkerAlt} className='filter-icon'/>
-                    <input className='filter-input' type='text' placeholder='City'/>
+                    <input className='filter-input' type='text' placeholder='City'
+                           onChange={(ev) => setCity(ev.target.value)}/>
                 </div>
 
                 <div className='filter-field'>
                     <FontAwesomeIcon icon={faCalendarAlt} className='filter-icon'/>
-                    <input className='filter-input' type='date' placeholder='Date'/>
+                    <input className='filter-input' type='date' placeholder='Date'
+                           onChange={(ev) => setDate(ev.target.value)}/>
                 </div>
 
                 <TagDropdown maxTags={tags.length} options={tags} selectedTags={selectedTags} onSelectTag={handleSelectTag}/>
