@@ -27,16 +27,16 @@ const FilterMenu = () => {
 
     const [selectedStatuses, setSelectedStatuses] = useState([]);
     const statuses = [
-        { label: 'Upcoming', icon: 'icon-upcoming' },
-        { label: 'Ongoing', icon: 'icon-ongoing' },
-        { label: 'Over', icon: 'icon-over' },
+        { label: 'Upcoming', icon: 'icon-upcoming', value: 'UPCOMING' },
+        { label: 'Ongoing', icon: 'icon-ongoing', value: 'ONGOING' },
+        { label: 'Over', icon: 'icon-over', value: 'OVER' },
     ]
     const handleSelectStatus = (statuses) => {
         setSelectedStatuses(statuses);
     }
 
     return (
-        <div className='filter-wrap'>
+        <form className='filter-wrap'>
             <div className='filter-content'>
                 <div className='filter-field'>
                     <FontAwesomeIcon icon={faMagnifyingGlass} className='filter-icon'/>
@@ -57,10 +57,10 @@ const FilterMenu = () => {
 
                 <StatusDropdown options={statuses} selectedStatuses={selectedStatuses} onSelectStatus={handleSelectStatus}/>
         </div>
-            <button className='accept-filter'>
+            <button type="submit" className='accept-filter'>
                 <FontAwesomeIcon icon={faCheck} className='accept-icon'/>
             </button>
-        </div>
+        </form>
     )
 }
 

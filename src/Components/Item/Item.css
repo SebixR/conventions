@@ -65,8 +65,10 @@
   background-color: #6540b0;
   border-radius: 10px;
   padding: 6px 14px;
+  font-size: 12pt;
   color: white;
-  min-height: 120px;
+  height: 118px;
+  overflow: hidden;
 }
 .item-main-wrap .item-right-pane {
   display: flex;
@@ -86,10 +88,26 @@
   text-decoration: none;
   color: black;
 }
-.item-main-wrap .item-right-pane .status-icon {
+.item-main-wrap .item-right-pane .status-icon-upcoming {
+  position: relative;
   color: #f3e156;
-  width: 24px;
-  height: 24px;
+  float: right;
+  width: 25px;
+  height: 25px;
+}
+.item-main-wrap .item-right-pane .status-icon-over {
+  position: relative;
+  color: #ef5f5f;
+  float: right;
+  width: 25px;
+  height: 25px;
+}
+.item-main-wrap .item-right-pane .status-icon-ongoing {
+  position: relative;
+  color: #69ee70;
+  float: right;
+  width: 25px;
+  height: 25px;
 }
 
 /*# sourceMappingURL=Item.css.map */

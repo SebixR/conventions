@@ -117,27 +117,31 @@ const ConventionPage = () => {
                     </div>
                 </div>
 
-                <div className='photos-wrap'>
-                    <label>Photos:</label>
-                    <div className='photos-content'>
-                        <div className='photos-column'>
-                            {convention.photos.map((photo, index) => {
-                                if (index % 2 === 0) {
-                                    return <img key={photo.id} src={'/Assets/' + photo.fileName} alt='image1' />;
-                                }
-                                return null;
-                            })}
-                        </div>
-                        <div className='photos-column'>
-                            {convention.photos.map((photo, index) => {
-                                if (index % 2 !== 0) {
-                                    return <img key={photo.id} src={'/Assets/' + photo.fileName} alt='image1' />;
-                                }
-                                return null;
-                            })}
+                {convention.photos.length > 0 &&
+
+                    <div className='photos-wrap'>
+                        <label>Photos:</label>
+                        <div className='photos-content'>
+                            <div className='photos-column'>
+                                {convention.photos.map((photo, index) => {
+                                    if (index % 2 === 0) {
+                                        return <img key={photo.id} src={'/Assets/' + photo.fileName} alt='image1' />;
+                                    }
+                                    return null;
+                                })}
+                            </div>
+                            <div className='photos-column'>
+                                {convention.photos.map((photo, index) => {
+                                    if (index % 2 !== 0) {
+                                        return <img key={photo.id} src={'/Assets/' + photo.fileName} alt='image1' />;
+                                    }
+                                    return null;
+                                })}
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
+
             </div>
 
         </div>

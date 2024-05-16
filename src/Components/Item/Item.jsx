@@ -30,7 +30,15 @@ const Item = ( props ) => {
                 </div>
             </div>
             <div className='item-right-pane'>
-                <FontAwesomeIcon icon={faCircle} className='status-icon'/>
+                {props.status === 'UPCOMING' &&
+                    <FontAwesomeIcon icon={faCircle} className='status-icon-upcoming'/>
+                }
+                {props.status === 'OVER' &&
+                    <FontAwesomeIcon icon={faCircle} className='status-icon-over'/>
+                }
+                {props.status === 'ONGOING' &&
+                    <FontAwesomeIcon icon={faCircle} className='status-icon-ongoing'/>
+                }
                 <Link to={"/ConventionPage/" + props.id} className='more-button'>More</Link>
             </div>
 

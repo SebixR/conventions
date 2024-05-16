@@ -4,16 +4,22 @@ import TopNav from "../TopNav/TopNav";
 import FilterMenu from "../FilerMenu/FilterMenu";
 import Item from "../Item/Item";
 import axios from "../../config/axios";
+import ErrorNotification from "../ErrorNotification/ErrorNotification";
 
 const Home = () => {
 
     const [items, setItems] = useState([])
 
     useEffect(() => {
-        axios.get("public/getAllConventions").then((res) => {
-           const conventions = res.data;
-           setItems(conventions);
-        });
+        try {
+            axios.get("public/getAllConventions").then((res) => {
+                const conventions = res.data;
+                setItems(conventions);
+            });
+        } catch (error) {
+            console.log(error)
+        }
+
     }, []);
 
     return (
@@ -22,9 +28,10 @@ const Home = () => {
 
             <FilterMenu/>
 
-            {items.map((item) => (
+            {items.length > 0 ? items.map((item) => (
                 <Item key={item.id}
                       id={item.id}
+                      status={item.conventionStatus}
                       logo={item.logo}
                       city={item.city}
                       country={item.country}
@@ -32,7 +39,9 @@ const Home = () => {
                       endDate={item.selectedEndDate}
                       tags={item.selectedTags}
                       description={item.description}/>
-            ))}
+            )) : (
+                <ErrorNotification text="No conventions found"/>
+            )}
 
         </div>
     )

@@ -75,8 +75,10 @@
         background-color: $color-purple;
         border-radius: 10px;
         padding: 6px 14px;
+        font-size: 12pt;
         color: white;
-        min-height: 120px;
+        height: 118px;
+        overflow: hidden;
       }
     }
   }
@@ -100,10 +102,28 @@
       color: black;
     }
 
-    .status-icon {
+    .status-icon-upcoming {
+      position: relative;
       color: $color-yellow;
-      width: 24px;
-      height: 24px;
+      float: right;
+      width: 25px;
+      height: 25px;
+    }
+
+    .status-icon-over {
+      position: relative;
+      color: $color-error;
+      float: right;
+      width: 25px;
+      height: 25px;
+    }
+
+    .status-icon-ongoing {
+      position: relative;
+      color: $color-green;
+      float: right;
+      width: 25px;
+      height: 25px;
     }
   }
 }
