@@ -40,6 +40,7 @@ const Home = () => {
                             <Item key={item.id}
                                   id={item.id}
                                   status={item.conventionStatus}
+                                  eventName={item.eventName}
                                   logo={item.logo}
                                   city={item.city}
                                   country={item.country}
@@ -56,6 +57,7 @@ const Home = () => {
                     <Item key={item.id}
                           id={item.id}
                           status={item.conventionStatus}
+                          eventName={item.eventName}
                           logo={item.logo}
                           city={item.city}
                           country={item.country}

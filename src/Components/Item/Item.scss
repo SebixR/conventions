@@ -24,6 +24,7 @@
     width: 250px;
     height: 250px;
     position: relative;
+    align-self: center;
 
     img {
       height: 100%;
@@ -37,6 +38,11 @@
     padding: 6px;
     margin: 4px;
     width: 65%;
+
+    .event-name-label {
+      margin-bottom: 12px;
+      font-weight: bold;
+    }
 
     .first-row {
       display: flex;

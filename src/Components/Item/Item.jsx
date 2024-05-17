@@ -13,6 +13,7 @@ const Item = ( props ) => {
                 <img src={logoPath} alt='logo'/>
             </div>
             <div className='item-content-wrap'>
+                <label className='event-name-label'>{props.eventName}</label>
                 <div className='first-row'>
                     <label className='city-label'>{props.city + ', ' + props.country}</label>
                     <label>{props.startDate.replace(/-/g, ".")}</label>
