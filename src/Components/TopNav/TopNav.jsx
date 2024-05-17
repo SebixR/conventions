@@ -58,7 +58,7 @@ const TopNav = () => {
                     isAuth() ? (
                         <div ref={dropRef} className='drop-wrap'>
                             <div className='drop-content'>
-                                <Link to="/Account" className='drop-link'>My Account</Link>
+                                <Link to="/AccountPage" className='drop-link'>My Account</Link>
                                 <Link to="/" onClick={handleLogout} className='drop-link'>Log Out</Link>
                             </div>
                         </div>

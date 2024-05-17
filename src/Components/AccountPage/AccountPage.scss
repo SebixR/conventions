@@ -1,0 +1,135 @@
+@import "../../colors";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  max-width: 2000px;
+  margin: auto;
+}
+
+.main-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+
+  .account-main-content-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px;
+    max-width: 90%;
+    margin: 0 auto;
+
+    .account-info-pane {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      background-color: $color-ui;
+      width: 100%;
+      padding: 12px 18px;
+      margin-right: 12px;
+
+      .account-info-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        padding-bottom: 6px;
+
+        .single-info-wrap {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          width: 30%;
+
+          label {
+            padding: 6px;
+          }
+
+          input {
+            width: 80%;
+            border: none;
+            border-radius: 10px;
+            font-size: 12pt;
+            padding: 3px 6px;
+          }
+          input:focus {
+            outline: $color-yellow solid 1.5px;
+          }
+        }
+      }
+
+      .account-info-buttons-wrap {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        button {
+          background-color: $color-yellow;
+          border: none;
+          border-radius: 10px;
+          color: white;
+          margin: 4px;
+          cursor: pointer;
+
+          .icon {
+            width: 35px;
+            height: 35px;
+            padding: 6px;
+          }
+        }
+      }
+    }
+  }
+
+  button {
+    background-color: $color-yellow;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 12pt;
+    padding: 0;
+    margin-bottom: 14px;
+    margin-top: 14px;
+  }
+
+  .account-item-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 12px auto;
+
+    .item-main-wrap {
+      margin: 0;
+    }
+
+    .account-item-buttons-wrap {
+      display: flex;
+      flex-direction: column;
+      margin-left: 12px;
+
+      button {
+        background-color: $color-yellow;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        margin-left: 4px;
+        cursor: pointer;
+
+        .icon {
+          width: 35px;
+          height: 35px;
+          padding: 8px;
+        }
+      }
+    }
+  }
+
+}

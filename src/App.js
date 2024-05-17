@@ -5,7 +5,7 @@ import Home from "./Components/Home/Home";
 import SignupForm from "./Components/SignupForm/SignupForm";
 import ConventionPage from "./Components/ConventionPage/ConventionPage";
 import AuthProvider from "./provider/AuthProvider";
-import Account from "./Components/Account/Account";
+import AccountPage from "./Components/AccountPage/AccountPage";
 import Schedule from "./Components/Schedule/Schedule";
 import AddConventionPage from "./Components/AddConventionPage/AddConventionPage";
 
@@ -51,9 +51,9 @@ function App() {
                       </>
                   }>
                   </Route>
-                  <Route path="/Account" element={
+                  <Route path="/AccountPage" element={
                       <>
-                          <Account/>
+                          <AccountPage/>
                       </>
                   }>
                   </Route>
