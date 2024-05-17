@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react"
+import React, {useEffect, useState} from "react"
 import TopNav from "../TopNav/TopNav";
 import "./AccountPage.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -106,6 +106,33 @@ const AccountPage = () => {
     };
 
 
+    const [deletedSuccessfully, setDeletedSuccessfully] = useState(false);
+    const [deletedError, setDeletedError] = useState(false);
+    const handleDeleteEntry = async (id) => {
+        try {
+            const response = await axios.delete(`auth/deleteConvention/${id}`);
+            if (response.status === 200) {
+                showDeletedSuccessfullyNotification();
+                const updatedItems = items.filter(item => item.id !== id);
+                setItems(updatedItems);
+            }
+            else showDeletedErrorNotification();
+        } catch (error) {console.log(error)}
+    }
+    const showDeletedSuccessfullyNotification = () => {
+        setDeletedSuccessfully(true);
+        setTimeout(() => {
+            setDeletedSuccessfully(false);
+        }, 3000);
+    };
+    const showDeletedErrorNotification = () => {
+        setDeletedError(true);
+        setTimeout(() => {
+            setDeletedError(false);
+        }, 3000);
+    };
+
+
     const [isReadOnly, setIsReadOnly] = useState(true);
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -142,6 +169,8 @@ const AccountPage = () => {
             ))}
 
             {success && <SuccessNotification text="Successfully changed user information." />}
+            {deletedSuccessfully && <SuccessNotification text="Successfully deleted entry." />}
+            {deletedError && <ErrorNotification text="Failed to delete the entry." />}
 
             <div className="account-main-content-wrap">
 
@@ -182,10 +211,10 @@ const AccountPage = () => {
                 {items.map((item) =>(
                     <div key={item.id} className='account-item-wrap'>
                         {visibleNotifications[item.id] &&
-                            <div className='delete-notification-wrap'>
+                            <div onSubmit={handleDeleteEntry} className='delete-notification-wrap'>
                                 <label>Are you sure you want to delete this entry?</label>
                                 <div className='delete-notification-buttons-wrap'>
-                                    <button>Yes</button>
+                                    <button type="submit" onClick={() => handleDeleteEntry(item.id)}>Yes</button>
                                     <button type="button" onClick={() => handleCancelClick(item.id)}>No</button>
                                 </div>
                             </div>
