@@ -10,9 +10,11 @@ import {useAuth} from "../../provider/AuthProvider";
 const AccountPage = () => {
 
     const [userId, setUserId] = useState(null)
-    const [userFirstName, setUserFirstName] = useState('');
-    const [userLastName, setUserLastName] = useState('');
-    const [userEmail, setUserEmail] = useState('');
+    const [inputValues, setInputValues] = useState({
+        firstNameInput: '',
+        lastNameInput: '',
+        emailInput: ''
+    })
     const { token } = useAuth();
     const [items, setItems] = useState([]);
     useEffect(() => {
@@ -25,9 +27,11 @@ const AccountPage = () => {
                 });
                 const userDataResponse = response.data;
                 setUserId(userDataResponse.id);
-                setUserFirstName(userDataResponse.firstName);
-                setUserLastName(userDataResponse.lastName);
-                setUserEmail(userDataResponse.email);
+                setInputValues({
+                    firstNameInput: userDataResponse.firstName,
+                    lastNameInput: userDataResponse.lastName,
+                    emailInput: userDataResponse.email
+                })
             } catch (error) {
                 console.log(error);
             }
@@ -36,7 +40,7 @@ const AccountPage = () => {
         if (token) {
             fetchUserData();
         }
-    }, [token, userId])
+    }, [token])
 
     useEffect(() => {
         try {
@@ -52,6 +56,32 @@ const AccountPage = () => {
 
     }, [userId]);
 
+
+    const [isReadOnly, setIsReadOnly] = useState(true);
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setInputValues((prevValues) => ({
+            ...prevValues,
+            [name]: value,
+        }));
+    };
+    const toggleReadOnly = () => {
+        setIsReadOnly((prevReadOnly) => !prevReadOnly);
+    };
+
+
+    const [visibleNotifications, setVisibleNotifications] = useState({});
+    const handleDeleteClick = (id) => {
+        setVisibleNotifications((prevNotifications) => ({
+            ...prevNotifications, [id]: true,
+        }));
+    };
+    const handleCancelClick = (id) => {
+        setVisibleNotifications((prevNotifications) => ({
+            ...prevNotifications, [id]: false,
+        }));
+    };
+
     return (
 
         <div className="account-main-wrap">
@@ -64,23 +94,25 @@ const AccountPage = () => {
                     <div className="account-info-content">
                         <div className="single-info-wrap">
                             <label>First Name</label>
-                            <input type="text" value={userFirstName} readOnly={true}/>
+                            <input disabled={isReadOnly} type="text" name="firstNameInput" onChange={handleInputChange} value={inputValues.firstNameInput} readOnly={isReadOnly}/>
                         </div>
                         <div className="single-info-wrap">
                             <label>Last Name</label>
-                            <input type="text" value={userLastName} readOnly={true}/>
+                            <input disabled={isReadOnly} type="text" name="lastNameInput" onChange={handleInputChange} value={inputValues.lastNameInput} readOnly={isReadOnly}/>
                         </div>
                         <div className="single-info-wrap">
                             <label>Email</label>
-                            <input type="text" value={userEmail} readOnly={true}/>
+                            <input disabled={isReadOnly} type="text" name="emailInput" onChange={handleInputChange} value={inputValues.emailInput} readOnly={isReadOnly}/>
                         </div>
                     </div>
 
                     <div className="account-info-buttons-wrap">
-                        <button type="submit">
+                        <button type="button" onClick={toggleReadOnly}
+                                style={{ backgroundColor: isReadOnly ? '#F3E156FF' : '#6540B0FF' }}>
                             <FontAwesomeIcon icon={faPencilSquare} className="icon"/>
                         </button>
-                        <button type="button">
+
+                        <button type="submit">
                             <FontAwesomeIcon icon={faCheck} className="icon"/>
                         </button>
                     </div>
@@ -94,13 +126,15 @@ const AccountPage = () => {
 
                 {items.map((item) =>(
                     <div key={item.id} className='account-item-wrap'>
-                        <div className='delete-notification-wrap'>
-                            <label>Are you sure you want to delete this entry?</label>
-                            <div className='delete-notification-buttons-wrap'>
-                                <button>Yes</button>
-                                <button type="button">No</button>
+                        {visibleNotifications[item.id] &&
+                            <div className='delete-notification-wrap'>
+                                <label>Are you sure you want to delete this entry?</label>
+                                <div className='delete-notification-buttons-wrap'>
+                                    <button>Yes</button>
+                                    <button type="button" onClick={() => handleCancelClick(item.id)}>No</button>
+                                </div>
                             </div>
-                        </div>
+                        }
 
                         <Item id={item.id}
                               status={item.conventionStatus}
@@ -117,7 +151,7 @@ const AccountPage = () => {
                             <button>
                                 <FontAwesomeIcon icon={faPencilSquare} className="icon"/>
                             </button>
-                            <button>
+                            <button onClick={() => handleDeleteClick(item.id)}>
                                 <FontAwesomeIcon icon={faTrash} className="icon"/>
                             </button>
                         </div>
