@@ -11,14 +11,7 @@ body {
   position: relative;
   width: 100%;
 }
-.main-wrap .form-wrap {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  max-width: 400px;
-  margin: 15% auto;
-  align-items: center;
-}
+.main-wrap .form-wrap { /* css is loaded from the signup form */ }
 .main-wrap .form-wrap h2 {
   background-color: #6540b0;
   color: white;

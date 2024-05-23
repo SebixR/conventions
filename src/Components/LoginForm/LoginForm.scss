@@ -13,14 +13,7 @@ body {
   position: relative;
   width: 100%;
 
-  .form-wrap {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    margin: 15% auto;
-    align-items: center;
-
+  .form-wrap { /* css is loaded from the signup form */
     h2 {
       background-color: $color-purple;
       color: white;
