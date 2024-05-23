@@ -60,7 +60,7 @@ body {
           width: 100%;
         }
         input:focus {
-          outline: none;
+          outline: $color-yellow solid 1px;
         }
 
         .error-wrap {

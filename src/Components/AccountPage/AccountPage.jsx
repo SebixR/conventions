@@ -8,6 +8,7 @@ import axios from "../../config/axios";
 import {useAuth} from "../../provider/AuthProvider";
 import ErrorNotification from "../ErrorNotification/ErrorNotification";
 import SuccessNotification from "../SuccessNotification/SuccessNotification";
+import {Link} from "react-router-dom";
 
 const AccountPage = () => {
 
@@ -202,7 +203,7 @@ const AccountPage = () => {
                     </div>
                 </form>
 
-                <button type="button">Change Password</button>
+                <Link className="change-password-link" to={"/ChangePassword"} state={{ userId: userId }}>Change Password</Link>
 
             </div>
 

@@ -77,6 +77,19 @@ body {
   height: 35px;
   padding: 6px;
 }
+.account-main-wrap .account-main-content-wrap .change-password-link {
+  background-color: #f3e156;
+  border: none;
+  border-radius: 10px;
+  color: #25212d;
+  text-decoration: none;
+  margin: 4px;
+  cursor: pointer;
+  font-size: 12pt;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
 .account-main-wrap button {
   background-color: #f3e156;
   border: none;

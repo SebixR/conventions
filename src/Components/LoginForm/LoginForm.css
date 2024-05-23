@@ -49,7 +49,7 @@ body {
   width: 100%;
 }
 .main-wrap .form-wrap .content-wrap .field input:focus {
-  outline: none;
+  outline: #f3e156 solid 1px;
 }
 .main-wrap .form-wrap .content-wrap .field .error-wrap {
   position: absolute;

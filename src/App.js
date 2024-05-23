@@ -8,6 +8,7 @@ import AuthProvider from "./provider/AuthProvider";
 import AccountPage from "./Components/AccountPage/AccountPage";
 import Schedule from "./Components/Schedule/Schedule";
 import AddConventionPage from "./Components/AddConventionPage/AddConventionPage";
+import ChangePassword from "./Components/ChangePassword/ChangePassword";
 
 function App() {
   return (
@@ -54,6 +55,12 @@ function App() {
                   <Route path="/AccountPage" element={
                       <>
                           <AccountPage/>
+                      </>
+                  }>
+                  </Route>
+                  <Route path="/ChangePassword" element={
+                      <>
+                          <ChangePassword/>
                       </>
                   }>
                   </Route>

@@ -86,6 +86,21 @@ body {
         }
       }
     }
+
+    .change-password-link
+    {
+      background-color: $color-yellow;
+      border: none;
+      border-radius: 10px;
+      color: $color-background;
+      text-decoration: none;
+      margin: 4px;
+      cursor: pointer;
+      font-size: 12pt;
+      text-align: center;
+      display: flex;
+      align-items: center;
+    }
   }
 
   button {
