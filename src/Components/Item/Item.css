@@ -37,6 +37,7 @@
 .item-main-wrap .item-content-wrap .event-name-label {
   margin-bottom: 12px;
   font-weight: bold;
+  margin-right: 0;
 }
 .item-main-wrap .item-content-wrap .first-row {
   display: flex;
@@ -51,17 +52,22 @@
 .item-main-wrap .item-content-wrap .first-row label {
   width: 25%;
   margin-left: 12px;
+  margin-right: 0;
 }
 .item-main-wrap .item-content-wrap .second-row {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   margin-top: 6px;
   margin-bottom: 6px;
 }
 .item-main-wrap .item-content-wrap .second-row label {
-  margin-right: 12px;
-  width: 25%;
+  width: 24%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 57px;
+  margin-right: 0;
 }
 .item-main-wrap .item-content-wrap .third-row {
   margin-top: 6px;
