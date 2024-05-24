@@ -203,7 +203,7 @@ const AccountPage = () => {
                     </div>
                 </form>
 
-                <Link className="change-password-link" to={"/ChangePassword"} state={{ userId: userId }}>Change Password</Link>
+                <Link className="change-password-link" to={"/ChangePassword"} state={{ userEmail: inputValues.email }}>Change Password</Link>
 
             </div>
 
