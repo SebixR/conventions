@@ -8,13 +8,13 @@ body {
   margin: auto;
 }
 
-.account-main-wrap {
+.main-wrap {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
 }
-.account-main-wrap .account-main-content-wrap {
+.main-wrap .account-main-content-wrap {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -23,7 +23,7 @@ body {
   max-width: 90%;
   margin: 0 auto;
 }
-.account-main-wrap .account-main-content-wrap .account-info-pane {
+.main-wrap .account-main-content-wrap .account-info-pane {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -33,38 +33,38 @@ body {
   padding: 12px 18px;
   margin-right: 12px;
 }
-.account-main-wrap .account-main-content-wrap .account-info-pane .account-info-content {
+.main-wrap .account-main-content-wrap .account-info-pane .account-info-content {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
   padding-bottom: 6px;
 }
-.account-main-wrap .account-main-content-wrap .account-info-pane .account-info-content .single-info-wrap {
+.main-wrap .account-main-content-wrap .account-info-pane .account-info-content .single-info-wrap {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 30%;
 }
-.account-main-wrap .account-main-content-wrap .account-info-pane .account-info-content .single-info-wrap label {
+.main-wrap .account-main-content-wrap .account-info-pane .account-info-content .single-info-wrap label {
   padding: 6px;
 }
-.account-main-wrap .account-main-content-wrap .account-info-pane .account-info-content .single-info-wrap input {
+.main-wrap .account-main-content-wrap .account-info-pane .account-info-content .single-info-wrap input {
   width: 80%;
   border: none;
   border-radius: 10px;
   font-size: 12pt;
   padding: 3px 6px;
 }
-.account-main-wrap .account-main-content-wrap .account-info-pane .account-info-content .single-info-wrap input:focus {
+.main-wrap .account-main-content-wrap .account-info-pane .account-info-content .single-info-wrap input:focus {
   outline: #f3e156 solid 1.5px;
 }
-.account-main-wrap .account-main-content-wrap .account-info-pane .account-info-buttons-wrap {
+.main-wrap .account-main-content-wrap .account-info-pane .account-info-buttons-wrap {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.account-main-wrap .account-main-content-wrap .account-info-pane .account-info-buttons-wrap button {
+.main-wrap .account-main-content-wrap .account-info-pane .account-info-buttons-wrap button {
   background-color: #f3e156;
   border: none;
   border-radius: 10px;
@@ -72,12 +72,12 @@ body {
   margin: 4px;
   cursor: pointer;
 }
-.account-main-wrap .account-main-content-wrap .account-info-pane .account-info-buttons-wrap button .icon {
+.main-wrap .account-main-content-wrap .account-info-pane .account-info-buttons-wrap button .icon {
   width: 35px;
   height: 35px;
   padding: 6px;
 }
-.account-main-wrap .account-main-content-wrap .change-password-link {
+.main-wrap .account-main-content-wrap .change-password-link {
   background-color: #f3e156;
   border: none;
   border-radius: 10px;
@@ -90,7 +90,7 @@ body {
   display: flex;
   align-items: center;
 }
-.account-main-wrap button {
+.main-wrap button {
   background-color: #f3e156;
   border: none;
   cursor: pointer;
@@ -100,22 +100,22 @@ body {
   margin-bottom: 14px;
   margin-top: 14px;
 }
-.account-main-wrap .account-item-wrap {
+.main-wrap .account-item-wrap {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   margin: 12px auto;
 }
-.account-main-wrap .account-item-wrap .item-main-wrap {
+.main-wrap .account-item-wrap .item-main-wrap {
   margin: 0;
 }
-.account-main-wrap .account-item-wrap .account-item-buttons-wrap {
+.main-wrap .account-item-wrap .account-item-buttons-wrap {
   display: flex;
   flex-direction: column;
   margin-left: 12px;
 }
-.account-main-wrap .account-item-wrap .account-item-buttons-wrap button {
+.main-wrap .account-item-wrap .account-item-buttons-wrap button {
   background-color: #f3e156;
   border: none;
   border-radius: 10px;
@@ -123,7 +123,7 @@ body {
   margin-left: 4px;
   cursor: pointer;
 }
-.account-main-wrap .account-item-wrap .account-item-buttons-wrap button .icon {
+.main-wrap .account-item-wrap .account-item-buttons-wrap button .icon {
   width: 35px;
   height: 35px;
   padding: 8px;

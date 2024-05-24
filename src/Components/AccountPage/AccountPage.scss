@@ -10,7 +10,7 @@ body {
   margin: auto;
 }
 
-.account-main-wrap {
+.main-wrap {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -59,6 +59,7 @@ body {
             font-size: 12pt;
             padding: 3px 6px;
           }
+
           input:focus {
             outline: $color-yellow solid 1.5px;
           }
@@ -87,8 +88,7 @@ body {
       }
     }
 
-    .change-password-link
-    {
+    .change-password-link {
       background-color: $color-yellow;
       border: none;
       border-radius: 10px;

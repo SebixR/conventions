@@ -161,7 +161,7 @@ const AccountPage = () => {
 
     return (
 
-        <div className="account-main-wrap">
+        <div className="main-wrap">
 
             <TopNav/>
 
