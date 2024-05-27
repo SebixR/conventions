@@ -20,6 +20,7 @@ const ImageUploader = ({ onImageUpload, className }) => {
     const handleDeleteImage = (id) => {
         const updatedImages = images.filter(image => image.id !== id);
         setImages(updatedImages);
+        onImageUpload(updatedImages);
     };
 
     return (

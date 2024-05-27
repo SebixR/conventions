@@ -97,7 +97,7 @@ const AddConventionPage = ( {convention} ) => {
 
     const [uploadedImages, setUploadedImages] = useState([]);
     const handleImageUpload = (newImages) => {
-        setUploadedImages((prevImages) => [...prevImages, ...newImages]);
+        setUploadedImages(newImages);
     };
 
     useEffect(() => {
@@ -181,8 +181,16 @@ const AddConventionPage = ( {convention} ) => {
         const formData = { userId , eventName, logo, selectedStartDate, selectedEndDate, city, country, address1, address2,
         tickets, links, description, selectedTags, photos};
         try {
+            console.log(photos);
             const response = await axios.post('auth/addConvention', formData);
             console.log(response.data);
+
+            const photoData = new FormData();
+            photoData.append('file', photos[0].file)
+            photoData.append('conventionId', response.data.id)
+            const photoResponse = await axios.post('auth/uploadPhoto', photoData)
+            console.log(photoResponse.data);
+
             setSuccess(true)
         } catch (error) {
 
