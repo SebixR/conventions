@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react"
-import TopNav from "../TopNav/TopNav";
 import AddConventionPage from "../AddConventionPage/AddConventionPage";
 import {useParams} from "react-router-dom";
 import axios from "../../config/axios";
