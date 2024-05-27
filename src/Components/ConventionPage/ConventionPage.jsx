@@ -30,11 +30,26 @@ const ConventionPage = () => {
         } catch (error) {}
     }, [conventionId])
 
+    const [photoFile, setPhotoFile] = useState('');
+    useEffect(() => {
+        try {
+            if (convention.photos.length > 0){
+                console.log("Halo halo")
+                axios.get(`auth/loadPhoto/${convention.photos[0].id}`, {responseType: 'blob'}).then((res) => {
+                    const newPhotoFile = URL.createObjectURL(res.data)
+                    setPhotoFile(newPhotoFile);
+                    console.log(photoFile);
+                })
+            }
+        } catch (error) {}
+    }, [convention.photos])
 
     const logoImage = '/Assets/' + convention.logo;
 
     return (
         <div className='main-wrap'>
+
+            <img src={photoFile} alt={"idk"}/>
 
             <TopNav/>
 
