@@ -103,7 +103,7 @@ body {
     }
   }
 
-  button {
+  .account-page-button {
     background-color: $color-yellow;
     border: none;
     cursor: pointer;
@@ -130,13 +130,17 @@ body {
       flex-direction: column;
       margin-left: 12px;
 
-      button {
+      .account-item-buttons-wrap-button {
         background-color: $color-yellow;
         border: none;
         border-radius: 10px;
         color: white;
         margin-left: 4px;
         cursor: pointer;
+        margin-bottom: 7px;
+        margin-top: 7px;
+        display: flex;
+        justify-content: center;
 
         .icon {
           width: 35px;

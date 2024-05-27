@@ -12,7 +12,7 @@ import {useAuth} from "../../provider/AuthProvider";
 import ErrorNotification from "../ErrorNotification/ErrorNotification";
 import SuccessNotification from "../SuccessNotification/SuccessNotification";
 
-const AddConventionPage = () => {
+const AddConventionPage = ( {convention} ) => {
 
     const [selectedStartDate, setSelectedStartDate] = useState('');
     const handleStartDateChange = (e) => {
@@ -190,6 +190,25 @@ const AddConventionPage = () => {
     }
 
 
+    useEffect(() => {
+        if (convention !== null && convention !== undefined) {
+            if (convention.eventName !== null && convention.eventName !== undefined) setEventName(convention.eventName);
+            if (convention.logo !== null && convention.logo !== undefined) setLogo(convention.logo)
+            setSelectedStartDate(convention.selectedStartDate);
+            setSelectedEndDate(convention.selectedEndDate);
+            setTickets(convention.tickets);
+            setLinks(convention.links);
+            setDescription(convention.description);
+            setUploadedImages(convention.photos);
+            if (convention.city !== null && convention.city !== undefined) setCity(convention.city)
+            if (convention.country !== null && convention.country !== undefined) setCountry(convention.country)
+            if (convention.address1 !== null && convention.address1 !== undefined) setAddress1(convention.address1)
+            if (convention.address2 !== null && convention.address2 !== undefined) setAddress2(convention.address2)
+            setSelectedTags(convention.selectedTags)
+        }
+    }, [convention]);
+
+
     return (
         <div className='main-wrap'>
 
@@ -204,9 +223,14 @@ const AddConventionPage = () => {
             <form onSubmit={handleSubmit} className='main-content-wrap'>
                 <div className='top-row'>
                     <input maxLength="60" type="text" id="event_name" placeholder="Event Name"
-                           className='name-header' onChange={(ev) => setEventName(ev.target.value)}/>
+                           className='name-header' value={eventName} onChange={(ev) => setEventName(ev.target.value)}/>
 
-                    <button type="submit" className='submit-convention-button'>Create</button>
+                    {convention ? (
+                        <button type="submit" className='submit-convention-button'>Edit</button>
+                    ) : (
+                        <button type="submit" className='submit-convention-button'>Create</button>
+                    )}
+
                 </div>
 
                 <div className='info-wrap'>
@@ -228,10 +252,10 @@ const AddConventionPage = () => {
                                 </div>
                                 <div className='inner-row-content'>
                                     <label>Address:</label>
-                                    <input type="text" placeholder="City" onChange={(ev) => setCity(ev.target.value)} className='text-input'/>
-                                    <input type="text" placeholder="Country" onChange={(ev) => setCountry(ev.target.value)} className='text-input'/>
-                                    <input type="text" placeholder="Address 1" onChange={(ev) => setAddress1(ev.target.value)} className='text-input'/>
-                                    <input type="text" placeholder="Address 2 (optional)" onChange={(ev) => setAddress2(ev.target.value)} className='text-input'/>
+                                    <input type="text" placeholder="City" value={city} onChange={(ev) => setCity(ev.target.value)} className='text-input'/>
+                                    <input type="text" placeholder="Country" value={country} onChange={(ev) => setCountry(ev.target.value)} className='text-input'/>
+                                    <input type="text" placeholder="Address 1" value={address1} onChange={(ev) => setAddress1(ev.target.value)} className='text-input'/>
+                                    <input type="text" placeholder="Address 2 (optional)" value={address2} onChange={(ev) => setAddress2(ev.target.value)} className='text-input'/>
                                 </div>
                                 <div className='inner-row-content'>
                                     <label>Ticket Price(s) (1-6):</label>

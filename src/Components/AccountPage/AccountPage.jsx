@@ -192,12 +192,12 @@ const AccountPage = () => {
                     </div>
 
                     <div className="account-info-buttons-wrap">
-                        <button type="button" onClick={toggleReadOnly}
+                        <button className="account-page-button" type="button" onClick={toggleReadOnly}
                                 style={{ backgroundColor: isReadOnly ? '#F3E156FF' : '#6540B0FF' }}>
                             <FontAwesomeIcon icon={faPencilSquare} className="icon"/>
                         </button>
 
-                        <button type="submit">
+                        <button className="account-page-button" type="submit">
                             <FontAwesomeIcon icon={faCheck} className="icon"/>
                         </button>
                     </div>
@@ -215,8 +215,8 @@ const AccountPage = () => {
                             <div onSubmit={handleDeleteEntry} className='delete-notification-wrap'>
                                 <label>Are you sure you want to delete this entry?</label>
                                 <div className='delete-notification-buttons-wrap'>
-                                    <button type="submit" onClick={() => handleDeleteEntry(item.id)}>Yes</button>
-                                    <button type="button" onClick={() => handleCancelClick(item.id)}>No</button>
+                                    <button className="account-page-button" type="submit" onClick={() => handleDeleteEntry(item.id)}>Yes</button>
+                                    <button className="account-page-button" type="button" onClick={() => handleCancelClick(item.id)}>No</button>
                                 </div>
                             </div>
                         }
@@ -233,10 +233,10 @@ const AccountPage = () => {
                               description={item.description}/>
 
                         <div className='account-item-buttons-wrap'>
-                            <button>
+                            <Link to={"/EditConventionPage/" + item.id} className="account-item-buttons-wrap-button">
                                 <FontAwesomeIcon icon={faPencilSquare} className="icon"/>
-                            </button>
-                            <button onClick={() => handleDeleteClick(item.id)}>
+                            </Link>
+                            <button className="account-item-buttons-wrap-button" onClick={() => handleDeleteClick(item.id)}>
                                 <FontAwesomeIcon icon={faTrash} className="icon"/>
                             </button>
                         </div>

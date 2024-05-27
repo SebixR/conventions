@@ -90,7 +90,7 @@ body {
   display: flex;
   align-items: center;
 }
-.main-wrap button {
+.main-wrap .account-page-button {
   background-color: #f3e156;
   border: none;
   cursor: pointer;
@@ -115,15 +115,19 @@ body {
   flex-direction: column;
   margin-left: 12px;
 }
-.main-wrap .account-item-wrap .account-item-buttons-wrap button {
+.main-wrap .account-item-wrap .account-item-buttons-wrap .account-item-buttons-wrap-button {
   background-color: #f3e156;
   border: none;
   border-radius: 10px;
   color: white;
   margin-left: 4px;
   cursor: pointer;
+  margin-bottom: 7px;
+  margin-top: 7px;
+  display: flex;
+  justify-content: center;
 }
-.main-wrap .account-item-wrap .account-item-buttons-wrap button .icon {
+.main-wrap .account-item-wrap .account-item-buttons-wrap .account-item-buttons-wrap-button .icon {
   width: 35px;
   height: 35px;
   padding: 8px;

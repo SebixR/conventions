@@ -9,6 +9,7 @@ import AccountPage from "./Components/AccountPage/AccountPage";
 import Schedule from "./Components/Schedule/Schedule";
 import AddConventionPage from "./Components/AddConventionPage/AddConventionPage";
 import ChangePassword from "./Components/ChangePassword/ChangePassword";
+import EditConventionPage from "./Components/EditConventionPage/EditConventionPage";
 
 function App() {
   return (
@@ -37,6 +38,12 @@ function App() {
                   <Route path="/AddConventionPage" element={
                       <>
                           <AddConventionPage/>
+                      </>
+                  }>
+                  </Route>
+                  <Route path="/EditConventionPage/:conventionId" element={
+                      <>
+                          <EditConventionPage/>
                       </>
                   }>
                   </Route>
