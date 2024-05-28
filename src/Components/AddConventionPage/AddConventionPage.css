@@ -59,13 +59,21 @@
 .main-content-wrap .info-wrap .info-content .first-row .image-wrap {
   margin-right: 12px;
   background-color: #f3e156;
-  width: 250px;
+  min-width: 250px;
   height: 250px;
   position: relative;
 }
 .main-content-wrap .info-wrap .info-content .first-row .image-wrap img {
-  height: 100%;
-  width: 100%;
+  height: 250px;
+  width: 250px;
+}
+.main-content-wrap .info-wrap .info-content .first-row .image-wrap .logo-input {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  background-color: #f3e156;
+  padding: 6px;
+  width: 250px;
 }
 .main-content-wrap .info-wrap .info-content .first-row .inner-row-wrap {
   position: relative;

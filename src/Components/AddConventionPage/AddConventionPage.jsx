@@ -177,9 +177,28 @@ const AddConventionPage = ( {convention} ) => {
         let isValid = validateForm();
         if (!isValid) return;
 
+        if (convention) {
+            try {
+                await axios.delete(`auth/deleteConvention/${convention.id}`);
+                addConvention();
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            addConvention();
+        }
+    }
+    const addConvention = async () => {
         const photos = uploadedImages;
-        const formData = { userId , eventName, logo: logoFile.name, selectedStartDate, selectedEndDate, city, country, address1, address2,
-        tickets, links, description, selectedTags, photos};
+        let logoFinal;
+        if (convention) {
+            logoFinal = convention.logo;
+        } else {
+            logoFinal = logoFile.name;
+        }
+        const formData = { userId , eventName, logo: logoFinal, selectedStartDate, selectedEndDate, city, country, address1, address2,
+            tickets, links, description, selectedTags, photos};
+
         try {
             console.log(photos);
             const response = await axios.post('auth/addConvention', formData);
@@ -194,11 +213,13 @@ const AddConventionPage = ( {convention} ) => {
                 console.log(photoResponse.data);
             }
 
-            const logoData = new FormData();
-            logoData.append('file', logoFile);
-            logoData.append('conventionId', response.data.id)
-            const logoResponse = await axios.post('auth/uploadLogo', logoData);
-            console.log(logoResponse.data);
+            if (logoFile.name) { // just to check if logoFile is a file object or just a Url
+                const logoData = new FormData();
+                logoData.append('file', logoFile);
+                logoData.append('conventionId', response.data.id)
+                const logoResponse = await axios.post('auth/uploadLogo', logoData);
+                console.log(logoResponse.data);
+            }
 
             setSuccess(true)
         } catch (error) {
@@ -208,9 +229,19 @@ const AddConventionPage = ( {convention} ) => {
 
 
     useEffect(() => {
+        const fetchLogoFile = async () => {
+            try {
+                const response = await axios.get(`public/loadLogo/${convention.id}`, { responseType: 'blob' });
+                const logoImage = URL.createObjectURL(response.data);
+                setLogoFile(logoImage);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
         if (convention !== null && convention !== undefined) {
             if (convention.eventName !== null && convention.eventName !== undefined) setEventName(convention.eventName);
-            if (convention.logo !== null && convention.logo !== undefined) setLogoFile(convention.logo)
+            if (convention.logo !== null && convention.logo !== undefined) fetchLogoFile();
             setSelectedStartDate(convention.selectedStartDate);
             setSelectedEndDate(convention.selectedEndDate);
             setTickets(convention.tickets);
@@ -243,7 +274,7 @@ const AddConventionPage = ( {convention} ) => {
                            className='name-header' value={eventName} onChange={(ev) => setEventName(ev.target.value)}/>
 
                     {convention ? (
-                        <button type="submit" className='submit-convention-button'>Edit</button>
+                        <button type="submit" className='submit-convention-button'>Confirm</button>
                     ) : (
                         <button type="submit" className='submit-convention-button'>Create</button>
                     )}
@@ -257,7 +288,8 @@ const AddConventionPage = ( {convention} ) => {
                         <div className='first-row'>
 
                             <div className='image-wrap'>
-                                <input type="file" onChange={(ev) => setLogoFile(ev.target.files[0])}/>
+                                {convention && (<img src={logoFile} alt='logo'/>)}
+                                <input className="logo-input" type="file" onChange={(ev) => setLogoFile(ev.target.files[0])}/>
                             </div>
 
                             <div className='inner-row-wrap'>

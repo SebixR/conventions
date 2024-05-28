@@ -7,6 +7,7 @@ const EditConventionPage = () => {
 
     let { conventionId } = useParams();
     const [convention, setConvention] = useState({
+        id: conventionId,
         eventName: '',
         conventionStatus: '',
         logo: '',
