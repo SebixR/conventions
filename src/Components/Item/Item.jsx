@@ -1,16 +1,29 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import "./Item.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircle} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
+import axios from "../../config/axios";
 
 const Item = ( props ) => {
-    const logoPath = '/Assets/' + props.logo;
+
+    const [logo, setLogo] = useState(null);
+    useEffect(() => {
+        try {
+            axios.get(`public/loadLogo/${props.id}`, { responseType: 'blob' }).then((res) => {
+                const logoImage = URL.createObjectURL(res.data);
+                setLogo(logoImage);
+            });
+        } catch (error) {
+            console.log(error)
+        }
+
+    }, []);
 
     return (
         <div className='item-main-wrap'>
             <div className='image-wrap'>
-                <img src={logoPath} alt='logo'/>
+                {logo && (<img src={logo} alt='logo'/>)}
             </div>
             <div className='item-content-wrap'>
                 <label className='event-name-label'>{props.eventName}</label>

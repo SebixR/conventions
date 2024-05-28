@@ -66,17 +66,18 @@
     .second-row {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: flex-start;
       margin-top: 6px;
       margin-bottom: 6px;
+      margin-right: -6px;
 
-      label {
+      .tag-label {
         width: 24%;
         display: flex;
         align-items: center;
         justify-content: center;
         min-height: 57px;
-        margin-right: 0;
+        margin-right: 6px;
       }
     }
 

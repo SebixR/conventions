@@ -30,26 +30,40 @@ const ConventionPage = () => {
         } catch (error) {}
     }, [conventionId])
 
-    const [photoFile, setPhotoFile] = useState('');
+    const [photoFiles, setPhotoFiles] = useState([]);
+    useEffect(() => {
+        const fetchPhoto = async (photoId) => {
+            try {
+                const res = await axios.get(`public/loadPhoto/${photoId}`, { responseType: 'blob' });
+                const newPhotoFile = URL.createObjectURL(res.data);
+                setPhotoFiles(prevPhotoFiles => [...prevPhotoFiles, newPhotoFile]);
+            } catch (error) {
+                console.error("Error fetching photo:", error);
+            }
+        };
+
+        for (let i = 0; i < convention.photos.length; i++)
+        {
+            fetchPhoto(convention.photos[i].id);
+            console.log(photoFiles);
+        }
+    }, [convention]);
+
+    const [logo, setLogo] = useState(null);
     useEffect(() => {
         try {
-            if (convention.photos.length > 0){
-                console.log("Halo halo")
-                axios.get(`auth/loadPhoto/${convention.photos[0].id}`, {responseType: 'blob'}).then((res) => {
-                    const newPhotoFile = URL.createObjectURL(res.data)
-                    setPhotoFile(newPhotoFile);
-                    console.log(photoFile);
-                })
-            }
-        } catch (error) {}
-    }, [convention.photos])
+            axios.get(`public/loadLogo/${conventionId}`, { responseType: 'blob' }).then((res) => {
+                const logoImage = URL.createObjectURL(res.data);
+                setLogo(logoImage);
+            });
+        } catch (error) {
+            console.log(error)
+        }
 
-    const logoImage = '/Assets/' + convention.logo;
+    }, [convention]);
 
     return (
         <div className='main-wrap'>
-
-            <img src={photoFile} alt={"idk"}/>
 
             <TopNav/>
 
@@ -72,7 +86,7 @@ const ConventionPage = () => {
                         <div className='first-row'>
 
                             <div className='image-wrap'>
-                                <img src={logoImage} alt='logo'/>
+                                <img src={logo} alt='logo'/>
                             </div>
 
                             <div className='inner-row-wrap'>
@@ -103,12 +117,14 @@ const ConventionPage = () => {
                                             )
                                     })}
                                 </div>
-                                <div className='inner-row-content'>
-                                    <label>Links:</label>
-                                    {convention.links.map((link) => (
-                                        <a key={link.id} href={link.address} className='link-label' target="_blank" rel={"noreferrer"}>{link.name}</a>
-                                    ))}
-                                </div>
+                                {convention.links > 0 && (
+                                    <div className='inner-row-content'>
+                                        <label>Links:</label>
+                                        {convention.links.map((link) => (
+                                            <a key={link.id} href={link.address} className='link-label' target="_blank" rel={"noreferrer"}>{link.name}</a>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
                         </div>
 
@@ -138,17 +154,17 @@ const ConventionPage = () => {
                         <label>Photos:</label>
                         <div className='photos-content'>
                             <div className='photos-column'>
-                                {convention.photos.map((photo, index) => {
+                                {photoFiles.map((photo, index) => {
                                     if (index % 2 === 0) {
-                                        return <img key={photo.id} src={'/Assets/' + photo.fileName} alt='image1' />;
+                                        return <img key={index} src={photo} alt={'image' + index} />;
                                     }
                                     return null;
                                 })}
                             </div>
                             <div className='photos-column'>
-                                {convention.photos.map((photo, index) => {
+                                {photoFiles.map((photo, index) => {
                                     if (index % 2 !== 0) {
-                                        return <img key={photo.id} src={'/Assets/' + photo.fileName} alt='image1' />;
+                                        return <img key={index} src={photo} alt={'image' + index} />;
                                     }
                                     return null;
                                 })}

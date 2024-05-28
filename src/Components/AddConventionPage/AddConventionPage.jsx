@@ -117,7 +117,7 @@ const AddConventionPage = ( {convention} ) => {
     }
 
     const [eventName, setEventName] = useState('');
-    const [logo, setLogo] = useState('');
+    const [logoFile, setLogoFile] = useState(null);
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
     const [address1, setAddress1] = useState('');
@@ -151,7 +151,7 @@ const AddConventionPage = ( {convention} ) => {
         let isValid = true;
 
         if (!eventName.trim()) errors.eventName = 'The event\'s name is required!';
-        if (!logo.trim()) errors.logo = 'The Logo is required!';
+        if (logoFile === null) errors.logo = 'The Logo is required!';
 
         if (selectedStartDate === '') errors.startDate = 'A Start date is required!';
         if (selectedEndDate === '') errors.endDate = 'An End date is required!';
@@ -178,22 +178,31 @@ const AddConventionPage = ( {convention} ) => {
         if (!isValid) return;
 
         const photos = uploadedImages;
-        const formData = { userId , eventName, logo, selectedStartDate, selectedEndDate, city, country, address1, address2,
+        const formData = { userId , eventName, logo: logoFile.name, selectedStartDate, selectedEndDate, city, country, address1, address2,
         tickets, links, description, selectedTags, photos};
         try {
             console.log(photos);
             const response = await axios.post('auth/addConvention', formData);
             console.log(response.data);
 
-            const photoData = new FormData();
-            photoData.append('file', photos[0].file)
-            photoData.append('conventionId', response.data.id)
-            const photoResponse = await axios.post('auth/uploadPhoto', photoData)
-            console.log(photoResponse.data);
+            for (let i = 0; i < photos.length; i++)
+            {
+                const photoData = new FormData();
+                photoData.append('file', photos[i].file)
+                photoData.append('conventionId', response.data.id)
+                const photoResponse = await axios.post('auth/uploadPhoto', photoData)
+                console.log(photoResponse.data);
+            }
+
+            const logoData = new FormData();
+            logoData.append('file', logoFile);
+            logoData.append('conventionId', response.data.id)
+            const logoResponse = await axios.post('auth/uploadLogo', logoData);
+            console.log(logoResponse.data);
 
             setSuccess(true)
         } catch (error) {
-
+            console.log(error);
         }
     }
 
@@ -201,7 +210,7 @@ const AddConventionPage = ( {convention} ) => {
     useEffect(() => {
         if (convention !== null && convention !== undefined) {
             if (convention.eventName !== null && convention.eventName !== undefined) setEventName(convention.eventName);
-            if (convention.logo !== null && convention.logo !== undefined) setLogo(convention.logo)
+            if (convention.logo !== null && convention.logo !== undefined) setLogoFile(convention.logo)
             setSelectedStartDate(convention.selectedStartDate);
             setSelectedEndDate(convention.selectedEndDate);
             setTickets(convention.tickets);
@@ -248,7 +257,7 @@ const AddConventionPage = ( {convention} ) => {
                         <div className='first-row'>
 
                             <div className='image-wrap'>
-                                <input type="file" onChange={(ev) => setLogo(ev.target.files[0].name)}/>
+                                <input type="file" onChange={(ev) => setLogoFile(ev.target.files[0])}/>
                             </div>
 
                             <div className='inner-row-wrap'>

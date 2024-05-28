@@ -57,17 +57,18 @@
 .item-main-wrap .item-content-wrap .second-row {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-top: 6px;
   margin-bottom: 6px;
+  margin-right: -6px;
 }
-.item-main-wrap .item-content-wrap .second-row label {
+.item-main-wrap .item-content-wrap .second-row .tag-label {
   width: 24%;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 57px;
-  margin-right: 0;
+  margin-right: 6px;
 }
 .item-main-wrap .item-content-wrap .third-row {
   margin-top: 6px;
