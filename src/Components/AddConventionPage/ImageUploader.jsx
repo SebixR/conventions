@@ -1,20 +1,35 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const ImageUploader = ({ onImageUpload, className }) => {
+const ImageUploader = ({ onImageUpload, className, fetchedImages }) => {
     const [images, setImages] = useState([]);
+
+    useEffect(() => {
+        setImages(fetchedImages);
+    }, [fetchedImages])
 
     const handleImageChange = (e) => {
         const fileList = e.target.files;
-        const newImages = Array.from(fileList).map((file) => ({
+        let newImages = Array.from(fileList).map((file) => ({
             id: Date.now(),
             file: file,
             fileName: file.name,
             preview: URL.createObjectURL(file),
         }));
+        console.log("New images przed");
+        console.log(newImages);
         setImages((prevImages) => [...prevImages, ...newImages]);
-        onImageUpload(newImages); // Notify parent component
+
+        let newImagesToBeAdded = [...images, ...newImages];
+
+        // console.log("new images");
+        // console.log(newImagesToBeAdded);
+        //
+        // console.log("images");
+        // console.log(images);
+
+        onImageUpload(newImagesToBeAdded); // Notify parent component
     };
 
     const handleDeleteImage = (id) => {
@@ -34,7 +49,7 @@ const ImageUploader = ({ onImageUpload, className }) => {
                             {index % 2 === 0 &&
                                 <div className="delete-image-button-wrap">
                                     <img src={image.preview} alt={`Uploaded ${index}`} />
-                                    <button onClick={() => handleDeleteImage(image.id)} className="delete-button-img">
+                                    <button type="button" onClick={() => handleDeleteImage(image.id)} className="delete-button-img">
                                         <FontAwesomeIcon icon={faTrash} className="trash-icon"/>
                                     </button>
                                 </div>}
@@ -47,7 +62,7 @@ const ImageUploader = ({ onImageUpload, className }) => {
                                 {index % 2 !== 0 &&
                                     <div className="delete-image-button-wrap">
                                         <img src={image.preview} alt={`Uploaded ${index}`} />
-                                <button onClick={() => handleDeleteImage(image.id)} className="delete-button-img">
+                                <button type="button" onClick={() => handleDeleteImage(image.id)} className="delete-button-img">
                                     <FontAwesomeIcon icon={faTrash} className="trash-icon"/>
                                 </button>
                                     </div>}

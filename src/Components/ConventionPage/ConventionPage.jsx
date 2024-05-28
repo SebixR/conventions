@@ -45,7 +45,6 @@ const ConventionPage = () => {
         for (let i = 0; i < convention.photos.length; i++)
         {
             fetchPhoto(convention.photos[i].id);
-            console.log(photoFiles);
         }
     }, [convention]);
 

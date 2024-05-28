@@ -29,7 +29,6 @@ const EditConventionPage = () => {
             axios.get(`public/getConvention/${conventionId}`).then((res) => {
                 const receivedConvention = res.data;
                 setConvention(receivedConvention);
-                console.log(receivedConvention);
             })
         } catch (error) {}
     }, [conventionId])

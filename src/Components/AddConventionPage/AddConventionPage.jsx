@@ -189,36 +189,37 @@ const AddConventionPage = ( {convention} ) => {
         }
     }
     const addConvention = async () => {
-        const photos = uploadedImages;
         let logoFinal;
         if (convention) {
             logoFinal = convention.logo;
         } else {
             logoFinal = logoFile.name;
         }
+        const uploadedImagesFiltered = uploadedImages.filter(item => !item.hasOwnProperty('file'));
+        const fetchedPhotoNames = uploadedImagesFiltered.map(item => item.fileName);
+        console.log("To send");
+        console.log(fetchedPhotoNames);
         const formData = { userId , eventName, logo: logoFinal, selectedStartDate, selectedEndDate, city, country, address1, address2,
-            tickets, links, description, selectedTags, photos};
+            tickets, links, description, selectedTags, photos: uploadedImages, fetchedPhotoNames };
 
         try {
-            console.log(photos);
             const response = await axios.post('auth/addConvention', formData);
-            console.log(response.data);
 
-            for (let i = 0; i < photos.length; i++)
+            for (let i = 0; i < uploadedImages.length; i++)
             {
-                const photoData = new FormData();
-                photoData.append('file', photos[i].file)
-                photoData.append('conventionId', response.data.id)
-                const photoResponse = await axios.post('auth/uploadPhoto', photoData)
-                console.log(photoResponse.data);
+                if (uploadedImages[i].file) {
+                    const photoData = new FormData();
+                    photoData.append('file', uploadedImages[i].file)
+                    photoData.append('conventionId', response.data.id)
+                    await axios.post('auth/uploadPhoto', photoData)
+                }
             }
 
-            if (logoFile.name) { // just to check if logoFile is a file object or just a Url
+            if (logoFile.hasOwnProperty('name')) { // just to check if logoFile is a file object or just a Url
                 const logoData = new FormData();
                 logoData.append('file', logoFile);
                 logoData.append('conventionId', response.data.id)
-                const logoResponse = await axios.post('auth/uploadLogo', logoData);
-                console.log(logoResponse.data);
+                await axios.post('auth/uploadLogo', logoData);
             }
 
             setSuccess(true)
@@ -228,6 +229,7 @@ const AddConventionPage = ( {convention} ) => {
     }
 
 
+    const [fetchedPhotos, setFetchedPhotos] = useState([]);
     useEffect(() => {
         const fetchLogoFile = async () => {
             try {
@@ -239,6 +241,24 @@ const AddConventionPage = ( {convention} ) => {
             }
         }
 
+        const fetchPhotoFiles = async () => {
+            let tempFetchedPhotos = [];
+            for (let i = 0; i < convention.photos.length; i++) {
+                try {
+                    const response = await axios.get(`public/loadPhoto/${convention.photos[i].id}`, { responseType: 'blob' });
+                    const photo = {
+                        id: convention.photos[i].id,
+                        preview: URL.createObjectURL(response.data),
+                        fileName: convention.photos[i].fileName,
+                    };
+                    tempFetchedPhotos = [...tempFetchedPhotos, photo];
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            setFetchedPhotos(prevImages => [...prevImages, ...tempFetchedPhotos]);
+        }
+
         if (convention !== null && convention !== undefined) {
             if (convention.eventName !== null && convention.eventName !== undefined) setEventName(convention.eventName);
             if (convention.logo !== null && convention.logo !== undefined) fetchLogoFile();
@@ -247,7 +267,7 @@ const AddConventionPage = ( {convention} ) => {
             setTickets(convention.tickets);
             setLinks(convention.links);
             setDescription(convention.description);
-            setUploadedImages(convention.photos);
+            if (convention.photos.length > 0) fetchPhotoFiles();
             if (convention.city !== null && convention.city !== undefined) setCity(convention.city)
             if (convention.country !== null && convention.country !== undefined) setCountry(convention.country)
             if (convention.address1 !== null && convention.address1 !== undefined) setAddress1(convention.address1)
@@ -367,7 +387,7 @@ const AddConventionPage = ( {convention} ) => {
 
                 <div className='photos-wrap'>
                     <label>Photos:</label>
-                    <ImageUploader onImageUpload={handleImageUpload} className="photos-button" />
+                    <ImageUploader onImageUpload={handleImageUpload} fetchedImages={fetchedPhotos} className="photos-button" />
                 </div>
             </form>
 
