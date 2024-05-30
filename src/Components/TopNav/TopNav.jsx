@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass,  faUser, faPlus} from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from "../../provider/AuthProvider";
 import axios from "../../config/axios";
+import {fetchAdmin} from "../../fetchAdmin";
 
 const TopNav = () => {
     const [drop, setDrop] = useState(false)
@@ -14,22 +15,8 @@ const TopNav = () => {
     const [isAdmin, setIsAdmin] = useState(false);
     const { token } = useAuth();
     useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await axios.get("/getAppUser", {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-                const userDataResponse = response.data;
-                if (userDataResponse.role === 'ADMIN') setIsAdmin(true);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
         if (token) {
-            fetchUserData();
+            fetchAdmin(token, setIsAdmin);
         }
     }, [token])
 

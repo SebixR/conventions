@@ -5,13 +5,26 @@
   width: 80%;
   max-width: 1300px;
 }
-.main-content-wrap .name-header {
+.main-content-wrap .convention-page-top-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.main-content-wrap .convention-page-top-wrap .name-header {
   background-color: #6540b0;
   color: white;
   padding: 6px 28px 6px 16px;
   border-radius: 10px;
-  width: fit-content;
+  width: 50%;
   float: left;
+  margin-bottom: 12px;
+}
+.main-content-wrap .convention-page-top-wrap .uploader-label {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  right: 0;
   margin-bottom: 12px;
 }
 .main-content-wrap .info-wrap {

@@ -5,6 +5,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircle} from "@fortawesome/free-solid-svg-icons";
 import {Link, useParams} from "react-router-dom";
 import axios from "../../config/axios";
+import {useAuth} from "../../provider/AuthProvider";
+import {fetchAdmin} from "../../fetchAdmin";
 
 const ConventionPage = () => {
     let { conventionId } = useParams(); //the name of the variable has to match the name in the url (for now set in App.js)
@@ -20,15 +22,36 @@ const ConventionPage = () => {
         photos: [],
     });
 
+    const [isAdmin, setIsAdmin] = useState(false);
+    const { token } = useAuth();
+    useEffect(() => {
+        if (token) {
+            fetchAdmin(token, setIsAdmin);
+        }
+    }, [token])
+
+    const [uploader, setUploader] = useState({
+        id: null,
+        firstName: '',
+        lastName: '',
+    });
     useEffect(() => {
         try {
             axios.get(`public/getConvention/${conventionId}`).then((res) => {
                 const receivedConvention = res.data;
                 setConvention(receivedConvention);
                 console.log(receivedConvention);
+                
+                if (isAdmin) {
+                    axios.get(`auth/getAppUserById/${receivedConvention.userId}`).then((res) => {
+                        const receivedUser = res.data;
+                        setUploader(receivedUser);
+                        console.log(receivedUser);
+                    })
+                }
             })
         } catch (error) {}
-    }, [conventionId])
+    }, [conventionId, isAdmin])
 
     const [photoFiles, setPhotoFiles] = useState([]);
     useEffect(() => {
@@ -67,7 +90,16 @@ const ConventionPage = () => {
             <TopNav/>
 
             <div className='main-content-wrap'>
-                <h2 className='name-header'>{convention.eventName}</h2>
+
+                <div className='convention-page-top-wrap'>
+                    <h2 className='name-header'>{convention.eventName}</h2>
+
+                    {isAdmin && (
+                        <Link to={"/AccountPage"} className='uploader-label'>
+                            {"Uploaded by: " + uploader.firstName + " " + uploader.lastName}
+                        </Link>
+                    )}
+                </div>
 
                 <div className='info-wrap'>
                     {convention.conventionStatus === 'UPCOMING' &&

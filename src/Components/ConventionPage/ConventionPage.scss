@@ -7,14 +7,29 @@
   width: 80%;
   max-width: 1300px;
 
-  .name-header {
-    background-color: $color-purple;
-    color: white;
-    padding: 6px 28px 6px 16px;
-    border-radius: 10px;
-    width: fit-content;
-    float: left;
-    margin-bottom: 12px;
+  .convention-page-top-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .name-header {
+      background-color: $color-purple;
+      color: white;
+      padding: 6px 28px 6px 16px;
+      border-radius: 10px;
+      width: 50%;
+      float: left;
+      margin-bottom: 12px;
+    }
+
+    .uploader-label {
+      position: relative;
+      color: white;
+      text-decoration: none;
+      right: 0;
+      margin-bottom: 12px;
+    }
   }
 
   .info-wrap {
