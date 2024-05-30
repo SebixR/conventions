@@ -111,7 +111,10 @@ const AccountPage = () => {
     const [deletedError, setDeletedError] = useState(false);
     const handleDeleteEntry = async (id) => {
         try {
-            const response = await axios.delete(`auth/deleteConvention/${id}`);
+            const data = new FormData();
+            data.append('id', id);
+            data.append('photos', []);
+            const response = await axios.post(`auth/deleteConvention`, data);
             if (response.status === 200) {
                 showDeletedSuccessfullyNotification();
                 const updatedItems = items.filter(item => item.id !== id);
@@ -209,7 +212,7 @@ const AccountPage = () => {
 
             <div className="items-wrap">
 
-                {items.map((item) =>(
+                {items.length > 0 && items.map((item) =>(
                     <div key={item.id} className='account-item-wrap'>
                         {visibleNotifications[item.id] &&
                             <div onSubmit={handleDeleteEntry} className='delete-notification-wrap'>

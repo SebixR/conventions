@@ -179,7 +179,15 @@ const AddConventionPage = ( {convention} ) => {
 
         if (convention) {
             try {
-                await axios.delete(`auth/deleteConvention/${convention.id}`);
+                const data = new FormData();
+                data.append("id", convention.id);
+
+                const uploadedImagesFiltered = uploadedImages.filter(item => !item.hasOwnProperty('file'));
+                let photosToSkip = uploadedImagesFiltered.map(item => item.fileName);
+                if (!logoFile.name) photosToSkip = [...photosToSkip, convention.logo]
+
+                data.append("photos",  photosToSkip);
+                await axios.post(`auth/deleteConvention`, data);
                 addConvention();
             } catch (error) {
                 console.log(error);
@@ -197,8 +205,6 @@ const AddConventionPage = ( {convention} ) => {
         }
         const uploadedImagesFiltered = uploadedImages.filter(item => !item.hasOwnProperty('file'));
         const fetchedPhotoNames = uploadedImagesFiltered.map(item => item.fileName);
-        console.log("To send");
-        console.log(fetchedPhotoNames);
         const formData = { userId , eventName, logo: logoFinal, selectedStartDate, selectedEndDate, city, country, address1, address2,
             tickets, links, description, selectedTags, photos: uploadedImages, fetchedPhotoNames };
 
@@ -215,7 +221,7 @@ const AddConventionPage = ( {convention} ) => {
                 }
             }
 
-            if (logoFile.hasOwnProperty('name')) { // just to check if logoFile is a file object or just a Url
+            if (logoFile.name) { // just to check if logoFile is a file object or just a Url
                 const logoData = new FormData();
                 logoData.append('file', logoFile);
                 logoData.append('conventionId', response.data.id)
@@ -229,7 +235,6 @@ const AddConventionPage = ( {convention} ) => {
     }
 
 
-    const [fetchedPhotos, setFetchedPhotos] = useState([]);
     useEffect(() => {
         const fetchLogoFile = async () => {
             try {
@@ -256,7 +261,7 @@ const AddConventionPage = ( {convention} ) => {
                     console.log(error);
                 }
             }
-            setFetchedPhotos(prevImages => [...prevImages, ...tempFetchedPhotos]);
+            setUploadedImages(prevImages => [...prevImages, ...tempFetchedPhotos]);
         }
 
         if (convention !== null && convention !== undefined) {
@@ -282,7 +287,8 @@ const AddConventionPage = ( {convention} ) => {
 
             <TopNav/>
 
-            {success && <SuccessNotification text="Successfully added the convention!"/>}
+            {success && !convention && <SuccessNotification text="Successfully added the convention!"/>}
+            {success && convention && <SuccessNotification text="Successfully edited the convention!"/>}
 
             {Object.keys(errors).map((errorKey) => (
                 <ErrorNotification key={errorKey} text={errors[errorKey]} />
@@ -387,7 +393,7 @@ const AddConventionPage = ( {convention} ) => {
 
                 <div className='photos-wrap'>
                     <label>Photos:</label>
-                    <ImageUploader onImageUpload={handleImageUpload} fetchedImages={fetchedPhotos} className="photos-button" />
+                    <ImageUploader onImageUpload={handleImageUpload} fetchedImages={uploadedImages} className="photos-button" />
                 </div>
             </form>
 
