@@ -184,6 +184,40 @@ const AccountPage = () => {
         }));
     };
 
+
+    const handleBlockConventionClick = (id, status) => {
+        if (status === 'BLOCKED') {
+            try {
+                axios.post(`auth/unblockConvention/${id}`).then((res) => {
+                    const index = items.findIndex(item => item.id === id);
+                    if (index !== -1) {
+                        const updatedList = [...items];
+                        updatedList[index] = { ...updatedList[index], conventionStatus: res.data.conventionStatus };
+                        setItems(updatedList);
+                    }
+                    console.log("Blocked convention");
+                });
+            } catch (error) {
+                console.log("Error blocking convention");
+            }
+        } else {
+            try {
+                axios.post(`auth/blockConvention/${id}`).then(() => {
+                    const index = items.findIndex(item => item.id === id);
+                    if (index !== -1) {
+                        const updatedList = [...items];
+                        updatedList[index] = { ...updatedList[index], conventionStatus: 'BLOCKED' };
+                        setItems(updatedList);
+                    }
+                    console.log("Blocked convention");
+                });
+            } catch (error) {
+                console.log("Error blocking convention");
+            }
+        }
+
+    }
+
     return (
 
         <div className="main-wrap">
@@ -272,8 +306,12 @@ const AccountPage = () => {
 
                         {isAdmin ? (
                             <div className='account-item-buttons-wrap'>
-                                <button className="account-item-buttons-wrap-button" onClick={() => handleDeleteClick(item.id)}>
-                                    <FontAwesomeIcon icon={faLock} className="icon"/>
+                                <button className="account-item-buttons-wrap-button" onClick={() => handleBlockConventionClick(item.id, item.conventionStatus)}>
+                                    {item.conventionStatus === 'BLOCKED' ? (
+                                        <FontAwesomeIcon icon={faUnlockAlt} className="icon"/>
+                                    ) : (
+                                        <FontAwesomeIcon icon={faLock} className="icon"/>
+                                    )}
                                 </button>
                             </div>
                         ) : (
