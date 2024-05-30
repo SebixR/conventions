@@ -198,7 +198,7 @@ const AccountPage = () => {
                     console.log("Blocked convention");
                 });
             } catch (error) {
-                console.log("Error blocking convention");
+                console.log("Error unblocking convention");
             }
         } else {
             try {
@@ -215,8 +215,38 @@ const AccountPage = () => {
                 console.log("Error blocking convention");
             }
         }
-
     }
+    const handleBlockUserClick = () => {
+        if (inputValues.role === 'BLOCKED') {
+            try {
+                axios.post(`auth/unblockAppUser/${userId}`).then(() => {
+                    setInputValues({ ...inputValues, role: 'USER'});
+
+                    axios.get(`auth/getConventionsByUser/${userId}`).then(result => {
+                        setItems(result.data);
+                    })
+
+                    console.log("Unblocked user");
+                })
+            } catch (error) {
+                console.log("Error unblocking user");
+            }
+        } else {
+            try {
+                axios.post(`auth/blockAppUser/${userId}`).then(() => {
+                    setInputValues({ ...inputValues, role: 'BLOCKED'});
+                    const updatedItems = items.map(item => {
+                        return { ...item, conventionStatus: 'BLOCKED'};
+                    })
+                    setItems(updatedItems);
+                    console.log("Blocked user");
+                })
+            } catch (error) {
+                console.log("Error unblocking user");
+            }
+        }
+    }
+
 
     return (
 
@@ -268,7 +298,7 @@ const AccountPage = () => {
                 {!isAdmin ? (
                     <Link className="change-password-link" to={"/ChangePassword"} state={{ userEmail: inputValues.email }}>Change Password</Link>
                 ) : (
-                    <button className="change-password-link">
+                    <button className="change-password-link" onClick={() => handleBlockUserClick()}>
                         {inputValues.role === 'BLOCKED' ? (
                             <FontAwesomeIcon className='block-user-icon' icon={faUnlockAlt}/>
                         ) : (
