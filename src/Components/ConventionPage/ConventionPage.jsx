@@ -41,17 +41,23 @@ const ConventionPage = () => {
                 const receivedConvention = res.data;
                 setConvention(receivedConvention);
                 console.log(receivedConvention);
-                
-                if (isAdmin) {
-                    axios.get(`auth/getAppUserById/${receivedConvention.userId}`).then((res) => {
-                        const receivedUser = res.data;
-                        setUploader(receivedUser);
-                        console.log(receivedUser);
-                    })
-                }
             })
         } catch (error) {}
-    }, [conventionId, isAdmin])
+    }, [conventionId])
+    
+    useEffect(() => {
+        if (isAdmin && convention.userId) {
+            try {
+                axios.get(`auth/getAppUserById/${convention.userId}`).then((res) => {
+                    const receivedUser = res.data;
+                    setUploader(receivedUser);
+                    console.log(receivedUser);
+                })
+            } catch (error) {
+                console.log("Error fetching uploader");
+            }
+        }
+    }, [convention, isAdmin])
 
     const [photoFiles, setPhotoFiles] = useState([]);
     useEffect(() => {
