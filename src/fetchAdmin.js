@@ -10,7 +10,7 @@ const fetchAdmin = async (token, setIsAdmin) => {
         const userDataResponse = response.data;
         if (userDataResponse.role === 'ADMIN') setIsAdmin(true);
     } catch (error) {
-        console.log(error);
+        console.log("Error fetching admin");
     }
 };
 

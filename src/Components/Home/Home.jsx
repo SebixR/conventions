@@ -5,22 +5,32 @@ import FilterMenu from "../FilerMenu/FilterMenu";
 import Item from "../Item/Item";
 import axios from "../../config/axios";
 import ErrorNotification from "../ErrorNotification/ErrorNotification";
+import {fetchAdmin} from "../../fetchAdmin";
+import {useAuth} from "../../provider/AuthProvider";
 
 const Home = () => {
 
     const [items, setItems] = useState([])
 
+    const [isAdmin, setIsAdmin] = useState(false);
+    const { token } = useAuth();
     useEffect(() => {
         try {
+            if (token) {
+                fetchAdmin(token, setIsAdmin);
+            }
+
             axios.get("public/getAllConventions").then((res) => {
-                const conventions = res.data;
+                let conventions = res.data;
+                if (!isAdmin) {
+                    conventions = conventions.filter(item => item.conventionStatus !== 'BLOCKED');
+                }
                 setItems(conventions);
             });
         } catch (error) {
             console.log(error)
         }
-
-    }, []);
+    }, [isAdmin, token]);
 
     const [filteredData, setFilteredData] = useState(null);
 
