@@ -4,11 +4,34 @@ import './TopNav.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass,  faUser, faPlus} from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from "../../provider/AuthProvider";
+import axios from "../../config/axios";
 
 const TopNav = () => {
     const [drop, setDrop] = useState(false)
     const dropRef = useRef(null);
     const { isAuth, setTokenNull } = useAuth();
+
+    const [isAdmin, setIsAdmin] = useState(false);
+    const { token } = useAuth();
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response = await axios.get("/getAppUser", {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                const userDataResponse = response.data;
+                if (userDataResponse.role === 'ADMIN') setIsAdmin(true);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        if (token) {
+            fetchUserData();
+        }
+    }, [token])
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -30,6 +53,7 @@ const TopNav = () => {
 
     const handleLogout = () => {
         setTokenNull();
+        setIsAdmin(false)
     }
 
     return (
@@ -42,9 +66,18 @@ const TopNav = () => {
                         <FontAwesomeIcon icon={faMagnifyingGlass} className='search-icon'/>
                     </button>
                 </div>
+
+                {isAdmin && (
+                    <div className='input-container'>
+                        <input type="search" className='search-bar'/>
+                        <button className='search-button'>
+                            <FontAwesomeIcon icon={faUser} className='search-icon'/>
+                        </button>
+                    </div>
+                )}
             </div>
 
-            {isAuth() && (
+            {isAuth() && !isAdmin && (
                 <Link to="/AddConventionPage" className='add-convention-button'>
                     <FontAwesomeIcon icon={faPlus}/>
                 </Link>
@@ -58,7 +91,9 @@ const TopNav = () => {
                     isAuth() ? (
                         <div ref={dropRef} className='drop-wrap'>
                             <div className='drop-content'>
-                                <Link to="/AccountPage" className='drop-link'>My Account</Link>
+                                {!isAdmin && (
+                                    <Link to="/AccountPage" className='drop-link'>My Account</Link>
+                                )}
                                 <Link to="/" onClick={handleLogout} className='drop-link'>Log Out</Link>
                             </div>
                         </div>
