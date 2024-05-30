@@ -95,7 +95,7 @@ const ConventionPage = () => {
                     <h2 className='name-header'>{convention.eventName}</h2>
 
                     {isAdmin && (
-                        <Link to={"/AccountPage"} className='uploader-label'>
+                        <Link to={"/AccountPage/" + uploader.id} className='uploader-label'>
                             {"Uploaded by: " + uploader.firstName + " " + uploader.lastName}
                         </Link>
                     )}

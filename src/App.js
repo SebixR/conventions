@@ -59,7 +59,7 @@ function App() {
                       </>
                   }>
                   </Route>
-                  <Route path="/AccountPage" element={
+                  <Route path="/AccountPage/:userIdAdmin?" element={
                       <>
                           <AccountPage/>
                       </>

@@ -2,48 +2,70 @@ import React, {useEffect, useState} from "react"
 import TopNav from "../TopNav/TopNav";
 import "./AccountPage.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCheck, faPencilSquare, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faCheck, faLock, faPencilSquare, faTrash, faUnlockAlt} from "@fortawesome/free-solid-svg-icons";
 import Item from "../Item/Item";
 import axios from "../../config/axios";
 import {useAuth} from "../../provider/AuthProvider";
 import ErrorNotification from "../ErrorNotification/ErrorNotification";
 import SuccessNotification from "../SuccessNotification/SuccessNotification";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
+import {fetchAdmin} from "../../fetchAdmin";
 
 const AccountPage = () => {
+    const { userIdAdmin } = useParams();
+
+    const { token } = useAuth();
+    const [isAdmin, setIsAdmin] = useState(false);
+    useEffect(() => {
+        if (userIdAdmin) fetchAdmin(token, setIsAdmin);
+    }, [token, userIdAdmin])
 
     const [userId, setUserId] = useState(null)
     const [inputValues, setInputValues] = useState({
         firstName: '',
         lastName: '',
-        email: ''
+        email: '',
+        role: 'USER'
     })
-    const { token } = useAuth();
     const [items, setItems] = useState([]);
     useEffect(() => {
         const fetchUserData = async () => {
-            try {
-                const response = await axios.get("/getAppUser", {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-                const userDataResponse = response.data;
-                setUserId(userDataResponse.id);
-                setInputValues({
-                    firstName: userDataResponse.firstName,
-                    lastName: userDataResponse.lastName,
-                    email: userDataResponse.email
+            if (!isAdmin) {
+                try {
+                    const response = await axios.get("/getAppUser", {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    });
+                    const userDataResponse = response.data;
+                    setUserId(userDataResponse.id);
+                    setInputValues({
+                        firstName: userDataResponse.firstName,
+                        lastName: userDataResponse.lastName,
+                        email: userDataResponse.email,
+                        role: userDataResponse.role
+                    })
+                } catch (error) {
+                    console.log(error);
+                }
+            } else {
+                axios.get(`auth/getAppUserById/${userIdAdmin}`).then((res) => {
+                    const receivedUser = res.data;
+                    setUserId(receivedUser.id);
+                    setInputValues({
+                        firstName: receivedUser.firstName,
+                        lastName: receivedUser.lastName,
+                        email: receivedUser.email,
+                        role: receivedUser.role
+                    })
                 })
-            } catch (error) {
-                console.log(error);
             }
         };
 
         if (token) {
             fetchUserData();
         }
-    }, [token])
+    }, [isAdmin, token, userIdAdmin])
 
     useEffect(() => {
         try {
@@ -194,19 +216,32 @@ const AccountPage = () => {
                         </div>
                     </div>
 
-                    <div className="account-info-buttons-wrap">
-                        <button className="account-page-button" type="button" onClick={toggleReadOnly}
-                                style={{ backgroundColor: isReadOnly ? '#F3E156FF' : '#6540B0FF' }}>
-                            <FontAwesomeIcon icon={faPencilSquare} className="icon"/>
-                        </button>
+                    {!isAdmin && (
+                        <div className="account-info-buttons-wrap">
+                            <button className="account-page-button" type="button" onClick={toggleReadOnly}
+                                    style={{ backgroundColor: isReadOnly ? '#F3E156FF' : '#6540B0FF' }}>
+                                <FontAwesomeIcon icon={faPencilSquare} className="icon"/>
+                            </button>
 
-                        <button className="account-page-button" type="submit">
-                            <FontAwesomeIcon icon={faCheck} className="icon"/>
-                        </button>
-                    </div>
+                            <button className="account-page-button" type="submit">
+                                <FontAwesomeIcon icon={faCheck} className="icon"/>
+                            </button>
+                        </div>
+                    )}
+
                 </form>
 
-                <Link className="change-password-link" to={"/ChangePassword"} state={{ userEmail: inputValues.email }}>Change Password</Link>
+                {!isAdmin ? (
+                    <Link className="change-password-link" to={"/ChangePassword"} state={{ userEmail: inputValues.email }}>Change Password</Link>
+                ) : (
+                    <button className="change-password-link">
+                        {inputValues.role === 'BLOCKED' ? (
+                            <FontAwesomeIcon className='block-user-icon' icon={faUnlockAlt}/>
+                        ) : (
+                            <FontAwesomeIcon className='block-user-icon' icon={faLock}/>
+                        )}
+                    </button>
+                )}
 
             </div>
 
@@ -235,14 +270,23 @@ const AccountPage = () => {
                               tags={item.selectedTags}
                               description={item.description}/>
 
-                        <div className='account-item-buttons-wrap'>
-                            <Link to={"/EditConventionPage/" + item.id} className="account-item-buttons-wrap-button">
-                                <FontAwesomeIcon icon={faPencilSquare} className="icon"/>
-                            </Link>
-                            <button className="account-item-buttons-wrap-button" onClick={() => handleDeleteClick(item.id)}>
-                                <FontAwesomeIcon icon={faTrash} className="icon"/>
-                            </button>
-                        </div>
+                        {isAdmin ? (
+                            <div className='account-item-buttons-wrap'>
+                                <button className="account-item-buttons-wrap-button" onClick={() => handleDeleteClick(item.id)}>
+                                    <FontAwesomeIcon icon={faLock} className="icon"/>
+                                </button>
+                            </div>
+                        ) : (
+                            <div className='account-item-buttons-wrap'>
+                                <Link to={"/EditConventionPage/" + item.id} className="account-item-buttons-wrap-button">
+                                    <FontAwesomeIcon icon={faPencilSquare} className="icon"/>
+                                </Link>
+                                <button className="account-item-buttons-wrap-button" onClick={() => handleDeleteClick(item.id)}>
+                                    <FontAwesomeIcon icon={faTrash} className="icon"/>
+                                </button>
+                            </div>
+                        )}
+
                     </div>
                 ))}
 

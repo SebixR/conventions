@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import "./Item.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircle} from "@fortawesome/free-solid-svg-icons";
+import {faCircle, faLock} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import axios from "../../config/axios";
 
@@ -17,11 +17,17 @@ const Item = ( props ) => {
         } catch (error) {
             console.log(error)
         }
-
     }, []);
 
     return (
         <div className='item-main-wrap'>
+
+            {props.status === 'BLOCKED' && (
+                <div className='blocked-cover'>
+                    <FontAwesomeIcon icon={faLock} className="icon"/>
+                </div>
+            )}
+
             <div className='image-wrap'>
                 {logo && (<img src={logo} alt='logo'/>)}
             </div>
@@ -47,7 +53,7 @@ const Item = ( props ) => {
                 {props.status === 'UPCOMING' &&
                     <FontAwesomeIcon icon={faCircle} className='status-icon-upcoming'/>
                 }
-                {props.status === 'OVER' &&
+                {(props.status === 'OVER' || props.status === 'BLOCKED') &&
                     <FontAwesomeIcon icon={faCircle} className='status-icon-over'/>
                 }
                 {props.status === 'ONGOING' &&

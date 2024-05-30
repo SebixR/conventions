@@ -90,6 +90,12 @@ body {
   display: flex;
   align-items: center;
 }
+.main-wrap .account-main-content-wrap .block-user-icon {
+  color: white;
+  width: 35px;
+  height: 35px;
+  margin: 0 6px 0 6px;
+}
 .main-wrap .account-page-button {
   background-color: #f3e156;
   border: none;
