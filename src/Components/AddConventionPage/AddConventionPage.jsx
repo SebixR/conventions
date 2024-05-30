@@ -314,7 +314,8 @@ const AddConventionPage = ( {convention} ) => {
                         <div className='first-row'>
 
                             <div className='image-wrap'>
-                                {convention && (<img src={logoFile} alt='logo'/>)}
+                                {convention && !(logoFile !== null && logoFile.name) && (<img src={logoFile} alt='logo'/>)}
+                                {logoFile !== null && logoFile.name && (<img src={URL.createObjectURL(logoFile)} alt='logo'/>)}
                                 <input className="logo-input" type="file" onChange={(ev) => setLogoFile(ev.target.files[0])}/>
                             </div>
 
