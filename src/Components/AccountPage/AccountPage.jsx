@@ -262,8 +262,9 @@ const AccountPage = () => {
             {deletedSuccessfully && <SuccessNotification text="Successfully deleted entry." />}
             {deletedError && <ErrorNotification text="Failed to delete the entry." />}
 
-            <div className="account-main-content-wrap">
+            {inputValues.role === 'BLOCKED' && (<ErrorNotification text="Your account has been blocked."/>)}
 
+            <div className="account-main-content-wrap">
                 <form onSubmit={handleSubmitUserInfo} className="account-info-pane">
                     <div className="account-info-content">
                         <div className="single-info-wrap">

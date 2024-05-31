@@ -154,3 +154,28 @@
     height: 25%;
   }
 }
+
+.main-item-buttons-wrap {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  right: -64px;
+  top: 40%;
+
+  .main-item-buttons-wrap-button {
+    padding: 0;
+    background-color: $color-yellow;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+    .icon {
+      width: 35px;
+      height: 35px;
+      padding: 8px;
+      color: white;
+    }
+  }
+}

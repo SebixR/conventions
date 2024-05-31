@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import "./Item.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircle, faLock} from "@fortawesome/free-solid-svg-icons";
+import {faCircle, faLock, faPencilSquare, faTrash, faUser} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import axios from "../../config/axios";
 
@@ -19,8 +19,18 @@ const Item = ( props ) => {
         }
     }, []);
 
+
     return (
+
         <div className='item-main-wrap'>
+
+            {props.isAdmin && (
+                <div className='main-item-buttons-wrap'>
+                    <Link to={"/AccountPage/" + props.userId} className="main-item-buttons-wrap-button">
+                        <FontAwesomeIcon icon={faUser} className="icon"/>
+                    </Link>
+                </div>
+            )}
 
             {props.status === 'BLOCKED' && (
                 <div className='blocked-cover'>
@@ -61,7 +71,6 @@ const Item = ( props ) => {
                 }
                 <Link to={"/ConventionPage/" + props.id} className='more-button'>More</Link>
             </div>
-
         </div>
     )
 }

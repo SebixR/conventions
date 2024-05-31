@@ -9,7 +9,7 @@ export const UserSearchProvider = ({ children }) => {
     const handleUserSearch = (keyword) => {
         if (keyword.trim() === '') {
             try {
-                axios.get('auth/getAllAppUsers', {params: {keyword: keyword}}).then((result) => {
+                axios.get('auth/getAllAppUsers').then((result) => {
                     let users = result.data;
                     users = users.filter(user => user.role !== 'ADMIN');
                     setUserSearchResults(users);
@@ -32,8 +32,35 @@ export const UserSearchProvider = ({ children }) => {
         }
     }
 
+
+    const [conventionSearchResults, setConventionSearchResults] = useState([]);
+
+    const handleConventionSearch = (keyword) => {
+        if (keyword.trim === '') {
+            try {
+                axios.get('public/getAllConventions').then((result) => {
+                    const conventions = result.data;
+                    setConventionSearchResults(conventions);
+                    console.log(conventions);
+                })
+            } catch (error) {
+                console.log("Error fetching all conventions");
+            }
+        } else {
+            try {
+                axios.get('public/searchConventions', {params: {keyword: keyword}}).then((result) => {
+                    const conventions = result.data;
+                    setConventionSearchResults(conventions);
+                    console.log(conventions);
+                })
+            } catch (error) {
+                console.log("Error fetching all conventions");
+            }
+        }
+    }
+
     return (
-            <UserSearchContext.Provider value={ { userSearchResults, handleUserSearch } }>
+            <UserSearchContext.Provider value={ { userSearchResults, handleUserSearch, conventionSearchResults, handleConventionSearch } }>
                 {children}
             </UserSearchContext.Provider>
         )

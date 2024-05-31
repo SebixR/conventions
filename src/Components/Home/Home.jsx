@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import "./Home.css"
 import TopNav from "../TopNav/TopNav";
 import FilterMenu from "../FilerMenu/FilterMenu";
@@ -7,10 +7,17 @@ import axios from "../../config/axios";
 import ErrorNotification from "../ErrorNotification/ErrorNotification";
 import {fetchAdmin} from "../../fetchAdmin";
 import {useAuth} from "../../provider/AuthProvider";
+import {UserSearchContext} from "../TopNav/UserSearchContext";
 
 const Home = () => {
 
     const [items, setItems] = useState([])
+
+    const { conventionSearchResults } = useContext(UserSearchContext);
+    const [conventionSearchResultsCopy, setConventionSearchResultsCopy] = useState(conventionSearchResults);
+    useEffect(() => {
+        setConventionSearchResultsCopy(conventionSearchResults);
+    }, [conventionSearchResults])
 
     const [isAdmin, setIsAdmin] = useState(false);
     const { token } = useAuth();
@@ -18,7 +25,7 @@ const Home = () => {
         try {
             if (token) {
                 fetchAdmin(token, setIsAdmin);
-            }
+            } else setIsAdmin(false);
 
             axios.get("public/getAllConventions").then((res) => {
                 let conventions = res.data;
@@ -35,6 +42,7 @@ const Home = () => {
     const [filteredData, setFilteredData] = useState(null);
 
     const handleFilter = (filteredData) => {
+        setConventionSearchResultsCopy([]);
         setFilteredData(filteredData);
         console.log(filteredData);
     };
@@ -44,28 +52,11 @@ const Home = () => {
             <TopNav/>
 
             <FilterMenu onFilter={handleFilter}/>
-            {filteredData !== null ? (
-                filteredData.length > 0 ? (
-                        filteredData.map((item) => (
-                            <Item key={item.id}
-                                  id={item.id}
-                                  status={item.conventionStatus}
-                                  eventName={item.eventName}
-                                  logo={item.logo}
-                                  city={item.city}
-                                  country={item.country}
-                                  startDate={item.selectedStartDate}
-                                  endDate={item.selectedEndDate}
-                                  tags={item.selectedTags}
-                                  description={item.description}/>
-                        ))
-                    ) : (
-                    <ErrorNotification text="No conventions found"/>
-                )
-            ) : items.length > 0 ? (
-                items.map((item) => (
+            {conventionSearchResultsCopy.length !== 0 ? (
+                conventionSearchResults.map((item) => (
                     <Item key={item.id}
                           id={item.id}
+                          userId={item.userId}
                           status={item.conventionStatus}
                           eventName={item.eventName}
                           logo={item.logo}
@@ -74,10 +65,49 @@ const Home = () => {
                           startDate={item.selectedStartDate}
                           endDate={item.selectedEndDate}
                           tags={item.selectedTags}
-                          description={item.description}/>
+                          description={item.description}
+                          isAdmin={isAdmin}/>
                 ))
             ) : (
-                <ErrorNotification text="No conventions found"/>
+                filteredData !== null ? (
+                    filteredData.length > 0 ? (
+                        filteredData.map((item) => (
+                            <Item key={item.id}
+                                  id={item.id}
+                                  userId={item.userId}
+                                  status={item.conventionStatus}
+                                  eventName={item.eventName}
+                                  logo={item.logo}
+                                  city={item.city}
+                                  country={item.country}
+                                  startDate={item.selectedStartDate}
+                                  endDate={item.selectedEndDate}
+                                  tags={item.selectedTags}
+                                  description={item.description}
+                                  isAdmin={isAdmin}/>
+                        ))
+                    ) : (
+                        <ErrorNotification text="No conventions found"/>
+                    )
+                ) : items.length > 0 ? (
+                    items.map((item) => (
+                        <Item key={item.id}
+                              id={item.id}
+                              userId={item.userId}
+                              status={item.conventionStatus}
+                              eventName={item.eventName}
+                              logo={item.logo}
+                              city={item.city}
+                              country={item.country}
+                              startDate={item.selectedStartDate}
+                              endDate={item.selectedEndDate}
+                              tags={item.selectedTags}
+                              description={item.description}
+                              isAdmin={isAdmin}/>
+                    ))
+                ) : (
+                    <ErrorNotification text="No conventions found"/>
+                )
             )}
 
         </div>

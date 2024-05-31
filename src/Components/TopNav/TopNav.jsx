@@ -50,14 +50,19 @@ const TopNav = () => {
         handleUserSearch(userSearch);
     }
 
+    const [conventionSearch, setConventionSearch] = useState('');
+    const { handleConventionSearch } = useContext(UserSearchContext);
+    const performConventionSearch = () => {
+        handleConventionSearch(conventionSearch);
+    }
 
     return (
         <div className='topnav'>
             <div className='left-wrap'>
                 <Link className='home-button' to="/">Home</Link>
                 <div className='input-container'>
-                    <input type="search" className='search-bar'/>
-                    <button className='search-button'>
+                    <input onChange={(e) => setConventionSearch(e.target.value)} type="search" className='search-bar'/>
+                    <button onClick={performConventionSearch} className='search-button'>
                         <FontAwesomeIcon icon={faMagnifyingGlass} className='search-icon'/>
                     </button>
                 </div>

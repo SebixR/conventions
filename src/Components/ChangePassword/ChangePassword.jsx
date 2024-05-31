@@ -24,6 +24,7 @@ const ChangePassword = () => {
         if (!newPassword.trim()) errors.newPassword = 'Please input your new password.';
         if (!oldPassword.trim()) errors.oldPassword = 'Please input your previous password.';
         if (newPassword !== newPasswordRepeat) errors.match = 'Passwords don\'t match';
+        if (newPassword.length < 8) errors.length = 'The new password must be 8 characters or longer';
 
         if (Object.keys(errors).length !== 0) isValid = false;
 
