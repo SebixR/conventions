@@ -154,7 +154,7 @@ const ConventionPage = () => {
                                             )
                                     })}
                                 </div>
-                                {convention.links > 0 && (
+                                {convention.links.length > 0 && (
                                     <div className='inner-row-content'>
                                         <label>Links:</label>
                                         {convention.links.map((link) => (
@@ -179,7 +179,7 @@ const ConventionPage = () => {
                                     <label key={tag} className='purple-label'>{tag}</label>
                                 ))}
                             </div>
-                            <Link to="/Schedule/0" className='schedule-button'>Schedule</Link>
+                            {/*<Link to="/Schedule/0" className='schedule-button'>Schedule</Link>*/}
                         </div>
 
                     </div>

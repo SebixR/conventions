@@ -19,6 +19,28 @@ const Home = () => {
         setConventionSearchResultsCopy(conventionSearchResults);
     }, [conventionSearchResults])
 
+    const [filteredData, setFilteredData] = useState(null);
+
+    const handlePageChange = (newPage) => {
+        if (filteredData === null) setCurrentPage(newPage);
+        else setCurrentPageFiltered(newPage);
+    }
+
+    const handleFilter = (filteredData) => {
+        setConventionSearchResultsCopy([]);
+        setFilteredData(filteredData);
+    };
+    const handleFilterTotalPages = (newTotalPages) => {
+        setTotalPages(newTotalPages);
+    }
+    const resetFilterCurrentPage = (newCurrentPage) => {
+        setCurrentPageFiltered(newCurrentPage);
+    }
+
+
+    const [currentPage, setCurrentPage] = useState(0);
+    const [currentPageFiltered, setCurrentPageFiltered] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
     const [isAdmin, setIsAdmin] = useState(false);
     const { token } = useAuth();
     useEffect(() => {
@@ -27,31 +49,27 @@ const Home = () => {
                 fetchAdmin(token, setIsAdmin);
             } else setIsAdmin(false);
 
-            axios.get("public/getAllConventions").then((res) => {
-                let conventions = res.data;
-                if (!isAdmin) {
-                    conventions = conventions.filter(item => item.conventionStatus !== 'BLOCKED');
-                }
-                setItems(conventions);
-            });
+            if (filteredData === null && conventionSearchResults.length === 0) {
+                axios.get("public/getAllConventions", {params: {page: currentPage}}).then((res) => {
+                    let conventions = res.data.content;
+                    if (!isAdmin && conventions.length > 0) {
+                        conventions = conventions.filter(item => item.conventionStatus !== 'BLOCKED');
+                    }
+                    setItems(conventions);
+                    setTotalPages(res.data.totalPages);
+                });
+            }
         } catch (error) {
             console.log(error)
         }
-    }, [isAdmin, token]);
+    }, [currentPage, filteredData, isAdmin, token]);
 
-    const [filteredData, setFilteredData] = useState(null);
-
-    const handleFilter = (filteredData) => {
-        setConventionSearchResultsCopy([]);
-        setFilteredData(filteredData);
-        console.log(filteredData);
-    };
 
     return (
         <div className='main-wrap'>
             <TopNav/>
 
-            <FilterMenu onFilter={handleFilter}/>
+            <FilterMenu onFilter={handleFilter} currentPage={currentPageFiltered} setCurrentPage={resetFilterCurrentPage} totalPages={handleFilterTotalPages}/>
             {conventionSearchResultsCopy.length !== 0 ? (
                 conventionSearchResults.map((item) => (
                     <Item key={item.id}
@@ -109,6 +127,24 @@ const Home = () => {
                     <ErrorNotification text="No conventions found"/>
                 )
             )}
+
+            <div className="pagination">
+                {filteredData === null ? (
+                    Array.from({ length: totalPages }, (_, index) => (
+                        <button className="page-button" key={index} onClick={() => handlePageChange(index)}
+                                disabled={index === currentPage} type="button">
+                            {index + 1}
+                        </button>
+                    ))
+                ) : (
+                    Array.from({ length: totalPages }, (_, index) => (
+                        <button className="page-button" key={index} onClick={() => handlePageChange(index)}
+                                disabled={index === currentPageFiltered} type="button">
+                            {index + 1}
+                        </button>
+                    ))
+                )}
+            </div>
 
         </div>
     )

@@ -53,7 +53,7 @@ const TopNav = () => {
     const [conventionSearch, setConventionSearch] = useState('');
     const { handleConventionSearch } = useContext(UserSearchContext);
     const performConventionSearch = () => {
-        handleConventionSearch(conventionSearch);
+        handleConventionSearch(conventionSearch, 0);
     }
 
     return (

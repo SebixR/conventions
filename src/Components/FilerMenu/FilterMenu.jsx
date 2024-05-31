@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import "./FilterMenu.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMagnifyingGlass, faMapMarkerAlt, faCalendarAlt,
@@ -8,7 +8,7 @@ import StatusDropdown from "./StatusDropdown";
 import TagService from "../../Services/TagService";
 import axios from "../../config/axios";
 
-const FilterMenu = ( { onFilter } ) => {
+const FilterMenu = ( { onFilter, currentPage, setCurrentPage, totalPages } ) => {
     useEffect(() => {
         const fetchTags = async () => {
             try {
@@ -38,20 +38,35 @@ const FilterMenu = ( { onFilter } ) => {
     const [name, setName] = useState('');
     const [city, setCity] = useState('');
     const [date, setDate] = useState('');
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formData = { name, city, date, selectedTags, selectedStatuses };
         try {
-            const response = await axios.post('public/filterConventions', formData);
-            onFilter(response.data);
-            console.log(response.data);
+            const response = await axios.post('public/filterConventions', formData, {params: {page: 0}});
+            onFilter(response.data.content);
+            totalPages(response.data.totalPages);
+            setCurrentPage(0);
         } catch (error)  {
             console.log(error);
         }
     }
-
+    const isInitialMount = useRef(true);
+    useEffect(() => {
+        if (isInitialMount.current) {
+            isInitialMount.current = false;
+        } else {
+            const formData = { name, city, date, selectedTags, selectedStatuses };
+            try {
+                axios.post('public/filterConventions', formData, {params: {page: currentPage}}).then(response => {
+                    onFilter(response.data.content);
+                    totalPages(response.data.totalPages);
+                });
+            } catch (error)  {
+                console.log(error);
+            }
+        }
+    }, [currentPage])
 
     const clearFilters = () => {
         setName('');

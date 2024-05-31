@@ -35,11 +35,11 @@ export const UserSearchProvider = ({ children }) => {
 
     const [conventionSearchResults, setConventionSearchResults] = useState([]);
 
-    const handleConventionSearch = (keyword) => {
+    const handleConventionSearch = (keyword, page) => {
         if (keyword.trim === '') {
             try {
-                axios.get('public/getAllConventions').then((result) => {
-                    const conventions = result.data;
+                axios.get('public/getAllConventions', {params: {page: page}}).then((result) => {
+                    const conventions = result.data.content;
                     setConventionSearchResults(conventions);
                     console.log(conventions);
                 })
@@ -48,9 +48,10 @@ export const UserSearchProvider = ({ children }) => {
             }
         } else {
             try {
-                axios.get('public/searchConventions', {params: {keyword: keyword}}).then((result) => {
-                    const conventions = result.data;
+                axios.get('public/searchConventions', {params: {keyword: keyword, page: page}}).then((result) => {
+                    const conventions = result.data.content;
                     setConventionSearchResults(conventions);
+                    console.log(keyword);
                     console.log(conventions);
                 })
             } catch (error) {

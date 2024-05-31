@@ -12,7 +12,6 @@ import ChangePassword from "./Components/ChangePassword/ChangePassword";
 import EditConventionPage from "./Components/EditConventionPage/EditConventionPage";
 import UserSearchPage from "./Components/UserSearchPage/UserSearchPage";
 import {UserSearchProvider} from "./Components/TopNav/UserSearchContext";
-import TopNav from "./Components/TopNav/TopNav";
 
 function App() {
   return (

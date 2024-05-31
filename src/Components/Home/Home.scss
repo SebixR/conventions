@@ -1,3 +1,5 @@
+@import '../../colors';
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,4 +8,23 @@
 body {
   max-width: 2000px;
   margin: auto;
+}
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+
+  .page-button {
+    background-color: $color-yellow;
+    border: none;
+    border-radius: 5px;
+    font-size: 13pt;
+    text-decoration: none;
+    padding: 2px 8px;
+    margin: 0 3px;
+    cursor: pointer;
+  }
 }

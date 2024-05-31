@@ -386,7 +386,7 @@ const AddConventionPage = ( {convention} ) => {
                                     <TagDropdown maxTags={4} options={tags} selectedTags={selectedTags} onSelectTag={handleSelectTag}/>
                                 </div>
                             </div>
-                            <Link to="/AddSchedule/0" className='schedule-button'>Create Schedule</Link>
+                            {/*<Link to="/AddSchedule/0" className='schedule-button'>Create Schedule</Link>*/}
                         </div>
 
                     </div>
