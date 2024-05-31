@@ -10,7 +10,8 @@ export const UserSearchProvider = ({ children }) => {
         if (keyword.trim() === '') {
             try {
                 axios.get('auth/getAllAppUsers', {params: {keyword: keyword}}).then((result) => {
-                    const users = result.data;
+                    let users = result.data;
+                    users = users.filter(user => user.role !== 'ADMIN');
                     setUserSearchResults(users);
                     console.log(users);
                 })
@@ -20,7 +21,8 @@ export const UserSearchProvider = ({ children }) => {
         } else {
             try {
                 axios.get('auth/searchAppUsers', {params: {keyword: keyword}}).then((result) => {
-                    const users = result.data;
+                    let users = result.data;
+                    users = users.filter(user => user.role !== 'ADMIN');
                     setUserSearchResults(users);
                     console.log(users);
                 })
