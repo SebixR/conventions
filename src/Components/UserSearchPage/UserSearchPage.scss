@@ -1,0 +1,63 @@
+@import '../../colors';
+
+.user-search-content-wrap {
+  width: 75%;
+  margin: 24px auto;
+
+  .user-search-item-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    margin-bottom: 12px;
+
+    .user-search-item {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      background-color: $color-ui;
+      border-radius: 10px;
+      padding: 12px 6px 12px 24px;
+      margin-right: 6px;
+      width: 100%;
+
+      .search-user-info-wrap {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 100%;
+        margin-right: 18px;
+
+        .search-user-info-label {
+          background-color: $color-purple;
+          width: 100%;
+          padding: 4px 12px;
+          border-radius: 10px;
+        }
+      }
+    }
+    .search-user-item-buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      button {
+        background-color: $color-yellow;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        margin-left: 12px;
+
+        .icon {
+          color: white;
+          width: 30px;
+          height: 30px;
+          padding: 8px;
+        }
+      }
+    }
+  }
+}

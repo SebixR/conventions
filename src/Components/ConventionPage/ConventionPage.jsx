@@ -9,7 +9,7 @@ import {useAuth} from "../../provider/AuthProvider";
 import {fetchAdmin} from "../../fetchAdmin";
 
 const ConventionPage = () => {
-    let { conventionId } = useParams(); //the name of the variable has to match the name in the url (for now set in App.js)
+    let { conventionId } = useParams(); //the name of the variable has to match the name in the url
     const [convention, setConvention] = useState({
         eventName: '',
         conventionStatus: '',

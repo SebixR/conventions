@@ -1,0 +1,57 @@
+.user-search-content-wrap {
+  width: 75%;
+  margin: 24px auto;
+}
+.user-search-content-wrap .user-search-item-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.user-search-content-wrap .user-search-item-wrap .user-search-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3f394b;
+  border-radius: 10px;
+  padding: 12px 6px 12px 24px;
+  margin-right: 6px;
+  width: 100%;
+}
+.user-search-content-wrap .user-search-item-wrap .user-search-item .search-user-info-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  margin-right: 18px;
+}
+.user-search-content-wrap .user-search-item-wrap .user-search-item .search-user-info-wrap .search-user-info-label {
+  background-color: #6540b0;
+  width: 100%;
+  padding: 4px 12px;
+  border-radius: 10px;
+}
+.user-search-content-wrap .user-search-item-wrap .search-user-item-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.user-search-content-wrap .user-search-item-wrap .search-user-item-buttons button {
+  background-color: #f3e156;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  margin-left: 12px;
+}
+.user-search-content-wrap .user-search-item-wrap .search-user-item-buttons button .icon {
+  color: white;
+  width: 30px;
+  height: 30px;
+  padding: 8px;
+}
+
+/*# sourceMappingURL=UserSearchPage.css.map */

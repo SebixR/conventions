@@ -10,6 +10,7 @@ import Schedule from "./Components/Schedule/Schedule";
 import AddConventionPage from "./Components/AddConventionPage/AddConventionPage";
 import ChangePassword from "./Components/ChangePassword/ChangePassword";
 import EditConventionPage from "./Components/EditConventionPage/EditConventionPage";
+import UserSearchPage from "./Components/UserSearchPage/UserSearchPage";
 
 function App() {
   return (
@@ -68,6 +69,12 @@ function App() {
                   <Route path="/ChangePassword" element={
                       <>
                           <ChangePassword/>
+                      </>
+                  }>
+                  </Route>
+                  <Route path="/UserSearchPage" element={
+                      <>
+                          <UserSearchPage/>
                       </>
                   }>
                   </Route>
