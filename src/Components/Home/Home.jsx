@@ -8,12 +8,19 @@ import ErrorNotification from "../ErrorNotification/ErrorNotification";
 import {fetchAdmin} from "../../fetchAdmin";
 import {useAuth} from "../../provider/AuthProvider";
 import {UserSearchContext} from "../TopNav/UserSearchContext";
+import {useSearchPagination} from "../TopNav/SearchPaginationContext";
 
 const Home = () => {
 
     const [items, setItems] = useState([])
 
-    const { conventionSearchResults } = useContext(UserSearchContext);
+    const { conventionSearchResults, handleConventionSearch } = useContext(UserSearchContext);
+    const { searchKeyword, pageNumber, totalPageNumber, setPage } = useSearchPagination();
+
+    const performConventionSearch = () => {
+        handleConventionSearch(searchKeyword, pageNumber);
+    }
+
     const [conventionSearchResultsCopy, setConventionSearchResultsCopy] = useState(conventionSearchResults);
     useEffect(() => {
         setConventionSearchResultsCopy(conventionSearchResults);
@@ -22,7 +29,7 @@ const Home = () => {
     const [filteredData, setFilteredData] = useState(null);
 
     const handlePageChange = (newPage) => {
-        if (filteredData === null) setCurrentPage(newPage);
+        if (filteredData === null) setPage(newPage);
         else setCurrentPageFiltered(newPage);
     }
 
@@ -30,15 +37,11 @@ const Home = () => {
         setConventionSearchResultsCopy([]);
         setFilteredData(filteredData);
     };
-    const handleFilterTotalPages = (newTotalPages) => {
-        setTotalPages(newTotalPages);
-    }
     const resetFilterCurrentPage = (newCurrentPage) => {
         setCurrentPageFiltered(newCurrentPage);
     }
 
 
-    const [currentPage, setCurrentPage] = useState(0);
     const [currentPageFiltered, setCurrentPageFiltered] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [isAdmin, setIsAdmin] = useState(false);
@@ -49,8 +52,10 @@ const Home = () => {
                 fetchAdmin(token, setIsAdmin);
             } else setIsAdmin(false);
 
-            if (filteredData === null && conventionSearchResults.length === 0) {
-                axios.get("public/getAllConventions", {params: {page: currentPage}}).then((res) => {
+            if (conventionSearchResultsCopy.length > 0) {
+                performConventionSearch();
+            } else {
+                axios.get("public/getAllConventions", {params: {page: pageNumber}}).then((res) => {
                     let conventions = res.data.content;
                     if (!isAdmin && conventions.length > 0) {
                         conventions = conventions.filter(item => item.conventionStatus !== 'BLOCKED');
@@ -62,14 +67,14 @@ const Home = () => {
         } catch (error) {
             console.log(error)
         }
-    }, [currentPage, filteredData, isAdmin, token]);
+    }, [pageNumber, filteredData, isAdmin, token]);
 
 
     return (
         <div className='main-wrap'>
             <TopNav/>
 
-            <FilterMenu onFilter={handleFilter} currentPage={currentPageFiltered} setCurrentPage={resetFilterCurrentPage} totalPages={handleFilterTotalPages}/>
+            <FilterMenu onFilter={handleFilter} currentPage={currentPageFiltered} setCurrentPage={resetFilterCurrentPage}/>
             {conventionSearchResultsCopy.length !== 0 ? (
                 conventionSearchResults.map((item) => (
                     <Item key={item.id}
@@ -129,21 +134,33 @@ const Home = () => {
             )}
 
             <div className="pagination">
-                {filteredData === null ? (
-                    Array.from({ length: totalPages }, (_, index) => (
+                {conventionSearchResultsCopy.length > 0 ? (
+                    Array.from({ length: totalPageNumber }, (_, index) => (
                         <button className="page-button" key={index} onClick={() => handlePageChange(index)}
-                                disabled={index === currentPage} type="button">
+                                disabled={index === pageNumber} type="button">
                             {index + 1}
                         </button>
                     ))
                 ) : (
-                    Array.from({ length: totalPages }, (_, index) => (
-                        <button className="page-button" key={index} onClick={() => handlePageChange(index)}
-                                disabled={index === currentPageFiltered} type="button">
-                            {index + 1}
-                        </button>
-                    ))
+
+                    filteredData === null ? (
+                        Array.from({ length: totalPages }, (_, index) => (
+                            <button className="page-button" key={index} onClick={() => handlePageChange(index)}
+                                    disabled={index === pageNumber} type="button">
+                                {index + 1}
+                            </button>
+                        ))
+                    ) : (
+                        Array.from({ length: totalPageNumber }, (_, index) => (
+                            <button className="page-button" key={index} onClick={() => handlePageChange(index)}
+                                    disabled={index === currentPageFiltered} type="button">
+                                {index + 1}
+                            </button>
+                        ))
+                    )
+
                 )}
+
             </div>
 
         </div>

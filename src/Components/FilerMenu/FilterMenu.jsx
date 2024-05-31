@@ -7,8 +7,11 @@ import TagDropdown from "./TagDropdown";
 import StatusDropdown from "./StatusDropdown";
 import TagService from "../../Services/TagService";
 import axios from "../../config/axios";
+import {useSearchPagination} from "../TopNav/SearchPaginationContext";
 
-const FilterMenu = ( { onFilter, currentPage, setCurrentPage, totalPages } ) => {
+const FilterMenu = ( { onFilter, currentPage, setCurrentPage } ) => {
+    const { searchKeyword, pageNumber, totalPageNumber, setPage, setTotalPage } = useSearchPagination();
+
     useEffect(() => {
         const fetchTags = async () => {
             try {
@@ -45,8 +48,10 @@ const FilterMenu = ( { onFilter, currentPage, setCurrentPage, totalPages } ) => 
         try {
             const response = await axios.post('public/filterConventions', formData, {params: {page: 0}});
             onFilter(response.data.content);
-            totalPages(response.data.totalPages);
             setCurrentPage(0);
+
+            setTotalPage(response.data.totalPages);
+            setPage(0);
         } catch (error)  {
             console.log(error);
         }
@@ -60,7 +65,8 @@ const FilterMenu = ( { onFilter, currentPage, setCurrentPage, totalPages } ) => 
             try {
                 axios.post('public/filterConventions', formData, {params: {page: currentPage}}).then(response => {
                     onFilter(response.data.content);
-                    totalPages(response.data.totalPages);
+                    setTotalPage(response.data.totalPages);
+                    setPage(currentPage);
                 });
             } catch (error)  {
                 console.log(error);

@@ -1,5 +1,6 @@
 import React, {createContext, useState} from "react";
 import axios from "../../config/axios";
+import {useSearchPagination} from "./SearchPaginationContext";
 
 export const UserSearchContext = createContext();
 
@@ -34,6 +35,7 @@ export const UserSearchProvider = ({ children }) => {
 
 
     const [conventionSearchResults, setConventionSearchResults] = useState([]);
+    const { setTotalPage } = useSearchPagination();
 
     const handleConventionSearch = (keyword, page) => {
         if (keyword.trim === '') {
@@ -41,6 +43,7 @@ export const UserSearchProvider = ({ children }) => {
                 axios.get('public/getAllConventions', {params: {page: page}}).then((result) => {
                     const conventions = result.data.content;
                     setConventionSearchResults(conventions);
+                    setTotalPage(result.data.totalPages);
                     console.log(conventions);
                 })
             } catch (error) {
@@ -51,6 +54,7 @@ export const UserSearchProvider = ({ children }) => {
                 axios.get('public/searchConventions', {params: {keyword: keyword, page: page}}).then((result) => {
                     const conventions = result.data.content;
                     setConventionSearchResults(conventions);
+                    setTotalPage(result.data.totalPages);
                     console.log(keyword);
                     console.log(conventions);
                 })

@@ -12,76 +12,79 @@ import ChangePassword from "./Components/ChangePassword/ChangePassword";
 import EditConventionPage from "./Components/EditConventionPage/EditConventionPage";
 import UserSearchPage from "./Components/UserSearchPage/UserSearchPage";
 import {UserSearchProvider} from "./Components/TopNav/UserSearchContext";
+import {SearchPaginationProvider} from "./Components/TopNav/SearchPaginationContext";
 
 function App() {
   return (
       <AuthProvider>
-          <UserSearchProvider>
-              <Router>
-                  <Routes>
-                      <Route path="/" element={
-                          <>
-                              <Home/>
-                          </>
-                      }>
-                      </Route>
-                      <Route path="/ConventionPage/:conventionId" element={
-                          <>
-                              <ConventionPage/>
-                          </>
-                      }>
-                      </Route>
-                      <Route path="/Schedule/:scheduleId" element={
-                          <>
-                              <Schedule/>
-                          </>
-                      }>
-                      </Route>
-                      <Route path="/AddConventionPage" element={
-                          <>
-                              <AddConventionPage/>
-                          </>
-                      }>
-                      </Route>
-                      <Route path="/EditConventionPage/:conventionId" element={
-                          <>
-                              <EditConventionPage/>
-                          </>
-                      }>
-                      </Route>
-                      <Route path="/LoginForm" element={
-                          <>
-                              <LoginForm/>
-                          </>
-                      }>
-                      </Route>
-                      <Route path="/SignupForm" element={
-                          <>
-                              <SignupForm/>
-                          </>
-                      }>
-                      </Route>
-                      <Route path="/AccountPage/:userIdAdmin?" element={
-                          <>
-                              <AccountPage/>
-                          </>
-                      }>
-                      </Route>
-                      <Route path="/ChangePassword" element={
-                          <>
-                              <ChangePassword/>
-                          </>
-                      }>
-                      </Route>
-                      <Route path="/UserSearchPage" element={
-                          <>
-                              <UserSearchPage/>
-                          </>
-                      }>
-                      </Route>
-                  </Routes>
-              </Router>
-          </UserSearchProvider>
+          <SearchPaginationProvider>
+              <UserSearchProvider>
+                  <Router>
+                      <Routes>
+                          <Route path="/" element={
+                              <>
+                                  <Home/>
+                              </>
+                          }>
+                          </Route>
+                          <Route path="/ConventionPage/:conventionId" element={
+                              <>
+                                  <ConventionPage/>
+                              </>
+                          }>
+                          </Route>
+                          <Route path="/Schedule/:scheduleId" element={
+                              <>
+                                  <Schedule/>
+                              </>
+                          }>
+                          </Route>
+                          <Route path="/AddConventionPage" element={
+                              <>
+                                  <AddConventionPage/>
+                              </>
+                          }>
+                          </Route>
+                          <Route path="/EditConventionPage/:conventionId" element={
+                              <>
+                                  <EditConventionPage/>
+                              </>
+                          }>
+                          </Route>
+                          <Route path="/LoginForm" element={
+                              <>
+                                  <LoginForm/>
+                              </>
+                          }>
+                          </Route>
+                          <Route path="/SignupForm" element={
+                              <>
+                                  <SignupForm/>
+                              </>
+                          }>
+                          </Route>
+                          <Route path="/AccountPage/:userIdAdmin?" element={
+                              <>
+                                  <AccountPage/>
+                              </>
+                          }>
+                          </Route>
+                          <Route path="/ChangePassword" element={
+                              <>
+                                  <ChangePassword/>
+                              </>
+                          }>
+                          </Route>
+                          <Route path="/UserSearchPage" element={
+                              <>
+                                  <UserSearchPage/>
+                              </>
+                          }>
+                          </Route>
+                      </Routes>
+                  </Router>
+              </UserSearchProvider>
+          </SearchPaginationProvider>
       </AuthProvider>
   );
 }

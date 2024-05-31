@@ -6,8 +6,11 @@ import { faMagnifyingGlass,  faUser, faPlus} from '@fortawesome/free-solid-svg-i
 import { useAuth } from "../../provider/AuthProvider";
 import {fetchAdmin} from "../../fetchAdmin";
 import {UserSearchContext} from "./UserSearchContext";
+import {useSearchPagination} from "./SearchPaginationContext";
 
 const TopNav = () => {
+    const { setSearch } = useSearchPagination();
+
     const [drop, setDrop] = useState(false)
     const dropRef = useRef(null);
     const { isAuth, setTokenNull } = useAuth();
@@ -56,12 +59,17 @@ const TopNav = () => {
         handleConventionSearch(conventionSearch, 0);
     }
 
+    const handleSearchChange = (keyword) => {
+        setSearch(keyword);
+        setConventionSearch(keyword);
+    }
+
     return (
         <div className='topnav'>
             <div className='left-wrap'>
                 <Link className='home-button' to="/">Home</Link>
                 <div className='input-container'>
-                    <input onChange={(e) => setConventionSearch(e.target.value)} type="search" className='search-bar'/>
+                    <input onChange={(ev) => handleSearchChange(ev.target.value)} type="search" className='search-bar'/>
                     <button onClick={performConventionSearch} className='search-button'>
                         <FontAwesomeIcon icon={faMagnifyingGlass} className='search-icon'/>
                     </button>
