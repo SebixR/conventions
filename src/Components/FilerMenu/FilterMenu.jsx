@@ -10,7 +10,7 @@ import axios from "../../config/axios";
 import {useSearchPagination} from "../TopNav/SearchPaginationContext";
 
 const FilterMenu = ( { onFilter, currentPage, setCurrentPage } ) => {
-    const { searchKeyword, pageNumber, totalPageNumber, setPage, setTotalPage } = useSearchPagination();
+    const { setPage, setTotalPage } = useSearchPagination();
 
     useEffect(() => {
         const fetchTags = async () => {
