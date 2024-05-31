@@ -1,11 +1,11 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import {Link} from "react-router-dom";
 import './TopNav.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass,  faUser, faPlus} from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from "../../provider/AuthProvider";
-import axios from "../../config/axios";
 import {fetchAdmin} from "../../fetchAdmin";
+import {UserSearchContext} from "./UserSearchContext";
 
 const TopNav = () => {
     const [drop, setDrop] = useState(false)
@@ -43,6 +43,14 @@ const TopNav = () => {
         setIsAdmin(false)
     }
 
+
+    const [userSearch, setUserSearch] = useState('');
+    const { handleUserSearch } = useContext(UserSearchContext);
+    const performUserSearch = () => {
+        handleUserSearch(userSearch);
+    }
+
+
     return (
         <div className='topnav'>
             <div className='left-wrap'>
@@ -56,10 +64,10 @@ const TopNav = () => {
 
                 {isAdmin && (
                     <div className='input-container'>
-                        <input type="search" className='search-bar'/>
-                        <button className='search-button'>
+                        <input onChange={(e) => setUserSearch(e.target.value)} type="search" className='search-bar'/>
+                        <Link to="/UserSearchPage" className='search-button' onClick={performUserSearch}>
                             <FontAwesomeIcon icon={faUser} className='search-icon'/>
-                        </button>
+                        </Link>
                     </div>
                 )}
             </div>

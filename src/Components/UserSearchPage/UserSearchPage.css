@@ -2,6 +2,9 @@
   width: 75%;
   margin: 24px auto;
 }
+.user-search-content-wrap .searched-user-label {
+  font-size: 16pt;
+}
 .user-search-content-wrap .user-search-item-wrap {
   display: flex;
   flex-direction: row;

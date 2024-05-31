@@ -54,6 +54,7 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .topnav .left-wrap .input-container .search-icon {
   color: white;
