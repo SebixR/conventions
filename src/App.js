@@ -13,6 +13,7 @@ import EditConventionPage from "./Components/EditConventionPage/EditConventionPa
 import UserSearchPage from "./Components/UserSearchPage/UserSearchPage";
 import {UserSearchProvider} from "./Components/TopNav/UserSearchContext";
 import {SearchPaginationProvider} from "./Components/TopNav/SearchPaginationContext";
+import PasswordResetPage from "./Components/PasswordResetPage/PasswordResetPage";
 
 function App() {
   return (
@@ -54,6 +55,12 @@ function App() {
                           <Route path="/LoginForm" element={
                               <>
                                   <LoginForm/>
+                              </>
+                          }>
+                          </Route>
+                          <Route path="/PasswordReset" element={
+                              <>
+                                  <PasswordResetPage/>
                               </>
                           }>
                           </Route>

@@ -89,6 +89,8 @@ const LoginForm = () => {
                     </div>
                 </div>
             </form>
+
+            <Link className="forgot-password-link" to="/PasswordReset">Forgot your password?</Link>
         </div>
     );
 };

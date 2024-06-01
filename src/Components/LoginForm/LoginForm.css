@@ -114,5 +114,13 @@ body {
   width: 45%;
   margin: 4px;
 }
+.main-wrap .forgot-password-link {
+  margin: 12px auto;
+  text-decoration: underline;
+  font-size: 12pt;
+  color: #f3e156;
+  position: relative;
+  top: -45px;
+}
 
 /*# sourceMappingURL=LoginForm.css.map */

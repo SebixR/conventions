@@ -130,4 +130,13 @@ body {
       }
     }
   }
+
+  .forgot-password-link {
+    margin: 12px auto;
+    text-decoration: underline;
+    font-size: 12pt;
+    color: $color-yellow;
+    position: relative;
+    top: -45px;
+  }
 }
