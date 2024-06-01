@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useRef, useState} from "react";
 import {Link} from "react-router-dom";
 import './TopNav.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass,  faUser, faPlus} from '@fortawesome/free-solid-svg-icons';
+import {faMagnifyingGlass, faUser, faPlus, faHome} from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from "../../provider/AuthProvider";
 import {fetchAdmin} from "../../fetchAdmin";
 import {UserSearchContext} from "./UserSearchContext";
@@ -67,7 +67,9 @@ const TopNav = () => {
     return (
         <div className='topnav'>
             <div className='left-wrap'>
-                <Link className='home-button' to="/">Home</Link>
+                <Link className='home-button' to="/">
+                    <FontAwesomeIcon icon={faHome}/>
+                </Link>
                 <div className='input-container'>
                     <input onChange={(ev) => handleSearchChange(ev.target.value)} type="search" className='search-bar'/>
                     <button onClick={performConventionSearch} className='search-button'>
