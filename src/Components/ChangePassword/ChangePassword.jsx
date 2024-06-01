@@ -5,6 +5,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import axios from "../../config/axios";
 import ErrorNotification from "../ErrorNotification/ErrorNotification";
 import {useAuth} from "../../provider/AuthProvider";
+import Footer from "../Footer/Footer";
 
 const ChangePassword = () => {
     let { state } = useLocation();
@@ -88,6 +89,8 @@ const ChangePassword = () => {
 
                 </div>
             </form>
+
+           <Footer/>
 
         </div>
     )

@@ -7,6 +7,7 @@ import {UserSearchContext} from "../TopNav/UserSearchContext";
 import ErrorNotification from "../ErrorNotification/ErrorNotification";
 import axios from "../../config/axios";
 import {Link} from "react-router-dom";
+import Footer from "../Footer/Footer";
 
 const UserSearchPage = () => {
 
@@ -90,6 +91,9 @@ const UserSearchPage = () => {
                     </div>
                 ))}
             </div>
+
+            <Footer/>
+
         </div>
     )
 }

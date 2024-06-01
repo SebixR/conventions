@@ -1,0 +1,12 @@
+@import "../../colors";
+
+.footer {
+  background-color: $color-ui;
+  color: $color-background;
+  text-align: center;
+  padding: 10px 0;
+  position: relative;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}

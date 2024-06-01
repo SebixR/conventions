@@ -6,6 +6,7 @@ import {faCircleXmark} from "@fortawesome/free-solid-svg-icons";
 import axios from "../../config/axios";
 import {Link, Navigate} from "react-router-dom";
 import {useAuth} from "../../provider/AuthProvider";
+import Footer from "../Footer/Footer";
 
 const LoginForm = () => {
     const [email, setEmail] = useState('')
@@ -91,6 +92,8 @@ const LoginForm = () => {
             </form>
 
             <Link className="forgot-password-link" to="/PasswordReset">Forgot your password?</Link>
+
+            <Footer/>
         </div>
     );
 };

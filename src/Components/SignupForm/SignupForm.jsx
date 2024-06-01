@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleXmark} from "@fortawesome/free-solid-svg-icons";
 import {Link, Navigate} from "react-router-dom";
 import axios from "../../config/axios";
+import Footer from "../Footer/Footer";
 
 const SignupForm = () => {
     const [firstName, setFirstName] = useState('')
@@ -161,6 +162,9 @@ const SignupForm = () => {
                     </div>
                 </div>
             </form>
+
+            <Footer/>
+
         </div>
     )
 }

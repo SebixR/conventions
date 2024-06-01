@@ -7,6 +7,7 @@ import {Link, useParams} from "react-router-dom";
 import axios from "../../config/axios";
 import {useAuth} from "../../provider/AuthProvider";
 import {fetchAdmin} from "../../fetchAdmin";
+import Footer from "../Footer/Footer";
 
 const ConventionPage = () => {
     let { conventionId } = useParams(); //the name of the variable has to match the name in the url
@@ -211,6 +212,8 @@ const ConventionPage = () => {
                 }
 
             </div>
+
+            <Footer/>
 
         </div>
     )

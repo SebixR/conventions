@@ -11,6 +11,7 @@ import TagService from "../../Services/TagService";
 import {useAuth} from "../../provider/AuthProvider";
 import ErrorNotification from "../ErrorNotification/ErrorNotification";
 import SuccessNotification from "../SuccessNotification/SuccessNotification";
+import Footer from "../Footer/Footer";
 
 const AddConventionPage = ( {convention} ) => {
 
@@ -398,6 +399,8 @@ const AddConventionPage = ( {convention} ) => {
                 </div>
             </form>
 
+
+            <Footer/>
         </div>
     )
 }

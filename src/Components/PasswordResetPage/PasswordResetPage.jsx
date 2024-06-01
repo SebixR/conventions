@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import "./PasswordResetPage.css"
 import TopNav from "../TopNav/TopNav";
 import SuccessNotification from "../SuccessNotification/SuccessNotification";
+import Footer from "../Footer/Footer";
 
 const PasswordResetPage = () => {
 
@@ -27,6 +28,8 @@ const PasswordResetPage = () => {
 
                 <button className="password-button" type="button" onClick={handleSubmitEmail}>Send</button>
             </div>
+
+            <Footer/>
 
         </div>
     )

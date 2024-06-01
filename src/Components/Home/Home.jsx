@@ -9,6 +9,7 @@ import {fetchAdmin} from "../../fetchAdmin";
 import {useAuth} from "../../provider/AuthProvider";
 import {UserSearchContext} from "../TopNav/UserSearchContext";
 import {useSearchPagination} from "../TopNav/SearchPaginationContext";
+import Footer from "../Footer/Footer";
 
 const Home = () => {
 
@@ -162,6 +163,8 @@ const Home = () => {
                 )}
 
             </div>
+
+            <Footer/>
 
         </div>
     )

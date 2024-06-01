@@ -10,6 +10,7 @@ import ErrorNotification from "../ErrorNotification/ErrorNotification";
 import SuccessNotification from "../SuccessNotification/SuccessNotification";
 import {Link, useParams} from "react-router-dom";
 import {fetchAdmin} from "../../fetchAdmin";
+import Footer from "../Footer/Footer";
 
 const AccountPage = () => {
     const { userIdAdmin } = useParams();
@@ -360,6 +361,8 @@ const AccountPage = () => {
                 ))}
 
             </div>
+
+            <Footer/>
 
         </div>
     )
