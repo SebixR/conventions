@@ -1,10 +1,10 @@
 import './App.css';
 import LoginForm from "./Components/LoginForm/LoginForm";
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
 import Home from "./Components/Home/Home";
 import SignupForm from "./Components/SignupForm/SignupForm";
 import ConventionPage from "./Components/ConventionPage/ConventionPage";
-import AuthProvider from "./provider/AuthProvider";
+import AuthProvider, {useAuth} from "./provider/AuthProvider";
 import AccountPage from "./Components/AccountPage/AccountPage";
 import Schedule from "./Components/Schedule/Schedule";
 import AddConventionPage from "./Components/AddConventionPage/AddConventionPage";
@@ -41,15 +41,11 @@ function App() {
                           }>
                           </Route>
                           <Route path="/AddConventionPage" element={
-                              <>
-                                  <AddConventionPage/>
-                              </>
+                              <PrivateRoute component={<AddConventionPage/>}/>
                           }>
                           </Route>
                           <Route path="/EditConventionPage/:conventionId" element={
-                              <>
-                                  <EditConventionPage/>
-                              </>
+                              <PrivateRoute component={<EditConventionPage/>}/>
                           }>
                           </Route>
                           <Route path="/LoginForm" element={
@@ -71,15 +67,12 @@ function App() {
                           }>
                           </Route>
                           <Route path="/AccountPage/:userIdAdmin?" element={
-                              <>
-                                  <AccountPage/>
-                              </>
+                              <PrivateRoute component={<AccountPage/>
+                              }/>
                           }>
                           </Route>
                           <Route path="/ChangePassword" element={
-                              <>
-                                  <ChangePassword/>
-                              </>
+                              <PrivateRoute component={<ChangePassword/>}/>
                           }>
                           </Route>
                           <Route path="/UserSearchPage" element={
@@ -94,6 +87,12 @@ function App() {
           </SearchPaginationProvider>
       </AuthProvider>
   );
+}
+
+function PrivateRoute({ component }) {
+    const { isAuth } = useAuth();
+
+    return isAuth() ? component : <Navigate to="/LoginForm"/>;
 }
 
 export default App;
