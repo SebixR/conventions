@@ -78,8 +78,10 @@
   padding: 6px 14px;
   font-size: 12pt;
   color: white;
-  height: 96px;
   overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  display: -webkit-box;
 }
 .item-main-wrap .item-right-pane {
   display: flex;
