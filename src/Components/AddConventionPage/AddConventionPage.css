@@ -22,7 +22,7 @@
   margin-bottom: 6px;
 }
 .main-content-wrap .name-header {
-  background-color: #6540b0;
+  background-color: #5f4396;
   color: white;
   padding: 6px 28px 6px 16px;
   border-radius: 10px;
@@ -102,7 +102,7 @@
   resize: none;
   border: none;
   font-size: 12pt;
-  background-color: #6540b0;
+  background-color: #5f4396;
   padding: 8px 16px 8px 12px;
   border-radius: 10px;
   color: white;
@@ -136,7 +136,7 @@
 }
 .main-content-wrap .info-wrap .info-content .third-row .tag-dropdown-button .tag-dropdown {
   position: absolute;
-  background-color: #6540b0;
+  background-color: #5f4396;
   padding: 6px;
   border-radius: 10px;
   outline: white solid 1px;
@@ -148,10 +148,10 @@
 .main-content-wrap .info-wrap .info-content .third-row .tag-dropdown-button .filter-icon {
   margin-right: 8px;
   height: 16pt;
-  color: #6540b0;
+  color: #5f4396;
 }
 .main-content-wrap .info-wrap .info-content .third-row .tag-dropdown-button .down-icon {
-  color: #6540b0;
+  color: #5f4396;
   width: 20px;
   height: 20px;
   margin-left: 6px;
@@ -204,7 +204,7 @@
 }
 .inner-row-content .link-label {
   padding: 6px 12px;
-  background-color: #6540b0;
+  background-color: #5f4396;
   border-radius: 10px;
   color: white;
   margin-right: 12px;
@@ -220,7 +220,7 @@ label {
 .purple-label {
   color: white;
   font-size: 12pt;
-  background-color: #6540b0;
+  background-color: #5f4396;
   padding: 6px 12px;
   border-radius: 10px;
   margin-right: 6px;
@@ -230,7 +230,7 @@ label {
   border: none;
   color: white;
   font-size: 12pt;
-  background-color: #6540b0;
+  background-color: #5f4396;
   padding: 6px 12px;
   border-radius: 10px;
   margin-right: 6px;
@@ -277,7 +277,7 @@ label {
   margin-top: 12px;
   margin-left: -54px;
   height: 100%;
-  background: #6540b0;
+  background: #5f4396;
   padding: 12px;
   border-radius: 50%;
   border: none;

@@ -20,7 +20,7 @@
   background-color: white;
 }
 .checkbox-wrap input:checked ~ .checkmark .check-icon {
-  color: #6540b0;
+  color: #5f4396;
 }
 .checkbox-wrap .checkmark {
   display: inline-flex;

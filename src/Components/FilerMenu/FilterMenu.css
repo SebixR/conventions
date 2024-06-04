@@ -4,7 +4,7 @@
   justify-content: space-between;
 }
 .filter-wrap .accept-filter {
-  background-color: #6540b0;
+  background-color: #5f4396;
   border: none;
   border-radius: 10px;
   margin: 12px 6px;
@@ -24,7 +24,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: #6540b0;
+  background-color: #5f4396;
   margin: 12px;
   padding: 6px;
   border-radius: 10px;
@@ -71,12 +71,12 @@
 }
 .filter-wrap .filter-content .filter-field .filter-dropdown-button .down-icon {
   display: flex;
-  color: #6540b0;
+  color: #5f4396;
 }
 .filter-wrap .tag-dropdown {
   position: absolute;
   top: 120px;
-  background-color: #6540b0;
+  background-color: #5f4396;
   border-radius: 10px;
   padding: 6px;
   width: 15%;

@@ -12,7 +12,7 @@
   align-items: center;
 }
 .main-content-wrap .convention-page-top-wrap .name-header {
-  background-color: #6540b0;
+  background-color: #5f4396;
   color: white;
   padding: 6px 28px 6px 16px;
   border-radius: 10px;
@@ -89,7 +89,7 @@
 }
 .main-content-wrap .info-wrap .info-content .first-row .inner-row-wrap .inner-row-content .link-label {
   padding: 6px 12px;
-  background-color: #6540b0;
+  background-color: #5f4396;
   border-radius: 10px;
   color: white;
   margin-right: 12px;
@@ -104,7 +104,7 @@
   margin-bottom: 12px;
 }
 .main-content-wrap .info-wrap .info-content .second-row .description {
-  background-color: #6540b0;
+  background-color: #5f4396;
   padding: 8px 16px 8px 12px;
   border-radius: 10px;
   color: white;
@@ -161,7 +161,7 @@ label {
 .purple-label {
   color: white;
   font-size: 12pt;
-  background-color: #6540b0;
+  background-color: #5f4396;
   padding: 6px 12px;
   border-radius: 10px;
   margin-right: 6px;

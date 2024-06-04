@@ -9,7 +9,7 @@
   position: relative;
 }
 .item-main-wrap label {
-  background-color: #6540b0;
+  background-color: #5f4396;
   border-radius: 10px;
   padding: 4px;
   color: white;
@@ -73,7 +73,7 @@
   margin-top: 6px;
 }
 .item-main-wrap .item-content-wrap .third-row .short-description {
-  background-color: #6540b0;
+  background-color: #5f4396;
   border-radius: 10px;
   padding: 6px 14px;
   font-size: 12pt;
