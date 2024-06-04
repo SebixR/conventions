@@ -24,7 +24,9 @@ const Home = () => {
 
     const [conventionSearchResultsCopy, setConventionSearchResultsCopy] = useState(conventionSearchResults);
     useEffect(() => {
-        setConventionSearchResultsCopy(conventionSearchResults);
+        if (!isAdmin) setConventionSearchResultsCopy(
+            conventionSearchResults.filter(item => item.conventionStatus !== 'BLOCKED'));
+        else setConventionSearchResultsCopy(conventionSearchResults);
     }, [conventionSearchResults])
 
     const [filteredData, setFilteredData] = useState(null);
@@ -36,6 +38,7 @@ const Home = () => {
 
     const handleFilter = (filteredData) => {
         setConventionSearchResultsCopy([]);
+        if (!isAdmin) filteredData = filteredData.filter(item => item.conventionStatus !== 'BLOCKED')
         setFilteredData(filteredData);
     };
     const resetFilterCurrentPage = (newCurrentPage) => {
