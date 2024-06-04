@@ -199,15 +199,18 @@ const AddConventionPage = ( {convention} ) => {
     }
     const addConvention = async () => {
         let logoFinal;
+        let status;
         if (convention) {
             logoFinal = convention.logo;
+            status = convention.conventionStatus;
         } else {
             logoFinal = logoFile.name;
+            status = 'NORMAL';
         }
         const uploadedImagesFiltered = uploadedImages.filter(item => !item.hasOwnProperty('file'));
         const fetchedPhotoNames = uploadedImagesFiltered.map(item => item.fileName);
         const formData = { userId , eventName, logo: logoFinal, selectedStartDate, selectedEndDate, city, country, address1, address2,
-            tickets, links, description, selectedTags, photos: uploadedImages, fetchedPhotoNames };
+            tickets, links, description, selectedTags, photos: uploadedImages, fetchedPhotoNames, conventionStatus:status };
 
         try {
             const response = await axios.post('auth/addConvention', formData);
