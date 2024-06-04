@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import "./Item.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircle, faLock, faPencilSquare, faTrash, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faCircle, faLock, faUser} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import axios from "../../config/axios";
 
 const Item = ( props ) => {
 
     const [logo, setLogo] = useState(null);
+    const [status, setStatus] = useState('OVER');
     useEffect(() => {
         try {
             axios.get(`public/loadLogo/${props.id}`, { responseType: 'blob' }).then((res) => {
@@ -17,8 +18,18 @@ const Item = ( props ) => {
         } catch (error) {
             console.log(error)
         }
-    }, []);
 
+        setStatus(getStatus);
+    }, []);
+    const getStatus = () => {
+        const today = new Date();
+        const selectedStartDateTime = new Date(props.startDate);
+        const selectedEndDateTime = new Date(props.endDate);
+
+        if (selectedStartDateTime <= today && selectedEndDateTime >= today) return 'ONGOING'
+        else if (selectedStartDateTime > today && selectedEndDateTime > today) return 'UPCOMING';
+        else return 'OVER'
+    };
 
     return (
 
@@ -60,13 +71,13 @@ const Item = ( props ) => {
                 </div>
             </div>
             <div className='item-right-pane'>
-                {props.status === 'UPCOMING' &&
+                {status === 'UPCOMING' &&
                     <FontAwesomeIcon icon={faCircle} className='status-icon-upcoming'/>
                 }
-                {(props.status === 'OVER' || props.status === 'BLOCKED') &&
+                {(status === 'OVER') &&
                     <FontAwesomeIcon icon={faCircle} className='status-icon-over'/>
                 }
-                {props.status === 'ONGOING' &&
+                {status === 'ONGOING' &&
                     <FontAwesomeIcon icon={faCircle} className='status-icon-ongoing'/>
                 }
                 <Link to={"/ConventionPage/" + props.id} className='more-button'>More</Link>
