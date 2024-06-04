@@ -79,6 +79,7 @@ const ConventionPage = () => {
     }, [convention]);
 
     const [logo, setLogo] = useState(null);
+    const [status, setStatus] = useState('OVER');
     useEffect(() => {
         try {
             axios.get(`public/loadLogo/${conventionId}`, { responseType: 'blob' }).then((res) => {
@@ -89,7 +90,17 @@ const ConventionPage = () => {
             console.log(error)
         }
 
+        setStatus(getStatus);
     }, [convention]);
+    const getStatus = () => {
+        const today = new Date();
+        const selectedStartDateTime = new Date(convention.selectedStartDate);
+        const selectedEndDateTime = new Date(convention.selectedEndDate);
+
+        if (selectedStartDateTime <= today && selectedEndDateTime >= today) return 'ONGOING'
+        else if (selectedStartDateTime > today && selectedEndDateTime > today) return 'UPCOMING';
+        else return 'OVER'
+    };
 
     return (
         <div className='main-wrap'>
@@ -109,13 +120,13 @@ const ConventionPage = () => {
                 </div>
 
                 <div className='info-wrap'>
-                    {convention.conventionStatus === 'UPCOMING' &&
+                    {status === 'UPCOMING' &&
                         <FontAwesomeIcon icon={faCircle} className='status-icon-upcoming'/>
                     }
-                    {convention.conventionStatus === 'OVER' &&
+                    {status === 'OVER' &&
                         <FontAwesomeIcon icon={faCircle} className='status-icon-over'/>
                     }
-                    {convention.conventionStatus === 'ONGOING' &&
+                    {status === 'ONGOING' &&
                         <FontAwesomeIcon icon={faCircle} className='status-icon-ongoing'/>
                     }
 
