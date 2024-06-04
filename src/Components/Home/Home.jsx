@@ -48,11 +48,11 @@ const Home = () => {
     const [isAdmin, setIsAdmin] = useState(false);
     const { token } = useAuth();
     useEffect(() => {
-        try {
-            if (token) {
-                fetchAdmin(token, setIsAdmin);
-            } else setIsAdmin(false);
+        if (token) {
+            fetchAdmin(token, setIsAdmin);
+        } else setIsAdmin(false);
 
+        try {
             if (conventionSearchResultsCopy.length > 0) {
                 performConventionSearch();
             } else {
